@@ -1,14 +1,18 @@
 import React from "react";
-// import TabsBar from "../components/tabsbar";
+import TabsBar from "../components/tabsbar";
 import Titlebar from "../components/titlebar";
-import WebView from "../components/webview";
+import useBrowser from "../hooks/useBrowser";
+import BrowserContent from "../pages";
 
 const UserView = () => {
+  const {
+    state: { tabsList },
+  } = useBrowser();
   return (
     <>
       <Titlebar />
-      {/* <TabsBar /> */}
-      <WebView />
+      {tabsList.length > 1 && <TabsBar />}
+      <BrowserContent />
     </>
   );
 };

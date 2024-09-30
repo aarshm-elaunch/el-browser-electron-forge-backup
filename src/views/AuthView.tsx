@@ -1,20 +1,29 @@
-import {
-  alpha,
-  Box,
-  Button,
-  Card,
-  CardContent,
-  FormControl,
-  FormLabel,
-  Paper,
-  TextField,
-  useTheme,
-} from "@mui/material";
-import React from "react";
+import { alpha, Box, Button, Card, CardContent, FormControl, FormLabel, Paper, TextField, Typography, useTheme } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import { KeyIcon } from "../components/icons";
+import useBrowser from "../hooks/useBrowser";
 
 const AuthView = () => {
   const theme = useTheme();
+  const { handleAuthentication } = useBrowser();
+
+  const [userName, setUserName] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
+  const handleUserNameOnChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
+    setUserName(ev.target.value);
+  };
+  const handlePasswordOnChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(ev.target.value);
+    console.log(ev.target.value);
+  };
+
+  const handleSubmit = () => {
+    if (userName !== "" && password !== "") {
+      handleAuthentication(userName, password);
+    }
+  };
+
   return (
     <Paper
       sx={{
@@ -71,18 +80,19 @@ const AuthView = () => {
             }}
           >
             <FormControl fullWidth>
-              <FormLabel sx={{ fontSize: 16, mb: 1 }} htmlFor="user_id">
+              <FormLabel sx={{ fontSize: 16, mb: 1, color: "#fff" }} htmlFor="user_id">
                 Employee Id
               </FormLabel>
               <TextField
                 sx={{}}
+                onChange={handleUserNameOnChange}
                 slotProps={{ input: { sx: { height: 48, fontSize: 14 } } }}
                 id="user_id"
                 placeholder="Enter your employee id"
               />
             </FormControl>
             <FormControl fullWidth>
-              <FormLabel sx={{ fontSize: 16, mb: 1 }} htmlFor="user_passkey">
+              <FormLabel sx={{ fontSize: 16, mb: 1, color: "#fff" }} htmlFor="user_passkey">
                 Password
               </FormLabel>
               <TextField
@@ -90,20 +100,18 @@ const AuthView = () => {
                 id="user_passkey"
                 type="password"
                 placeholder="Enter your password"
+                onChange={handlePasswordOnChange}
               />
             </FormControl>
           </Box>
-          <Button
-            disableRipple
-            sx={{ "&:hover": { bgcolor: theme.palette.primary.main } }}
-            variant="contained"
-          >
+          <Button onClick={handleSubmit} disableRipple sx={{ "&:hover": { bgcolor: theme.palette.primary.main } }} variant="contained">
             Login
           </Button>
         </CardContent>
+        <Typography sx={{ fontSize: 14, color: theme.palette.warning.main, p:2, textAlign:'center' }}>{'Enrer "test-dev" as employeeId and "1234" as password to enter browser.'}</Typography>
       </Card>
     </Paper>
-  );
-};
+  )
+}
 
 export default AuthView;

@@ -1,10 +1,6 @@
 import { SVGProps } from "react";
 
-export const KeyIcon = ({
-  width = 32,
-  height = 32,
-  ...props
-}: SVGProps<SVGSVGElement>) => (
+export const KeyIcon = ({ width = 32, height = 32, ...props }: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -31,15 +27,7 @@ export const KeyIcon = ({
       </linearGradient>
     </defs>
     <g transform="translate(117.368 -1236.363)">
-      <rect
-        width="48"
-        height="48"
-        x="-117.368"
-        y="1236.363"
-        fill="url(#b)"
-        rx="10.144"
-        ry="10.144"
-      ></rect>
+      <rect width="48" height="48" x="-117.368" y="1236.363" fill="url(#b)" rx="10.144" ry="10.144"></rect>
       <path
         fill="#fff"
         fill-rule="evenodd"
@@ -53,38 +41,22 @@ export const KeyIcon = ({
   </svg>
 );
 
-export const LockIcon = ({
-  width = 32,
-  height = 32,
-  ...props
-}: SVGProps<SVGSVGElement>) => (
+export const LockIcon = ({ width = 32, height = 32, ...props }: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"
-    width={width} height={height} {...props} 
+    width={width}
+    height={height}
+    {...props}
     viewBox="0 0 512 512"
     id="lock"
   >
     <defs>
-      <linearGradient
-        id="a"
-        x1="256"
-        x2="256"
-        y1="19.824"
-        y2="487.88"
-        gradientUnits="userSpaceOnUse"
-      >
+      <linearGradient id="a" x1="256" x2="256" y1="19.824" y2="487.88" gradientUnits="userSpaceOnUse">
         <stop offset="0" stop-color="#00efd1"></stop>
         <stop offset="1" stop-color="#00acea"></stop>
       </linearGradient>
-      <linearGradient
-        xlinkHref="#a"
-        id="b"
-        x1="255.999"
-        x2="255.999"
-        y1="19.824"
-        y2="487.88"
-      ></linearGradient>
+      <linearGradient xlinkHref="#a" id="b" x1="255.999" x2="255.999" y1="19.824" y2="487.88"></linearGradient>
     </defs>
     <g>
       <path
@@ -96,5 +68,26 @@ export const LockIcon = ({
         d="M256,317c-19.694,0-35.715,15.4-35.715,34.331A33.313,33.313,0,0,0,238,380.965v33.627a18,18,0,0,0,36,0V380.966a33.314,33.314,0,0,0,17.716-29.635C291.716,332.4,275.692,317,256,317Zm2,97.592a2,2,0,0,1-4,0V385.605c1,.036,1.328.057,2,.057s1-.021,2-.057Zm-2-44.93c-10.872,0-19.717-8.224-19.717-18.331S245.125,333,256,333s19.718,8.224,19.718,18.331S266.869,369.662,256,369.662Z"
       ></path>
     </g>
+  </svg>
+);
+
+export const ElectronIcon = ({ width = 16, height = 16, ...props }: SVGProps<SVGSVGElement>) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} {...props} viewBox="0 0 128 128" id="electron">
+    <path
+      fill="#47848f"
+      d="M49.07,32.66c-14.37-2.62-25.72.12-30.25,8-3.38,5.85-2.41,13.61,2.34,21.9a1.47,1.47,0,0,0,2.56-1.47c-4.28-7.47-5.12-14.17-2.35-19,3.76-6.51,13.89-9,27.17-6.54a1.47,1.47,0,1,0,.53-2.9ZM28.63,72.61a92.2,92.2,0,0,0,22,17.34c20.84,12,43,15.25,54,7.79a1.47,1.47,0,0,0-1.66-2.43C93.11,102,72,98.92,52.07,87.39A89.27,89.27,0,0,1,30.81,70.62a1.47,1.47,0,0,0-2.18,2Z"
+    ></path>
+    <path
+      fill="#47848f"
+      d="M101.06,70.81c9.41-11.11,12.69-22.29,8.17-30.11-3.32-5.76-10.35-8.8-19.69-8.92a1.47,1.47,0,0,0,0,2.95c8.4.11,14.45,2.73,17.18,7.45,3.75,6.5.82,16.47-7.87,26.74a1.47,1.47,0,1,0,2.25,1.9ZM76.89,33.15a92,92,0,0,0-26.25,10.4C29.13,56,15.09,74.29,17,87.57A1.47,1.47,0,0,0,20,87.14C18.23,75.35,31.53,58,52.11,46.11A89.07,89.07,0,0,1,77.51,36a1.47,1.47,0,1,0-.62-2.88Z"
+    ></path>
+    <path
+      fill="#47848f"
+      d="M42 96.78C47 110.51 55 119 64.05 119c6.6 0 12.7-4.5 17.46-12.42A1.47 1.47 0 1 0 79 105c-4.28 7.12-9.53 11-14.94 11-7.52 0-14.69-7.54-19.24-20.24a1.47 1.47 0 0 0-2.77 1zM87 94.09a92.5 92.5 0 0 0 3.91-27.3c0-24.41-8.54-45.44-20.71-50.85A1.47 1.47 0 0 0 69 18.64c10.85 4.82 19 24.78 19 48.15a89.57 89.57 0 0 1-3.78 26.42 1.47 1.47 0 0 0 2.81.88zM114.71 92.65a7.05 7.05 0 1 0-7.05 7.05 7.05 7.05 0 0 0 7.05-7.05zm-2.95 0a4.1 4.1 0 1 1-4.1-4.1 4.1 4.1 0 0 1 4.1 4.1zM20.34 99.7a7.05 7.05 0 1 0-7.05-7.05 7.05 7.05 0 0 0 7.05 7.05zm0-2.95a4.1 4.1 0 1 1 4.1-4.1 4.1 4.1 0 0 1-4.1 4.1z"
+    ></path>
+    <path
+      fill="#47848f"
+      d="M64.05 23.13A7.05 7.05 0 1 0 57 16.08a7.05 7.05 0 0 0 7.05 7.05zm0-2.95a4.1 4.1 0 1 1 4.1-4.1 4.1 4.1 0 0 1-4.1 4.1zM65.13 71.77A5.1 5.1 0 1 1 69 65.71 5.1 5.1 0 0 1 65.13 71.77z"
+    ></path>
   </svg>
 );

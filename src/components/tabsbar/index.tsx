@@ -1,33 +1,40 @@
-import { AppBar, Box, Tab, Tabs, useTheme } from "@mui/material";
-import React from "react";
+import { Box, useTheme } from "@mui/material";
+import React, { useEffect } from "react";
 import { TABSBAR_HEIGHT } from "../../utils/constants";
+import { CustomTabs } from "./CustomTabs";
+import { CustomTab } from "./CustomTab";
+import { TabContent } from "./CustomTabContent";
+import useBrowser from "../../hooks/useBrowser";
 
 function TabsBar() {
   const theme = useTheme();
-  const [value, setValue] = React.useState(0);
+  const {
+    state: { tabsList, activeTab },
+    handleSetActiveTab,
+  } = useBrowser();
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
+  const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
+    handleSetActiveTab(newValue);
   };
+
+  useEffect(() => {
+    console.log(tabsList);
+  },[tabsList])
+
   return (
     <Box
       sx={{
         height: TABSBAR_HEIGHT,
         width: "100vw",
-        bgcolor:
-          theme.palette.mode === "light"
-            ? theme.palette.primary.light
-            : "#3D3D3D",
+        bgcolor: theme.palette.mode === "light" ? theme.palette.primary.light : "#2B2B29",
         borderBottom: `1px solid ${theme.palette.divider}`,
       }}
     >
-      <AppBar position="static" sx={{ bgcolor: "transparent", height: "100%" }}>
-        <Tabs value={value} onChange={handleChange} sx={{ height: "100%" }}>
-          <Tab label="Item One" />
-          <Tab label="Item Two" />
-          <Tab label="Item Three" />
-        </Tabs>
-      </AppBar>
+      <CustomTabs value={activeTab.tabId} onChange={handleTabChange}>
+        {tabsList.map((tab) => (
+          <CustomTab disableRipple key={tab.tabId} label={<TabContent {...tab} />} selected={tab.isActive} value={tab.tabId}/>
+        ))}
+      </CustomTabs>
     </Box>
   );
 }

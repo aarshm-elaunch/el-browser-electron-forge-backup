@@ -1,14 +1,19 @@
-import React from 'react'
-import UserView from './UserView'
-import AuthView from './AuthView'
+import React from "react";
+import UserView from "./UserView";
+import AuthView from "./AuthView";
+import { BrowserProvider } from "../contexts/BrowserContext";
+import useBrowser from "../hooks/useBrowser";
 
 const Views = () => {
-    const isAuthenticated = true
+  const {
+    state: { isAuthenticated },
+  } = useBrowser();
+
   return (
     <>
-    {isAuthenticated ? <UserView /> : <AuthView />}
+      {isAuthenticated ? <UserView /> : <AuthView />}
     </>
-  )
-}
+  );
+};
 
-export default Views
+export default Views;

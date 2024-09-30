@@ -1,4 +1,4 @@
-const FONT_PRIMARY = 'Roboto, sans-serif'; // Google Font
+const FONT_PRIMARY = 'Rubik, sans-serif'; // Google Font
 
 const typography = {
   fontFamily: FONT_PRIMARY,
