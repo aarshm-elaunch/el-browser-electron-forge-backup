@@ -1,6 +1,3 @@
-import axios from "axios";
-import * as cheerio from 'cheerio';
-
 export function trafficLightPositionForMac(titlebarHeight: number) {
   const trafficLightsBtnDimension = 20;
   const trafficLightBtnsLeftPos = 12;
@@ -42,23 +39,4 @@ export const createStandardURL = (inputUrl: string) => {
 
   return url;
 };
-
-
-export async function fetchMetadata(url: string) {
-  const corsProxy = 'https://cors-anywhere.herokuapp.com/';
-  try {
-    const { data } = await axios.get(corsProxy + url);
-    const $ = cheerio.load(data);
-    const title = $('title').text() || 'Untitled';
-    const favicon = $('link[rel="icon"]').attr('href') || $('link[rel="apple-touch-icon"]').attr('href') || null;
-    const metadata = {
-      title,
-      favicon,
-      url
-    };
-    return metadata
-  } catch (error) {
-    console.error('Error fetching metadata:', error);
-  }
-}
 
