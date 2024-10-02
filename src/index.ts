@@ -47,11 +47,11 @@ const createWindow = (): void => {
       responseHeaders: {
         ...details.responseHeaders,
         "Content-Security-Policy": [
-          "default-src 'self' https://* 'unsafe-inline'; script-src 'self' https://* 'unsafe-inline'; img-src 'self' data: https://*",
+          "default-src 'self' http://localhost:* https://localhost:* https://* 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost:* https://localhost:*; img-src 'self' data: http://localhost:* https://localhost:* https://*; style-src 'self' 'unsafe-inline' http://localhost:* https://localhost:*;"
         ],
       },
     });
-  });
+  });  
 
   // and load the index.html of the app.
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
