@@ -1,10 +1,18 @@
-import React from "react";
-import UserView from "./UserView";
+import { Toaster } from "sonner";
 import AuthView from "./AuthView";
+import UserView from "./UserView";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
+import { useEffect, useState } from "react";
+import { ipcRenderer } from "electron";
+import { useGetMyAccountQuery } from "../redux/api/authApi";
 
 const Views = () => {
-  const isAuthenticated = true;
-  return <>{isAuthenticated ? <UserView /> : <AuthView />}</>;
+  const {isAuthenticated} = useSelector((state:RootState)=>state.auth);
+  return <>
+  {isAuthenticated ? <UserView /> : <AuthView />}
+  <Toaster richColors position="top-right"/>
+  </>;
 };
 
 export default Views;
