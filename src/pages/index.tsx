@@ -1,6 +1,6 @@
 import { Box, CircularProgress, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { TABSBAR_HEIGHT, TITLEBAR_HEIGHT } from "../utils/constants";
+import { SUMMIT_HEIGHT} from "../utils/constants";
 import { Tab } from "../types/browser";
 import StartPage from "./StartPage";
 import WebContentPage from "./WebContentPage";
@@ -43,18 +43,9 @@ function CustomTabPanel({ activeTab, panelHeight, value, children }: TabPanelPro
 
 const BrowserContent = () => {
   const [loaded, setLoaded] = useState<boolean>(false);
-  const [decideWebViewHeight, setDecideWebViewHeight] = useState<number>(0);
   const dispatch = useDispatch();
   const { tabsList, activeTabId } = useSelector((state: RootState) => state.browser);
   const activeTab = tabsList.find((tab) => tab.tabId === activeTabId);
-
-  useEffect(() => {
-    if (tabsList.length > 1) {
-      setDecideWebViewHeight(TITLEBAR_HEIGHT + TABSBAR_HEIGHT);
-    } else {
-      setDecideWebViewHeight(TITLEBAR_HEIGHT);
-    }
-  }, [tabsList]);
 
   useEffect(() => {
     if (!activeTab && tabsList.length > 0) {
@@ -77,7 +68,7 @@ const BrowserContent = () => {
       <Box
         sx={{
           width: "100%",
-          height: `calc(100vh - ${decideWebViewHeight}px)`,
+          height: `calc(100vh - ${SUMMIT_HEIGHT}px)`,
           display: "flex",
           flexDirection: "column",
           gap: 1,
@@ -95,7 +86,7 @@ const BrowserContent = () => {
       <Box
         sx={{
           width: "100%",
-          height: `calc(100vh - ${decideWebViewHeight}px)`,
+          height: `calc(100vh - ${SUMMIT_HEIGHT}px)`,
           display: "flex",
           flexDirection: "column",
           gap: 1,
@@ -122,13 +113,13 @@ const BrowserContent = () => {
         tabsList.map((tab) => {
           if (tab.tabURL === "about:blank") {
             return (
-              <CustomTabPanel value={tab.tabId} activeTab={activeTab} panelHeight={decideWebViewHeight} key={tab.tabId}>
+              <CustomTabPanel value={tab.tabId} activeTab={activeTab} panelHeight={SUMMIT_HEIGHT} key={tab.tabId}>
                 <StartPage />
               </CustomTabPanel>
             );
           } else {
             return (
-              <CustomTabPanel value={tab.tabId} activeTab={activeTab} panelHeight={decideWebViewHeight} key={tab.tabId}>
+              <CustomTabPanel value={tab.tabId} activeTab={activeTab} panelHeight={SUMMIT_HEIGHT} key={tab.tabId}>
                 <WebContentPage />
               </CustomTabPanel>
             );

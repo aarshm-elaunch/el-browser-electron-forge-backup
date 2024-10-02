@@ -22,7 +22,7 @@ export const TabContent = ({ tabId, tabTitleContent }: Tab) => {
         flexGrow: 1,
         display: "flex",
         alignItems: "center",
-        justifyContent: "center",
+        justifyContent: "flex-start",
         position: "relative",
         pl: "8px",
         width: "100%",
@@ -35,7 +35,7 @@ export const TabContent = ({ tabId, tabTitleContent }: Tab) => {
           width: 12,
           position: "absolute",
           top: "50%",
-          left: "8px",
+          right: "8px",
           transform: "translateY(-50%)",
           display: isHovering ? "flex" : "none",
         }}

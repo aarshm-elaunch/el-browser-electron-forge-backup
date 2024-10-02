@@ -1,23 +1,25 @@
 import { Tab } from "@mui/material";
 import { styled } from "@mui/system";
-import { TABSBAR_HEIGHT } from "../../utils/constants";
+import { TAB_MAX_WIDTH, TABSBAR_HEIGHT } from "../../utils/constants";
 
 // Custom styled Tab component
 export const CustomTab = styled(Tab, {
   shouldForwardProp: (prop) => prop !== "selected", // Allows the `selected` prop to be used
 })<{ selected?: boolean }>(({ selected }) => ({
-  minHeight: TABSBAR_HEIGHT,
-  height: "100%",
+  minHeight: 'unset',
+  height: `calc(${TABSBAR_HEIGHT}px - 8px)`,
   minWidth: "unset",
-  maxWidth: "unset",
+  maxWidth: TAB_MAX_WIDTH,
   flexGrow: 1,
   backgroundColor: selected ? "#2A2927" : "#171715",
+  borderTopLeftRadius: "20px",
+  borderTopRightRadius: "20px",
   color: "white",
-  padding: "0 12px 0 0",
+  padding: "0 12px 0",
   display: "flex",
   flexWrap: "nowrap",
   width: "fit-content",
-  justifyContent: "center",
+  justifyContent: "flex-start",
   "&:hover": {
     backgroundColor: selected ? "#2A2927" : "#22211F",
   },

@@ -46,34 +46,34 @@ function Titlebar() {
 
   return (
     <Box
-      className="titlebar"
       sx={{
         width: "100vw",
         display: "flex",
         alignItems: "center",
-        justifyContent: "center",
+        // justifyContent: "center",
         gap: "1rem",
         flexWrap: "nowrap",
-        padding: "0 100px",
+        padding: "0 100px 0 1rem",
         position: "relative",
         height: TITLEBAR_HEIGHT,
         backgroundColor: theme.palette.mode === "dark" ? "#2B2B29" : theme.palette.primary.light,
       }}
     >
-      <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }} className="no-drag">
+      <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
         <BackButton />
         <ForwardButton />
         <ReloadButton />
       </Box>
       <Box
-        className="no-drag"
         sx={{
           width: "100%",
-          bgcolor: theme.palette.mode === "light" ? theme.palette.background.paper : "#282828",
-          height: 30,
-          maxWidth: "60%",
-          border: `1px solid ${theme.palette.divider}`,
-          borderRadius: "4px",
+          flexGrow: 1,
+          bgcolor: theme.palette.mode === "light" ? theme.palette.background.paper : "#000",
+          // bgcolor: 'transparent',
+          height: 34,
+          // border: `1px solid ${theme.palette.divider}`,
+          border: `none`,
+          borderRadius: "25px",
           position: "relative",
           padding: "0 8px 0 1rem",
         }}
@@ -106,7 +106,7 @@ function Titlebar() {
             position: "absolute",
             top: 0,
             left: 0,
-            height: 30,
+            height: 34,
             width: "2rem",
             display: "flex",
             justifyContent: "center",
@@ -117,7 +117,6 @@ function Titlebar() {
         </Box>
       </Box>
       <Box
-        className="no-drag"
         sx={{
           position: "absolute",
           top: "50%",

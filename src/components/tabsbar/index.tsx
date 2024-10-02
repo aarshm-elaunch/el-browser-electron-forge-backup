@@ -19,16 +19,24 @@ const TabsBar = () => {
 
   return (
     <Box
+      className={"window-drag"}
       sx={{
         height: TABSBAR_HEIGHT,
-        width: "100vw",
-        bgcolor: theme.palette.mode === "light" ? theme.palette.primary.light : "#2B2B29",
-        borderBottom: `1px solid ${theme.palette.divider}`,
+        width: "100%",
+        padding: "0 80px",
+        // bgcolor: theme.palette.mode === "light" ? theme.palette.primary.light : "#2B2B29",
       }}
     >
-      <CustomTabs value={activeTabId} onChange={handleTabChange}>
+      <CustomTabs sx={{ alignItems: "flex-end", bgcolor: 'inherit' }} value={activeTabId} onChange={handleTabChange}>
         {tabsList.map((tab) => (
-          <CustomTab disableRipple key={tab.tabId} label={<TabContent {...tab} />} selected={activeTabId === tab.tabId} value={tab.tabId} />
+          <CustomTab
+            className="window-no-drag"
+            disableRipple
+            key={tab.tabId}
+            label={<TabContent {...tab} />}
+            selected={activeTabId === tab.tabId}
+            value={tab.tabId}
+          />
         ))}
       </CustomTabs>
     </Box>
