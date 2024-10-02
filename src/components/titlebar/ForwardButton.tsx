@@ -2,18 +2,21 @@ import { ArrowForward } from "@mui/icons-material";
 import { alpha, IconButton, Tooltip, useTheme } from "@mui/material";
 import React from "react";
 import useBrowser from "../../hooks/useBrowser";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 
 const ForwardButton = () => {
   const theme = useTheme();
-  const {
-    handleGoForward,
-    state: { activeTab },
-  } = useBrowser();
+  const { handleGoForward } = useBrowser();
+  const { tabsList, activeTabId } = useSelector((state: RootState) => state.browser);
+  const activeTab = tabsList.find((tab) => tab.tabId === activeTabId);
 
   const handleClick = () => {
-    handleGoForward(activeTab.tabId);
+    if (activeTab) {
+      handleGoForward();
+    }
   };
-  
+
   return (
     <Tooltip
       title="Click to go forward"

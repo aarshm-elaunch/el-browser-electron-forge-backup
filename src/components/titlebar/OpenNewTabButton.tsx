@@ -1,11 +1,16 @@
 import { Add } from "@mui/icons-material";
 import { alpha, IconButton, Tooltip, useTheme } from "@mui/material";
 import React from "react";
-import useBrowser from "../../hooks/useBrowser";
+import { useDispatch } from "react-redux";
+import { addTab } from "../../redux/slices/browserSlice";
 
 const OpenNewTabButton = () => {
   const theme = useTheme();
-  const { handleAddTab } = useBrowser();
+  const dispatch = useDispatch();
+
+  const handleNewAddTab = () => {
+    dispatch(addTab());
+  };
 
   return (
     <Tooltip
@@ -32,7 +37,7 @@ const OpenNewTabButton = () => {
           },
           color: "#B7B7B6",
         }}
-        onClick={handleAddTab}
+        onClick={handleNewAddTab}
       >
         <Add style={{ fontSize: 20 }} />
       </IconButton>

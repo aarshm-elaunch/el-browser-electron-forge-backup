@@ -91,3 +91,24 @@ export const ElectronIcon = ({ width = 16, height = 16, ...props }: SVGProps<SVG
     ></path>
   </svg>
 );
+
+export const LinkIcon = ({ width = 24, height = 24, ...props }: SVGProps<SVGSVGElement>) => (
+  <svg width={width} height={height} {...props} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10.616 16.077H7.077C5.949 16.077 4.98767 15.6797 4.193 14.885C3.39833 14.0903 3.00067 13.1287 3 12C2.99933 10.8713 3.397 9.90966 4.193 9.115C4.989 8.32033 5.95033 7.92266 7.077 7.922H10.616V8.922H7.077C6.23033 8.922 5.506 9.22333 4.904 9.826C4.30133 10.4293 4 11.154 4 12C4 12.846 4.30133 13.5703 4.904 14.173C5.50667 14.7757 6.231 15.077 7.077 15.077H10.616V16.077ZM8.5 12.5V11.5H15.5V12.5H8.5ZM13.385 16.077V15.077H16.923C17.7697 15.077 18.494 14.7757 19.096 14.173C19.6987 13.5703 20 12.846 20 12C20 11.154 19.6987 10.4297 19.096 9.827C18.4933 9.22433 17.769 8.923 16.923 8.923H13.385V7.923H16.923C18.051 7.923 19.0127 8.32033 19.808 9.115C20.6033 9.90966 21.0007 10.8713 21 12C20.9993 13.1287 20.6017 14.0903 19.807 14.885C19.0123 15.6797 18.051 16.0773 16.923 16.078L13.385 16.077Z" fill="#1C1C1E" />
+  </svg>
+);
+
+export const FolderIcon = ({ width = 24, height = 24, ...props }: SVGProps<SVGSVGElement>) => (
+  <svg width={width} height={height} {...props} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M22 11.1V16.5C22 20.1 21 21 17 21H7C3 21 2 20.1 2 16.5V7.5C2 3.9 3 3 7 3H8.5C10 3 10.33 3.396 10.9 4.08L12.4 5.88C12.78 6.33 13 6.6 14 6.6H17C21 6.6 22 7.5 22 11.1Z" stroke="#1C1C1E" stroke-miterlimit="10" />
+    <path d="M8 3H17C19 3 20 3.91324 20 5.73973V7" stroke="#1C1C1E" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+);
+
+export const CancleCircleIcon = ({ width = 24, height = 24, ...props }: SVGProps<SVGSVGElement>) => (
+  <svg width={width} height={height} {...props} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="#1C1C1E" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M9.16992 14.83L14.8299 9.17004" stroke="#1C1C1E" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M14.8299 14.83L9.16992 9.17004" stroke="#1C1C1E" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+);

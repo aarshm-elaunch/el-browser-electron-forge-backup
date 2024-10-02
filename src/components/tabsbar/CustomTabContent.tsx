@@ -1,13 +1,19 @@
 import { Close } from "@mui/icons-material";
-import { alpha, Box, IconButton, Typography } from "@mui/material";
+import { alpha, Box, Typography } from "@mui/material";
 import { useState } from "react";
 import { Tab } from "../../types/browser";
-import useBrowser from "../../hooks/useBrowser";
+import { useDispatch } from "react-redux";
+import { closeTab } from "../../redux/slices/browserSlice";
 
 // Custom favicon + title display for the tab content
-export const TabContent = ({ tabId, tabContent }: Tab) => {
-  const { handleCloseTab } = useBrowser();
+export const TabContent = ({ tabId, tabTitleContent }: Tab) => {
+  const dispatch = useDispatch();
   const [isHovering, setIsHovering] = useState<boolean>(false);
+
+  const handleCloseTab = () => {
+    dispatch(closeTab(tabId));
+  };
+
   return (
     <Box
       onMouseEnter={() => setIsHovering(true)}
@@ -34,7 +40,7 @@ export const TabContent = ({ tabId, tabContent }: Tab) => {
           display: isHovering ? "flex" : "none",
         }}
       >
-        <IconButton
+        <Box
           sx={{
             p: "2px",
             height: 16,
@@ -42,14 +48,14 @@ export const TabContent = ({ tabId, tabContent }: Tab) => {
             borderRadius: "2px",
             "&:hover": { bgcolor: alpha("#fff", 0.1) },
           }}
-          onClick={() => handleCloseTab(tabId)}
+          onClick={handleCloseTab}
         >
           <Close style={{ fontSize: 14 }} />
-        </IconButton>
+        </Box>
       </Box>
       <Box
         component={"img"}
-        src={tabContent.favIconURL}
+        src={tabTitleContent.favIconURL}
         alt="favicon"
         sx={{
           width: "16px",
@@ -59,7 +65,7 @@ export const TabContent = ({ tabId, tabContent }: Tab) => {
         }}
       />
       <Typography component={"span"} fontSize={12} fontWeight={500} sx={{ textTransform: "capitalize" }}>
-        {tabContent.titleString}
+        {tabTitleContent.titleString}
       </Typography>
     </Box>
   );
