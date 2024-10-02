@@ -1,25 +1,21 @@
 import { Box, useTheme } from "@mui/material";
-import React, { useEffect } from "react";
+import React from "react";
 import { TABSBAR_HEIGHT } from "../../utils/constants";
 import { CustomTabs } from "./CustomTabs";
 import { CustomTab } from "./CustomTab";
 import { TabContent } from "./CustomTabContent";
-import useBrowser from "../../hooks/useBrowser";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
+import { setActiveTab } from "../../redux/slices/browserSlice";
 
-function TabsBar() {
+const TabsBar = () => {
   const theme = useTheme();
-  const {
-    state: { tabsList, activeTab },
-    handleSetActiveTab,
-  } = useBrowser();
+  const dispatch = useDispatch();
+  const { tabsList, activeTabId } = useSelector((state: RootState) => state.browser);
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
-    handleSetActiveTab(newValue);
+    dispatch(setActiveTab(newValue));
   };
-
-  useEffect(() => {
-    console.log(tabsList);
-  },[tabsList])
 
   return (
     <Box
@@ -30,13 +26,13 @@ function TabsBar() {
         borderBottom: `1px solid ${theme.palette.divider}`,
       }}
     >
-      <CustomTabs value={activeTab.tabId} onChange={handleTabChange}>
+      <CustomTabs value={activeTabId} onChange={handleTabChange}>
         {tabsList.map((tab) => (
-          <CustomTab disableRipple key={tab.tabId} label={<TabContent {...tab} />} selected={tab.isActive} value={tab.tabId}/>
+          <CustomTab disableRipple key={tab.tabId} label={<TabContent {...tab} />} selected={activeTabId === tab.tabId} value={tab.tabId} />
         ))}
       </CustomTabs>
     </Box>
   );
-}
+};
 
 export default TabsBar;

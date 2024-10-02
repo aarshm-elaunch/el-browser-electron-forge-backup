@@ -2,16 +2,19 @@ import { RefreshOutlined } from "@mui/icons-material";
 import { alpha, IconButton, Tooltip, useTheme } from "@mui/material";
 import React from "react";
 import useBrowser from "../../hooks/useBrowser";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 
 const ReloadButton = () => {
   const theme = useTheme();
-  const {
-    handleReload,
-    state: { activeTab },
-  } = useBrowser();
+  const { handleReload } = useBrowser();
+  const { tabsList, activeTabId } = useSelector((state: RootState) => state.browser);
+  const activeTab = tabsList.find((tab) => tab.tabId === activeTabId);
 
   const handleClick = () => {
-    handleReload(activeTab.tabId);
+    if (activeTab) {
+      handleReload();
+    }
   };
 
   return (

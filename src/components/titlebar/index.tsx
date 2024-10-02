@@ -7,22 +7,23 @@ import BackButton from "./BackButton";
 import ForwardButton from "./ForwardButton";
 import ReloadButton from "./ReloadButton";
 import OpenNewTabButton from "./OpenNewTabButton";
-import useBrowser from "../../hooks/useBrowser";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
+import { loadUrl } from "../../redux/slices/browserSlice";
+import { createStandardURL } from "../../utils";
 
 function Titlebar() {
   const [enteredURL, setEnteredURL] = useState<string>("");
   const theme = useTheme();
-  const {
-    state: { activeTab },
-    handleLoadUrl,
-  } = useBrowser();
+  const dispatch = useDispatch();
+  const { tabsList, activeTabId } = useSelector((state: RootState) => state.browser);
 
   useEffect(() => {
-
+    const activeTab = tabsList.find((tab) => tab.tabId === activeTabId);
     const listenEnterPress = (ev: KeyboardEvent) => {
       if (ev.key === "Enter") {
         if (enteredURL !== "") {
-          handleLoadUrl(activeTab.tabId, enteredURL);
+          dispatch(loadUrl({ tabId: activeTab.tabId, url: createStandardURL(enteredURL) }));
         }
       }
     };
@@ -30,8 +31,14 @@ function Titlebar() {
     document.addEventListener("keydown", listenEnterPress);
 
     return () => document.removeEventListener("keydown", listenEnterPress);
-    
-  }, [enteredURL, activeTab]);
+  }, [enteredURL, activeTabId]);
+
+  useEffect(() => {
+    const activeTab = tabsList.find((tab) => tab.tabId === activeTabId);
+    if (activeTab) {
+      setEnteredURL(activeTab.tabURL);
+    }
+  }, [tabsList, activeTabId]);
 
   const handleOnURLChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     setEnteredURL(ev.target.value);
@@ -126,7 +133,7 @@ function Titlebar() {
           zIndex: 10,
         }}
       >
-        {/* <OpenNewTabButton /> */}
+        <OpenNewTabButton />
         <BrowserControlMenuButton />
       </Box>
     </Box>

@@ -2,16 +2,21 @@ import { ArrowBack } from "@mui/icons-material";
 import { alpha, IconButton, Tooltip, useTheme } from "@mui/material";
 import React from "react";
 import useBrowser from "../../hooks/useBrowser";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 
 const BackButton = () => {
   const theme = useTheme();
-  const {
-    handleGoBack,
-    state: { activeTab },
-  } = useBrowser();
+  const { handleGoBack } = useBrowser();
+  const { tabsList, activeTabId } = useSelector((state: RootState) => state.browser);
+  const activeTab = tabsList.find((tab) => tab.tabId === activeTabId);
+
   const handleClick = () => {
-    handleGoBack(activeTab.tabId);
+    if (activeTab) {
+      handleGoBack();
+    }
   };
+  
   return (
     <Tooltip
       title="Click to go back"

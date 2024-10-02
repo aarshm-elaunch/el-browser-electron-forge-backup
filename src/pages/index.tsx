@@ -1,10 +1,12 @@
 import { Box, CircularProgress, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import useBrowser from "../hooks/useBrowser";
 import { TABSBAR_HEIGHT, TITLEBAR_HEIGHT } from "../utils/constants";
 import { Tab } from "../types/browser";
 import StartPage from "./StartPage";
 import WebContentPage from "./WebContentPage";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../redux/store";
+import { setActiveTab } from "../redux/slices/browserSlice";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -42,9 +44,9 @@ function CustomTabPanel({ activeTab, panelHeight, value, children }: TabPanelPro
 const BrowserContent = () => {
   const [loaded, setLoaded] = useState<boolean>(false);
   const [decideWebViewHeight, setDecideWebViewHeight] = useState<number>(0);
-  const {
-    state: { tabsList, activeTab },
-  } = useBrowser();
+  const dispatch = useDispatch();
+  const { tabsList, activeTabId } = useSelector((state: RootState) => state.browser);
+  const activeTab = tabsList.find((tab) => tab.tabId === activeTabId);
 
   useEffect(() => {
     if (tabsList.length > 1) {
@@ -55,7 +57,13 @@ const BrowserContent = () => {
   }, [tabsList]);
 
   useEffect(() => {
-    if (activeTab !== null) {
+    if (!activeTab && tabsList.length > 0) {
+      dispatch(setActiveTab(tabsList[0].tabId));
+    }
+  }, [activeTab, tabsList, dispatch]);
+
+  useEffect(() => {
+    if (activeTab) {
       setLoaded(true);
     } else {
       setTimeout(() => {
@@ -82,7 +90,7 @@ const BrowserContent = () => {
     );
   }
 
-  if (loaded && activeTab === null) {
+  if (loaded && !activeTab) {
     return (
       <Box
         sx={{
@@ -109,6 +117,8 @@ const BrowserContent = () => {
   return (
     <>
       {tabsList.length > 0 &&
+        activeTab &&
+        loaded &&
         tabsList.map((tab) => {
           if (tab.tabURL === "about:blank") {
             return (
