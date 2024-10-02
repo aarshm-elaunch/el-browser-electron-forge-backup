@@ -4,3 +4,19 @@
 #root {
     overflow: hidden !important;
 }
+
+.hidden-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .theme-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  .theme-scrollbar::-webkit-scrollbar-track {
+    width: 4px;
+  }
+  
+  .theme-scrollbar::-webkit-scrollbar-thumb {
+    background: #E4E4E4;
+  }
