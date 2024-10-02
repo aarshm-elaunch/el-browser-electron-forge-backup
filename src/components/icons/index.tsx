@@ -112,3 +112,18 @@ export const CancleCircleIcon = ({ width = 24, height = 24, ...props }: SVGProps
     <path d="M14.8299 14.83L9.16992 9.17004" stroke="#1C1C1E" stroke-linecap="round" stroke-linejoin="round" />
   </svg>
 );
+
+export const PluseCircleIcon = ({ width = 18, height = 18, ...props }: SVGProps<SVGSVGElement>) => (
+  <svg width={width} height={height} {...props} viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M9 16.5C13.125 16.5 16.5 13.125 16.5 9C16.5 4.875 13.125 1.5 9 1.5C4.875 1.5 1.5 4.875 1.5 9C1.5 13.125 4.875 16.5 9 16.5Z" stroke="#1C1C1E" stroke-opacity="0.3" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M6 9H12" stroke="#1C1C1E" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M9 12V6" stroke="#1C1C1E" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+);
+
+export const SearchIcon = ({ width = 26, height = 26, ...props }: SVGProps<SVGSVGElement>) => (
+  <svg width={width} height={height} {...props} viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12.4583 22.7501C18.1423 22.7501 22.75 18.1423 22.75 12.4584C22.75 6.77448 18.1423 2.16675 12.4583 2.16675C6.7744 2.16675 2.16666 6.77448 2.16666 12.4584C2.16666 18.1423 6.7744 22.7501 12.4583 22.7501Z" stroke="#1C1C1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M23.8333 23.8334L21.6667 21.6667" stroke="#1C1C1E" stroke-opacity="0.3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+);
