@@ -1,15 +1,17 @@
-import React from "react";
-import { alpha, Box, Button, Card, CardContent, FormControl, FormLabel, Paper, TextField, Typography, useTheme } from "@mui/material";
+import React, { useState } from "react";
+import { Box, Button, Card, CardContent, Checkbox, FormControl, FormControlLabel, FormLabel, IconButton, InputAdornment, Paper, TextField, Typography, useTheme } from "@mui/material";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { KeyIcon } from "../components/icons";
+import { EyeIcon, EyeOffIcon } from "../components/icons";
 import { useLoginMutation } from "../redux/api/authApi";
 import { toast } from "sonner";
 import { useDispatch } from "react-redux";
 import { setAuthenticatationFlag, setToken } from "../redux/slices/authSlice";
+import bgImage from "../assets/images/bg_main.jpg";
+import { RadioButtonUnchecked, CheckCircle } from '@mui/icons-material';
 
 const validationSchema = Yup.object().shape({
-  email: Yup.string().required("Email  is required"),
+  userName: Yup.string().required("Email  is required"),
   password: Yup.string().required("Password is required"),
 });
 
@@ -17,14 +19,26 @@ const AuthView = () => {
   const theme = useTheme();
   const [loginFunc, { isLoading }] = useLoginMutation();
   const dispatch = useDispatch()
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleTogglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
+  };
   return (
     <Paper
       sx={{
         height: "100vh",
         width: "100vw",
         overflow: "hidden",
-        bgcolor: theme.palette.background.paper,
+        backgroundImage: `url('${bgImage}')`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "100% 100%",
+        backgroundPosition: "center",
         position: "relative",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        borderRadius: '0px'
       }}
     >
       <Box
@@ -45,21 +59,24 @@ const AuthView = () => {
       ></Box>
       <Card
         sx={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          width: 420,
-          border: `1px solid ${alpha(theme.palette.divider, 0.08)}`,
+          background: "rgba(241, 243, 244, 0.6)",
+          backdropFilter: 'blur(10px)',
+          width: '100%',
+          maxWidth: { xl: '30%', lg: '40%', md: '50%', xs: '75%' },
+          boxShadow: 'none',
+          p: { lg: '60px', xs: '36px' },
+          borderRadius: { lg: '60px', xs: '40px' }
         }}
       >
+        <Typography sx={{ color: '#000', fontSize: 32, fontWeight: 600 }}>Welcome Back</Typography>
+        <Typography sx={{ color: '#656565', fontSize: 14, fontWeight: 400 }}>Welcome to Custom Browser - Let's log in account</Typography>
         <Formik
-          initialValues={{ email: "", password: "" }}
+          initialValues={{ userName: "", password: "" }}
           validationSchema={validationSchema}
           onSubmit={async (values, { setSubmitting }) => {
             console.log(values, "asasas");
             try {
-              const response = await loginFunc({ email: values.email, password: values.password }).unwrap();
+              const response = await loginFunc({ email: values.userName, password: values.password }).unwrap();
               toast.success("Login Successful");
               console.log(response, "response");
               dispatch(setAuthenticatationFlag(true));
@@ -81,61 +98,141 @@ const AuthView = () => {
                   alignItems: "center",
                   justifyContent: "center",
                   height: "100%",
+                  p: '0 !important',
+                  pt: '40px !important',
                 }}
               >
-                <KeyIcon width={64} height={64} />
                 <Box
                   sx={{
                     display: "flex",
                     flexDirection: "column",
-                    gap: 3,
+                    gap: '15px',
                     width: "100%",
                   }}
                 >
                   <FormControl fullWidth>
-                    <FormLabel sx={{ fontSize: 16, mb: 1, color: "#fff" }} htmlFor="user_id">
-                      Employee Id
+                    <FormLabel sx={{ fontSize: 14, mb: '8px', color: "#000", fontWeight: 500 }} htmlFor="user_id">
+                      Username
                     </FormLabel>
                     <Field
                       as={TextField}
-                      name="email"
-                      placeholder="Enter your employee id"
+                      name="userName"
+                      placeholder="Enter your Username"
                       error={!!ErrorMessage}
                       helperText={<ErrorMessage name="userName" />}
+                      sx={{
+                        color: '#000',
+                        "& .MuiInputBase-input": {
+                          color: '#000',
+                          backgroundColor: '#fff',
+                          borderRadius: '30px',
+                          p: '14px 20px'
+                        },
+                        "& .MuiOutlinedInput-notchedOutline": {
+                          border: 'none'
+                        }
+                      }}
                     />
                   </FormControl>
                   <FormControl fullWidth>
-                    <FormLabel sx={{ fontSize: 16, mb: 1, color: "#fff" }} htmlFor="user_passkey">
+                    <FormLabel sx={{ fontSize: 14, mb: '8px', color: "#000", fontWeight: 500 }} htmlFor="user_passkey">
                       Password
                     </FormLabel>
                     <Field
                       as={TextField}
                       name="password"
-                      type="password"
+                      type={showPassword ? 'text' : 'password'}  // Toggle between 'text' and 'password'
                       placeholder="Enter your password"
                       error={!!ErrorMessage}
                       helperText={<ErrorMessage name="password" />}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end" sx={{ m: 0 }}>
+                            <IconButton
+                              onClick={handleTogglePasswordVisibility}
+                              edge="end"
+                              sx={{ py: 0 }}
+                            >
+                              {showPassword ? <EyeOffIcon /> : <EyeIcon />}
+                            </IconButton>
+                          </InputAdornment>
+                        ),
+                      }}
+                      sx={{
+                        color: '#000',
+                        "& .MuiInputBase-root": {
+                          color: '#000',
+                          backgroundColor: '#fff',
+                          borderRadius: '30px',
+                          padding: '14px 20px',
+                        },
+                        "& .MuiInputBase-input": {
+                          padding: '0px',
+                        },
+                        "& .MuiOutlinedInput-notchedOutline": {
+                          border: 'none',
+                        },
+                      }}
                     />
                   </FormControl>
+                  <FormControlLabel
+                    value="end"
+                    control={
+                      <Checkbox
+                        icon={<RadioButtonUnchecked />}
+                        checkedIcon={<CheckCircle />}
+                        sx={{
+                          p: 0,
+                          "& .MuiSvgIcon-root": {
+                            fontSize: 20,
+                          },
+                          color: '#000',
+                          '&.Mui-checked': {
+                            color: '#000',
+                          },
+                          '&:hover': {
+                            background: 'transparent',
+                          },
+                        }}
+                      />
+                    }
+                    label="Remember Me"
+                    sx={{
+                      color: '#000',
+                      fontSize: 12,
+                      fontWeight: 500,
+                      padding: '0',
+                      marginLeft: '-3px',
+                      display: 'inline-flex',
+                      width: 'fit-content',
+                      "& .MuiFormControlLabel-label": {
+                        color: '#000',
+                        fontSize: 12,
+                        fontWeight: 500,
+                        paddingLeft: '8px',
+                      },
+                    }}
+                  />
                 </Box>
                 <Button
                   type="submit"
                   disableRipple
-                  sx={{ "&:hover": { bgcolor: theme.palette.primary.main } }}
+                  fullWidth
+                  sx={{ background: '#1C1C1E', color: '#fff', borderRadius: '30px', py: '15px', fontSize: 18, fontWeight: 500, textTransform: 'capitalize', lineHeight: 'normal' }}
                   variant="contained"
                   disabled={isSubmitting}
                 >
-                  Login
+                  Log In
                 </Button>
               </CardContent>
             </Form>
           )}
         </Formik>
-        <Typography sx={{ fontSize: 14, color: theme.palette.warning.main, p: 2, textAlign: "center" }}>
+        {/* <Typography sx={{ fontSize: 14, color: theme.palette.warning.main, p: 2, textAlign: "center" }}>
           {'Enter "test-dev" as employeeId and "1234" as password to enter the browser.'}
-        </Typography>
+        </Typography> */}
       </Card>
-    </Paper>
+    </Paper >
   );
 };
 

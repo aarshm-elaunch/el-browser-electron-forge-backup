@@ -9,7 +9,7 @@ const HistoryPage = () => {
         <Box sx={{ maxWidth: { md: '60%', xs: '85%' }, flexGrow: 1 }} mx={'auto'} py={4}>
             <Typography sx={{ color: (theme) => theme.palette.primary.dark, fontSize: 28, fontWeight: 600 }}>History</Typography>
             <Search placeholder='Search History Here...' />
-            <Box className="hidden-scrollbar" sx={{ bgcolor: "#F1F3F4B2", p: '30px', borderRadius: '30px', maxHeight: 'calc(100vh - 235px)', overflow: 'auto' }}>
+            <Box className="hidden-scrollbar" sx={{ bgcolor: "#F1F3F4B2", p: '30px', borderRadius: '30px', maxHeight: 'calc(100vh - 300px)', overflow: 'auto' }}>
                 <Box sx={{ mb: '30px' }}>
                     <Typography sx={{ color: (theme) => theme.palette.primary.dark, fontSize: 18, fontWeight: 500 }}>Today - Tuesday 1 Oct 2024</Typography>
                     <Divider sx={{ borderColor: '#E4E4E4', my: '8px' }} />

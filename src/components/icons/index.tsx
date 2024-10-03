@@ -127,3 +127,22 @@ export const SearchIcon = ({ width = 26, height = 26, ...props }: SVGProps<SVGSV
     <path d="M23.8333 23.8334L21.6667 21.6667" stroke="#1C1C1E" stroke-opacity="0.3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
   </svg>
 );
+
+export const EyeOffIcon = ({ width = 24, height = 24, ...props }: SVGProps<SVGSVGElement>) => (
+  <svg width={width} height={height} {...props} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M14.53 9.47004L9.47004 14.53C8.82004 13.88 8.42004 12.99 8.42004 12C8.42004 10.02 10.02 8.42004 12 8.42004C12.99 8.42004 13.88 8.82004 14.53 9.47004Z" stroke="#1C1C1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M17.82 5.76998C16.07 4.44998 14.07 3.72998 12 3.72998C8.46997 3.72998 5.17997 5.80998 2.88997 9.40998C1.98997 10.82 1.98997 13.19 2.88997 14.6C3.67997 15.84 4.59997 16.91 5.59997 17.77" stroke="#1C1C1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M8.42004 19.5301C9.56004 20.0101 10.77 20.2701 12 20.2701C15.53 20.2701 18.82 18.1901 21.11 14.5901C22.01 13.1801 22.01 10.8101 21.11 9.40005C20.78 8.88005 20.42 8.39005 20.05 7.93005" stroke="#1C1C1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M15.5099 12.7C15.2499 14.11 14.0999 15.26 12.6899 15.52" stroke="#1C1C1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M9.47 14.53L2 22" stroke="#1C1C1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M22 2L14.53 9.47" stroke="#1C1C1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+
+);
+export const EyeIcon = ({ width = 24, height = 24, ...props }: SVGProps<SVGSVGElement>) => (
+  <svg width={width} height={height} {...props} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M15.58 11.9999C15.58 13.9799 13.98 15.5799 12 15.5799C10.02 15.5799 8.42004 13.9799 8.42004 11.9999C8.42004 10.0199 10.02 8.41992 12 8.41992C13.98 8.41992 15.58 10.0199 15.58 11.9999Z" stroke="#1C1C1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M12 20.27C15.53 20.27 18.82 18.19 21.11 14.59C22.01 13.18 22.01 10.81 21.11 9.39997C18.82 5.79997 15.53 3.71997 12 3.71997C8.46997 3.71997 5.17997 5.79997 2.88997 9.39997C1.98997 10.81 1.98997 13.18 2.88997 14.59C5.17997 18.19 8.46997 20.27 12 20.27Z" stroke="#1C1C1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+
+);

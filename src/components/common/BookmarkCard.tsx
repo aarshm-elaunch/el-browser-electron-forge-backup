@@ -16,7 +16,7 @@ const BookmarkCard = () => {
         setAnchorEl(null);
     };
     return (
-        <Box sx={{ background: '#F1F3F44D', backdropFilter: 'blur(46px)', borderRadius: '16px', py: '20px', px: '16px', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', gap: '10px', position: 'relative' }}>
+        <Box sx={{ background: 'rgba(241, 243, 244, 0.3)', backdropFilter: 'blur(46px)', borderRadius: '16px', py: '20px', px: '16px', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', gap: '10px', position: 'relative' }}>
             <Avatar
                 alt="Remy Sharp"
                 src={Image}

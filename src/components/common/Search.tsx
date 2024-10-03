@@ -14,7 +14,7 @@ const Search = ({ filter = true, placeholder }: SearchProps) => {
         <Box sx={{ width: "100%", my: 3 }}>
             <Paper
                 component="form"
-                sx={{ p: '5px 5px', display: 'flex', alignItems: 'center', width: "100%", bgcolor: "#F1F3F4B2", boxShadow: "none", borderRadius: "48px" }}
+                sx={{ p: '5px 5px', display: 'flex', alignItems: 'center', width: "100%", bgcolor: "rgba(241, 243, 244, 0.7)", backdropFilter: 'blur(76px)', boxShadow: "none", borderRadius: "48px" }}
             >
                 <Box sx={{ width: "50px", height: "50px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", bgcolor: "#fff" }} aria-label="search">
                     <SearchIcon />

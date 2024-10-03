@@ -10,7 +10,7 @@ const DownloadHistoryPage = () => {
       <Search placeholder="Search Download Here..." filter={false} />
       <Box
         className="hidden-scrollbar"
-        sx={{ bgcolor: "#F1F3F4B2", p: "30px", borderRadius: "30px", maxHeight: "calc(100vh - 235px)", overflow: "auto" }}
+        sx={{ bgcolor: "#F1F3F4B2", p: "30px", borderRadius: "30px", maxHeight: "calc(100vh - 300px)", overflow: "auto" }}
       >
         <Box sx={{ mb: "30px" }}>
           <Typography sx={{ color: (theme) => theme.palette.primary.dark, fontSize: 18, fontWeight: 500 }}>Today - Tuesday 1 Oct 2024</Typography>
