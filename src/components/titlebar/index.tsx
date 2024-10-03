@@ -6,11 +6,11 @@ import BrowserControlMenuButton from "./BrowserControlMenuButton";
 import BackButton from "./BackButton";
 import ForwardButton from "./ForwardButton";
 import ReloadButton from "./ReloadButton";
-import OpenNewTabButton from "./OpenNewTabButton";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { loadUrl } from "../../redux/slices/browserSlice";
 import { createStandardURL } from "../../utils";
+import UserAvatarMenu from "./UserAvatarMenu";
 
 function Titlebar() {
   const [enteredURL, setEnteredURL] = useState<string>("");
@@ -126,10 +126,11 @@ function Titlebar() {
           flexShrink: 0,
           alignItems: "center",
           justifyContent: "flex-end",
+          gap: '4px',
           zIndex: 10,
         }}
       >
-        <OpenNewTabButton />
+        <UserAvatarMenu />
         <BrowserControlMenuButton />
       </Box>
     </Box>
