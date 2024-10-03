@@ -1,12 +1,14 @@
 import { Box, CircularProgress, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { SUMMIT_HEIGHT} from "../utils/constants";
+import { SUMMIT_HEIGHT } from "../utils/constants";
 import { Tab } from "../types/browser";
-import StartPage from "./StartPage";
 import WebContentPage from "./WebContentPage";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../redux/store";
 import { setActiveTab } from "../redux/slices/browserSlice";
+import HomePage from "./HomePage";
+import HistoryPage from "./HistoryPage";
+import DownloadHistoryPage from "./DownloadHistoryPage";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -114,7 +116,19 @@ const BrowserContent = () => {
           if (tab.tabURL === "about:blank") {
             return (
               <CustomTabPanel value={tab.tabId} activeTab={activeTab} panelHeight={SUMMIT_HEIGHT} key={tab.tabId}>
-                <StartPage />
+                <HomePage />
+              </CustomTabPanel>
+            );
+          } else if (tab.tabURL === "history") {
+            return (
+              <CustomTabPanel value={tab.tabId} activeTab={activeTab} panelHeight={SUMMIT_HEIGHT} key={tab.tabId}>
+                <HistoryPage />
+              </CustomTabPanel>
+            );
+          } else if (tab.tabURL === "downloads") {
+            return (
+              <CustomTabPanel value={tab.tabId} activeTab={activeTab} panelHeight={SUMMIT_HEIGHT} key={tab.tabId}>
+                <DownloadHistoryPage />
               </CustomTabPanel>
             );
           } else {

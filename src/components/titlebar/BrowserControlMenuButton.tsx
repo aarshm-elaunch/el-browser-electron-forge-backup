@@ -1,9 +1,12 @@
 import { MoreVert } from "@mui/icons-material";
 import { alpha, IconButton, Menu, MenuItem, Tooltip, useTheme } from "@mui/material";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { openDownloadTab, openHistoryTab } from "../../redux/slices/browserSlice";
 
 const BrowserControlMenuButton = () => {
   const theme = useTheme();
+  const dispatch = useDispatch()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -13,6 +16,16 @@ const BrowserControlMenuButton = () => {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleOpenDownloadHistory = () => {
+    dispatch(openDownloadTab());
+    handleClose()
+  };
+
+  const handleOpenUserHistory = () => {
+    dispatch(openHistoryTab());
+    handleClose()
   };
 
   return (
@@ -58,10 +71,10 @@ const BrowserControlMenuButton = () => {
           "aria-labelledby": "browser-control-button",
         }}
       >
-        <MenuItem sx={{ fontSize: 14 }} onClick={handleClose}>
+        <MenuItem sx={{ fontSize: 14 }} onClick={handleOpenUserHistory}>
           History
         </MenuItem>
-        <MenuItem sx={{ fontSize: 14 }} onClick={handleClose}>
+        <MenuItem sx={{ fontSize: 14 }} onClick={handleOpenDownloadHistory}>
           Download
         </MenuItem>
         <MenuItem sx={{ fontSize: 14 }} onClick={handleClose}>

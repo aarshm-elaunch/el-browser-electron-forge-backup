@@ -2,7 +2,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { BrowserState, Tab } from "../../types/browser";
 import { v4 as uuidv4 } from "uuid";
-import { NEWTAB_ICON_STRING } from "../../utils/constants";
+import { DOWNLOAD_HISTORY_TAB_ICON, HISTORY_TAB_ICON, NEWTAB_ICON_STRING } from "../../utils/constants";
 
 const newTab: Tab = {
   tabId: uuidv4(),
@@ -78,11 +78,41 @@ const browserSlice = createSlice({
         tab.tabURL = action.payload.tabURL;
       }
     },
+    openHistoryTab: (state) => {
+      const newTab: Tab = {
+        tabId: uuidv4(),
+        tabURL: "history",
+        tabTitleContent: {
+          favIconURL: HISTORY_TAB_ICON,
+          titleString: "History",
+        },
+        canGoBack: false,
+        canGoForward: false,
+        scrollPosition: 0,
+      };
+      state.tabsList.push(newTab);
+      state.activeTabId = newTab.tabId; // Make new tab active
+    },
+    openDownloadTab: (state) => {
+      const newTab: Tab = {
+        tabId: uuidv4(),
+        tabURL: "downloads",
+        tabTitleContent: {
+          favIconURL: DOWNLOAD_HISTORY_TAB_ICON,
+          titleString: "Download history",
+        },
+        canGoBack: false,
+        canGoForward: false,
+        scrollPosition: 0,
+      };
+      state.tabsList.push(newTab);
+      state.activeTabId = newTab.tabId; // Make new tab active
+    },
   },
 });
 
 // Export actions
-export const { addTab, closeTab, setActiveTab, loadUrl, updateTabState } = browserSlice.actions;
+export const { addTab, closeTab, setActiveTab, loadUrl, updateTabState, openHistoryTab, openDownloadTab } = browserSlice.actions;
 
 // Export reducer
 export default browserSlice.reducer;

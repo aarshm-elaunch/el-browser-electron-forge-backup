@@ -3,7 +3,7 @@ import { Box, Divider, Typography } from '@mui/material'
 import Search from '../components/common/Search';
 import HistoryItem from '../components/common/HistoryItem';
 
-const History = () => {
+const HistoryPage = () => {
 
     return (
         <Box sx={{ maxWidth: { md: '60%', xs: '85%' }, flexGrow: 1 }} mx={'auto'} py={4}>
@@ -33,4 +33,4 @@ const History = () => {
     )
 }
 
-export default History
+export default HistoryPage
