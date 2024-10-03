@@ -60,7 +60,7 @@ const BrowserControlMenuButton = () => {
           aria-expanded={open ? "true" : undefined}
           onClick={handleClick}
         >
-          <MoreVert style={{ fontSize: 20 }} />
+          <MoreVert style={{ fontSize: 22 }} />
         </IconButton>
       </Tooltip>
       <Menu
