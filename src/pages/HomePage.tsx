@@ -1,13 +1,16 @@
 import { Box, Container, Grid2, Typography } from "@mui/material";
+import { useSelector } from "react-redux";
 import { toast } from "sonner";
 import startPageBg from "../assets/images/bg_main.jpg";
 import BookmarkCard from "../components/common/BookmarkCard";
 import Search from "../components/common/Search";
 import { PluseCircleIcon } from "../components/icons";
-import { useGetMyAccountQuery, useLogoutMutation } from "../redux/api/authApi";
+import { useLogoutMutation } from "../redux/api/authApi";
+import { RootState } from "../redux/store";
 
 const HomePage = () => {
-    const { data, refetch } = useGetMyAccountQuery();
+    const { userInfo } = useSelector((state: RootState) => state.auth)
+
     const [logoutFunc] = useLogoutMutation()
 
     const handlelogOut = async () => {
@@ -37,8 +40,8 @@ const HomePage = () => {
                     <Box sx={{ width: '100%' }}>
                         <Grid2 container spacing={3}>
                             {
-                                Array.from({ length: 7 }).map(() =>
-                                    <Grid2 size={3}>
+                                Array.from({ length: 7 }).map((_, index: number) =>
+                                    <Grid2 size={3} key={index}>
                                         <BookmarkCard />
                                     </Grid2>
                                 )
@@ -55,12 +58,11 @@ const HomePage = () => {
                     </Box>
                 </Box>
                 <Box>
-                    <button onClick={refetch}>refetch</button>
                     <button onClick={handlelogOut}>logout</button>
                     {
-                        data &&
+                        userInfo &&
                         <div className="">
-                            <h1>{data.email}</h1>
+                            <h1>{userInfo.email}</h1>
                         </div>
                     }
                 </Box>

@@ -101,29 +101,29 @@ export const LinkIcon = ({ width = 24, height = 24, ...props }: SVGProps<SVGSVGE
 export const FolderIcon = ({ width = 24, height = 24, ...props }: SVGProps<SVGSVGElement>) => (
   <svg width={width} height={height} {...props} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M22 11.1V16.5C22 20.1 21 21 17 21H7C3 21 2 20.1 2 16.5V7.5C2 3.9 3 3 7 3H8.5C10 3 10.33 3.396 10.9 4.08L12.4 5.88C12.78 6.33 13 6.6 14 6.6H17C21 6.6 22 7.5 22 11.1Z" stroke="#1C1C1E" stroke-miterlimit="10" />
-    <path d="M8 3H17C19 3 20 3.91324 20 5.73973V7" stroke="#1C1C1E" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M8 3H17C19 3 20 3.91324 20 5.73973V7" stroke="#1C1C1E" stroke-miterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
 export const CancleCircleIcon = ({ width = 24, height = 24, ...props }: SVGProps<SVGSVGElement>) => (
   <svg width={width} height={height} {...props} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="#1C1C1E" stroke-linecap="round" stroke-linejoin="round" />
-    <path d="M9.16992 14.83L14.8299 9.17004" stroke="#1C1C1E" stroke-linecap="round" stroke-linejoin="round" />
-    <path d="M14.8299 14.83L9.16992 9.17004" stroke="#1C1C1E" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="#1C1C1E" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M9.16992 14.83L14.8299 9.17004" stroke="#1C1C1E" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M14.8299 14.83L9.16992 9.17004" stroke="#1C1C1E" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
 export const PluseCircleIcon = ({ width = 18, height = 18, ...props }: SVGProps<SVGSVGElement>) => (
   <svg width={width} height={height} {...props} viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M9 16.5C13.125 16.5 16.5 13.125 16.5 9C16.5 4.875 13.125 1.5 9 1.5C4.875 1.5 1.5 4.875 1.5 9C1.5 13.125 4.875 16.5 9 16.5Z" stroke="#1C1C1E" stroke-opacity="0.3" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" />
-    <path d="M6 9H12" stroke="#1C1C1E" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" />
-    <path d="M9 12V6" stroke="#1C1C1E" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M9 16.5C13.125 16.5 16.5 13.125 16.5 9C16.5 4.875 13.125 1.5 9 1.5C4.875 1.5 1.5 4.875 1.5 9C1.5 13.125 4.875 16.5 9 16.5Z" stroke="#1C1C1E" strokeOpacity="0.3" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M6 9H12" stroke="#1C1C1E" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M9 12V6" stroke="#1C1C1E" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
 export const SearchIcon = ({ width = 26, height = 26, ...props }: SVGProps<SVGSVGElement>) => (
   <svg width={width} height={height} {...props} viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M12.4583 22.7501C18.1423 22.7501 22.75 18.1423 22.75 12.4584C22.75 6.77448 18.1423 2.16675 12.4583 2.16675C6.7744 2.16675 2.16666 6.77448 2.16666 12.4584C2.16666 18.1423 6.7744 22.7501 12.4583 22.7501Z" stroke="#1C1C1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-    <path d="M23.8333 23.8334L21.6667 21.6667" stroke="#1C1C1E" stroke-opacity="0.3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M12.4583 22.7501C18.1423 22.7501 22.75 18.1423 22.75 12.4584C22.75 6.77448 18.1423 2.16675 12.4583 2.16675C6.7744 2.16675 2.16666 6.77448 2.16666 12.4584C2.16666 18.1423 6.7744 22.7501 12.4583 22.7501Z" stroke="#1C1C1E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M23.8333 23.8334L21.6667 21.6667" stroke="#1C1C1E" strokeOpacity="0.3" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );

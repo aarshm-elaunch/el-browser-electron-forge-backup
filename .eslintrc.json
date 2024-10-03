@@ -12,5 +12,6 @@
     "plugin:import/electron",
     "plugin:import/typescript"
   ],
+  "rules": { "no-empty-interface": false },
   "parser": "@typescript-eslint/parser"
 }
