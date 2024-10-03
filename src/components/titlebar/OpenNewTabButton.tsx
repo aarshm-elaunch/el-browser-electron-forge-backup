@@ -8,7 +8,7 @@ const OpenNewTabButton = () => {
   const theme = useTheme();
   const dispatch = useDispatch();
 
-  const handleNewAddTab = () => {
+  const handleAddNewTab = () => {
     dispatch(addTab());
   };
 
@@ -27,19 +27,21 @@ const OpenNewTabButton = () => {
     >
       <IconButton
         disableRipple
+        onClick={handleAddNewTab}
         sx={{
-          padding: 0,
-          height: 30,
-          width: 30,
-          borderRadius: "4px",
+          width: "80%",
+          height: "80%",
+          p: "2px",
+          borderRadius: "50%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
           "&:hover": {
-            backgroundColor: theme.palette.mode === "dark" ? alpha(theme.palette.grey[300], 0.1) : alpha(theme.palette.primary.main, 0.1),
+            bgcolor: alpha(theme.palette.primary.main, 0.3),
           },
-          color: "#B7B7B6",
         }}
-        onClick={handleNewAddTab}
       >
-        <Add style={{ fontSize: 20 }} />
+        <Add style={{ fontSize: "16px" }} />
       </IconButton>
     </Tooltip>
   );

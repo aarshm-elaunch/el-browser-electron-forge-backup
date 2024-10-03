@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Typography } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { SUMMIT_HEIGHT } from "../utils/constants";
 import { Tab } from "../types/browser";
@@ -65,47 +65,23 @@ const BrowserContent = () => {
     }
   }, [activeTab]);
 
-  if (!loaded) {
-    return (
-      <Box
-        sx={{
-          width: "100%",
-          height: `calc(100vh - ${SUMMIT_HEIGHT}px)`,
-          display: "flex",
-          flexDirection: "column",
-          gap: 1,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <CircularProgress />
-      </Box>
-    );
-  }
-
-  if (loaded && !activeTab) {
-    return (
-      <Box
-        sx={{
-          width: "100%",
-          height: `calc(100vh - ${SUMMIT_HEIGHT}px)`,
-          display: "flex",
-          flexDirection: "column",
-          gap: 1,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Typography sx={{ color: (theme) => theme.palette.text.disabled, fontSize: 16, fontWeight: 600 }}>Oops! Something went wrong.</Typography>
-        <Typography sx={{ color: (theme) => theme.palette.text.disabled, fontSize: 14, fontWeight: 500 }}>
-          It looks like there's an issue initializing the browser. Please try opening a new tab.
-        </Typography>
-        <Typography sx={{ color: (theme) => theme.palette.text.disabled, fontSize: 14, fontWeight: 500 }}>
-          If the problem persists, you may need to restart the application.
-        </Typography>
-      </Box>
-    );
-  }
+  // if (!loaded) {
+  //   return (
+  //     <Box
+  //       sx={{
+  //         width: "100%",
+  //         height: `calc(100vh - ${SUMMIT_HEIGHT}px)`,
+  //         display: "flex",
+  //         flexDirection: "column",
+  //         gap: 1,
+  //         justifyContent: "center",
+  //         alignItems: "center",
+  //       }}
+  //     >
+  //       <CircularProgress />
+  //     </Box>
+  //   );
+  // }
 
   return (
     <>
