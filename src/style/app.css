@@ -7,16 +7,24 @@
 
 .hidden-scrollbar::-webkit-scrollbar {
     display: none;
-  }
-  
-  .theme-scrollbar::-webkit-scrollbar {
+}
+
+.theme-scrollbar::-webkit-scrollbar {
     width: 4px;
-  }
-  
-  .theme-scrollbar::-webkit-scrollbar-track {
+}
+
+.theme-scrollbar::-webkit-scrollbar-track {
     width: 4px;
-  }
-  
-  .theme-scrollbar::-webkit-scrollbar-thumb {
+}
+
+.theme-scrollbar::-webkit-scrollbar-thumb {
     background: #E4E4E4;
-  }
+}
+
+.text-ellipsis {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
