@@ -2,6 +2,7 @@
   "name": "custom-browser",
   "productName": "custom-browser",
   "version": "1.0.0",
+  "proxy": "http://localhost:4000",
   "description": "My Electron application description",
   "main": ".webpack/main",
   "scripts": {
@@ -53,12 +54,15 @@
     "@types/lodash": "^4.17.9",
     "@types/react-redux": "^7.1.34",
     "electron-squirrel-startup": "^1.0.1",
+    "formik": "^2.4.6",
     "lodash": "^4.17.21",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-redux": "^9.1.2",
     "react-router-dom": "^6.26.2",
     "redux": "^5.0.1",
-    "uuid": "^10.0.0"
+    "sonner": "^1.5.0",
+    "uuid": "^10.0.0",
+    "yup": "^1.4.0"
   }
 }

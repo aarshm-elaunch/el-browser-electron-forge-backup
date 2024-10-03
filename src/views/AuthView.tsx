@@ -1,23 +1,22 @@
+import React from "react";
 import { alpha, Box, Button, Card, CardContent, FormControl, FormLabel, Paper, TextField, Typography, useTheme } from "@mui/material";
-import React, { useState } from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 import { KeyIcon } from "../components/icons";
+import { useLoginMutation } from "../redux/api/authApi";
+import { toast } from "sonner";
+import { useDispatch } from "react-redux";
+import { setAuthenticatationFlag } from "../redux/slices/authSlice";
+
+const validationSchema = Yup.object().shape({
+  email: Yup.string().required("Email  is required"),
+  password: Yup.string().required("Password is required"),
+});
 
 const AuthView = () => {
   const theme = useTheme();
-
-  const [userName, setUserName] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-
-  console.log(userName);
-  console.log(password);
-
-  const handleUserNameOnChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    setUserName(ev.target.value);
-  };
-  const handlePasswordOnChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(ev.target.value);
-  };
-
+  const [loginFunc, { isLoading }] = useLoginMutation();
+  const dispatch = useDispatch()
   return (
     <Paper
       sx={{
@@ -54,56 +53,82 @@ const AuthView = () => {
           border: `1px solid ${alpha(theme.palette.divider, 0.08)}`,
         }}
       >
-        <CardContent
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            gap: 5,
-            alignItems: "center",
-            justifyContent: "center",
-            height: "100%",
+        <Formik
+          initialValues={{ email: "", password: "" }}
+          validationSchema={validationSchema}
+          onSubmit={async (values, { setSubmitting }) => {
+            console.log(values,"asasas")
+            try {
+              const response = await loginFunc({email:values.email,password:values.password}).unwrap()
+              toast.success("Login Successfull")
+              dispatch(setAuthenticatationFlag(true))
+            } catch (error: any) {
+              toast.error(error.data.message)
+            }
           }}
         >
-          <KeyIcon width={64} height={64} />
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              gap: 3,
-              width: "100%",
-            }}
-          >
-            <FormControl fullWidth>
-              <FormLabel sx={{ fontSize: 16, mb: 1, color: "#fff" }} htmlFor="user_id">
-                Employee Id
-              </FormLabel>
-              <TextField
-                sx={{}}
-                onChange={handleUserNameOnChange}
-                slotProps={{ input: { sx: { height: 48, fontSize: 14 } } }}
-                id="user_id"
-                placeholder="Enter your employee id"
-              />
-            </FormControl>
-            <FormControl fullWidth>
-              <FormLabel sx={{ fontSize: 16, mb: 1, color: "#fff" }} htmlFor="user_passkey">
-                Password
-              </FormLabel>
-              <TextField
-                slotProps={{ input: { sx: { height: 48, fontSize: 14 } } }}
-                id="user_passkey"
-                type="password"
-                placeholder="Enter your password"
-                onChange={handlePasswordOnChange}
-              />
-            </FormControl>
-          </Box>
-          <Button disableRipple sx={{ "&:hover": { bgcolor: theme.palette.primary.main } }} variant="contained">
-            Login
-          </Button>
-        </CardContent>
+          {({ isSubmitting }) => (
+            <Form>
+              <CardContent
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 5,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  height: "100%",
+                }}
+              >
+                <KeyIcon width={64} height={64} />
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 3,
+                    width: "100%",
+                  }}
+                >
+                  <FormControl fullWidth>
+                    <FormLabel sx={{ fontSize: 16, mb: 1, color: "#fff" }} htmlFor="user_id">
+                      Employee Id
+                    </FormLabel>
+                    <Field
+                      as={TextField}
+                      name="email"
+                      placeholder="Enter your employee id"
+                      error={!!ErrorMessage}
+                      helperText={<ErrorMessage name="userName" />}
+                    />
+                  </FormControl>
+                  <FormControl fullWidth>
+                    <FormLabel sx={{ fontSize: 16, mb: 1, color: "#fff" }} htmlFor="user_passkey">
+                      Password
+                    </FormLabel>
+                    <Field
+                      as={TextField}
+                      name="password"
+                      type="password"
+                      placeholder="Enter your password"
+                      error={!!ErrorMessage}
+                      helperText={<ErrorMessage name="password" />}
+                    />
+                  </FormControl>
+                </Box>
+                <Button
+                  type="submit"
+                  disableRipple
+                  sx={{ "&:hover": { bgcolor: theme.palette.primary.main } }}
+                  variant="contained"
+                  disabled={isSubmitting}
+                >
+                  Login
+                </Button>
+              </CardContent>
+            </Form>
+          )}
+        </Formik>
         <Typography sx={{ fontSize: 14, color: theme.palette.warning.main, p: 2, textAlign: "center" }}>
-          {'Enrer "test-dev" as employeeId and "1234" as password to enter browser.'}
+          {'Enter "test-dev" as employeeId and "1234" as password to enter the browser.'}
         </Typography>
       </Card>
     </Paper>
@@ -111,3 +136,4 @@ const AuthView = () => {
 };
 
 export default AuthView;
+

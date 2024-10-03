@@ -31,11 +31,12 @@ export const createStandardURL = (inputUrl: string) => {
     if (!url.startsWith("http://") && !url.startsWith("https://")) {
       // Check if "www" is needed
       if (!url.startsWith("www.")) {
-        url = "www." + url; // Add www if missing
+        url = "www." + url;
       }
-      url = `https://${url}`; // Default to https
+      url = `https://${url}`;
     }
   }
 
   return url;
 };
+
