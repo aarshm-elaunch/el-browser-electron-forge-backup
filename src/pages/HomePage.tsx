@@ -1,12 +1,23 @@
-import React from "react";
-import { Avatar, Box, Container, Grid2, Typography } from "@mui/material";
+import { Box, Container, Grid2, Typography } from "@mui/material";
+import { toast } from "sonner";
 import startPageBg from "../assets/images/bg_main.jpg";
-import Search from "../components/common/Search";
-import Image from '../assets/images/bookmark.jpg'
 import BookmarkCard from "../components/common/BookmarkCard";
+import Search from "../components/common/Search";
 import { PluseCircleIcon } from "../components/icons";
+import { useGetMyAccountQuery, useLogoutMutation } from "../redux/api/authApi";
 
 const HomePage = () => {
+    const { data, refetch } = useGetMyAccountQuery();
+    const [logoutFunc] = useLogoutMutation()
+
+    const handlelogOut = async () => {
+        try {
+            const response = await logoutFunc().unwrap();
+            toast.success("Logout Successful");
+        } catch (error: any) {
+            toast.error(error.data.message);
+        }
+    }
     return (
         <Box
             sx={{
@@ -43,7 +54,16 @@ const HomePage = () => {
                         </Grid2>
                     </Box>
                 </Box>
-
+                <Box>
+                    <button onClick={refetch}>refetch</button>
+                    <button onClick={handlelogOut}>logout</button>
+                    {
+                        data &&
+                        <div className="">
+                            <h1>{data.email}</h1>
+                        </div>
+                    }
+                </Box>
                 {/* <Typography sx={{ fontSize: 30, color: "#000", fontWeight: 600 }}>Start Page</Typography>
                 <Typography sx={{ fontSize: 16, color: "#000", fontWeight: 500 }}>This is the initial page or new tab content.</Typography>
                 <Typography sx={{ fontSize: 16, color: "#000", fontWeight: 500 }}>Features like favourite sites or frequenlty visited pages will be listed here.</Typography> */}

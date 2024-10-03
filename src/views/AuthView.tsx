@@ -6,7 +6,7 @@ import { KeyIcon } from "../components/icons";
 import { useLoginMutation } from "../redux/api/authApi";
 import { toast } from "sonner";
 import { useDispatch } from "react-redux";
-import { setAuthenticatationFlag } from "../redux/slices/authSlice";
+import { setAuthenticatationFlag, setToken } from "../redux/slices/authSlice";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required("Email  is required"),
@@ -57,13 +57,17 @@ const AuthView = () => {
           initialValues={{ email: "", password: "" }}
           validationSchema={validationSchema}
           onSubmit={async (values, { setSubmitting }) => {
-            console.log(values,"asasas")
+            console.log(values, "asasas");
             try {
-              const response = await loginFunc({email:values.email,password:values.password}).unwrap()
-              toast.success("Login Successfull")
-              dispatch(setAuthenticatationFlag(true))
+              const response = await loginFunc({ email: values.email, password: values.password }).unwrap();
+              toast.success("Login Successful");
+              console.log(response, "response");
+              dispatch(setAuthenticatationFlag(true));
+              dispatch(setToken(response.token));
             } catch (error: any) {
-              toast.error(error.data.message)
+              toast.error(error.data.message);
+            } finally {
+              setSubmitting(false);
             }
           }}
         >
