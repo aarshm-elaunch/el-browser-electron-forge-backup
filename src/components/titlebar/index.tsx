@@ -78,6 +78,7 @@ function Titlebar() {
         <TextField
           placeholder="search google or enter address"
           onChange={handleOnURLChange}
+          value={enteredURL}
           sx={{
             height: "100%",
             width: "100%",
@@ -126,7 +127,7 @@ function Titlebar() {
           flexShrink: 0,
           alignItems: "center",
           justifyContent: "flex-end",
-          gap: '4px',
+          gap: "4px",
           zIndex: 10,
         }}
       >
