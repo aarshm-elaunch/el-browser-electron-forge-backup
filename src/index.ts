@@ -14,6 +14,7 @@ if (require("electron-squirrel-startup")) {
 }
 const createWindow = (): void => {
   // Create the browser window.
+  const isMac = process.platform === "darwin";
   const mainWindow = new BrowserWindow({
     height: 720,
     width: 1280,
@@ -28,8 +29,9 @@ const createWindow = (): void => {
       webSecurity: true, // Keep web security enabled
       allowRunningInsecureContent: true,
     },
-    frame: false,
-    titleBarStyle: "hidden",
+    autoHideMenuBar: true,
+    frame: isMac ? false : true,
+    titleBarStyle: isMac ? "hidden" : "default",
     trafficLightPosition: trafficLightPositionForMac(TITLEBAR_HEIGHT),
   });
   session.defaultSession.cookies
@@ -50,7 +52,7 @@ const createWindow = (): void => {
           "default-src 'self' http://localhost:* https://localhost:* https://* 'unsafe-inline'; " +
             "script-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost:* https://localhost:*; " +
             "img-src 'self' data: http://localhost:* https://localhost:* https://*; " +
-            "style-src 'self' 'unsafe-inline' http://localhost:* https://localhost:*; "
+            "style-src 'self' 'unsafe-inline' http://localhost:* https://localhost:*; ",
         ],
       },
     });
