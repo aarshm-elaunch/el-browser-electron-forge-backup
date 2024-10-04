@@ -28,7 +28,7 @@ const UserAvatarMenu = () => {
           toast.success("Logout Successful", { position: "bottom-right" });
         });
     } catch (error: any) {
-      toast.error(error.data.message, { position: "bottom-right" });
+      toast.error(error?.data?.message, { position: "bottom-right" });
     }
   };
 
