@@ -50,8 +50,7 @@ const createWindow = (): void => {
           "default-src 'self' http://localhost:* https://localhost:* https://* 'unsafe-inline'; " +
             "script-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost:* https://localhost:*; " +
             "img-src 'self' data: http://localhost:* https://localhost:* https://*; " +
-            "style-src 'self' 'unsafe-inline' http://localhost:* https://localhost:*; " +
-            "connect-src 'self' ws://localhost:* wss://browser.elaunchinfotech.in wss://*;",
+            "style-src 'self' 'unsafe-inline' http://localhost:* https://localhost:*; "
         ],
       },
     });

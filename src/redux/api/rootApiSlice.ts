@@ -1,7 +1,7 @@
 import { BaseQueryFn, FetchArgs, FetchBaseQueryError, createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { logOut } from "../slices/authSlice";
 
-const BASE_URL = "https://browser.elaunchinfotech.in/api/";
+const BASE_URL = "https://browser.elaunchinfotech.in/api";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: BASE_URL,
