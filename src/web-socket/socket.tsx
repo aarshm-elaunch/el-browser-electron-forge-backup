@@ -2,6 +2,9 @@ import React, { createContext, FC, PropsWithChildren, useContext, useEffect, use
 import { useSelector } from "react-redux";
 import { io, Socket } from "socket.io-client";
 import { RootState } from "../redux/store";
+import { useLogoutMutation } from "../redux/api/authApi";
+import { useDispatch } from "react-redux";
+import { logOut } from "../redux/slices/authSlice";
 
 const SocketContext = createContext<Socket | null>(null);
 
@@ -10,9 +13,10 @@ interface SocketProviderProps extends PropsWithChildren { }
 const SocketProvider: FC<SocketProviderProps> = ({ children }) => {
   const [socket, setSocket] = useState<Socket | null>(null);
   const { token } = useSelector((state: RootState) => state.auth)
+  const [logoutFunc] = useLogoutMutation();
+  const dispatch = useDispatch()
   useEffect(() => {
-    const newSocket = io("http://localhost:4000", {
-      transports: ['websocket'],
+    const newSocket = io("https://browser.elaunchinfotech.in", {
       query: {
         token: token,
       },
@@ -20,6 +24,10 @@ const SocketProvider: FC<SocketProviderProps> = ({ children }) => {
     setSocket(newSocket);
     newSocket.on("connect", () => {
       console.log("Socket connected:", newSocket.id);
+    });
+    newSocket.on('event:logout', (data) => {
+      logoutFunc()
+      dispatch(logOut())
     });
     return () => {
       newSocket.disconnect();
