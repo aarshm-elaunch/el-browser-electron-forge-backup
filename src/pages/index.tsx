@@ -65,24 +65,6 @@ const BrowserContent = () => {
     }
   }, [activeTab]);
 
-  // if (!loaded) {
-  //   return (
-  //     <Box
-  //       sx={{
-  //         width: "100%",
-  //         height: `calc(100vh - ${SUMMIT_HEIGHT}px)`,
-  //         display: "flex",
-  //         flexDirection: "column",
-  //         gap: 1,
-  //         justifyContent: "center",
-  //         alignItems: "center",
-  //       }}
-  //     >
-  //       <CircularProgress />
-  //     </Box>
-  //   );
-  // }
-
   return (
     <>
       {tabsList.length > 0 &&

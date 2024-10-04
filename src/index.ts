@@ -47,7 +47,11 @@ const createWindow = (): void => {
       responseHeaders: {
         ...details.responseHeaders,
         "Content-Security-Policy": [
-          "default-src 'self' http://localhost:* https://localhost:* https://* 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost:* https://localhost:*; img-src 'self' data: http://localhost:* https://localhost:* https://*; style-src 'self' 'unsafe-inline' http://localhost:* https://localhost:*;",
+          "default-src 'self' http://localhost:* https://localhost:* https://* 'unsafe-inline'; " +
+            "script-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost:* https://localhost:*; " +
+            "img-src 'self' data: http://localhost:* https://localhost:* https://*; " +
+            "style-src 'self' 'unsafe-inline' http://localhost:* https://localhost:*; " +
+            "connect-src 'self' ws://localhost:* wss://browser.elaunchinfotech.in wss://*;",
         ],
       },
     });
@@ -93,9 +97,8 @@ app.on("ready", () => {
   });
 });
 
-app.on('ready',() => {
+app.on("ready", () => {
   ipcMain.on("quit-app", () => {
     app.quit();
   });
-})
-
+});

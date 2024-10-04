@@ -1,5 +1,20 @@
 import React, { useState } from "react";
-import { Box, Button, Card, CardContent, Checkbox, FormControl, FormControlLabel, FormLabel, IconButton, InputAdornment, Paper, TextField, Typography, useTheme } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Checkbox,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  IconButton,
+  InputAdornment,
+  Paper,
+  TextField,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { EyeIcon, EyeOffIcon } from "../components/icons";
@@ -8,7 +23,7 @@ import { toast } from "sonner";
 import { useDispatch } from "react-redux";
 import { setAuthenticatationFlag, setToken } from "../redux/slices/authSlice";
 import bgImage from "../assets/images/bg_main.jpg";
-import { RadioButtonUnchecked, CheckCircle } from '@mui/icons-material';
+import { RadioButtonUnchecked, CheckCircle } from "@mui/icons-material";
 
 const validationSchema = Yup.object().shape({
   userName: Yup.string().required("Email  is required"),
@@ -18,7 +33,7 @@ const validationSchema = Yup.object().shape({
 const AuthView = () => {
   const theme = useTheme();
   const [loginFunc, { isLoading }] = useLoginMutation();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
 
   const handleTogglePasswordVisibility = () => {
@@ -38,7 +53,7 @@ const AuthView = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        borderRadius: '0px'
+        borderRadius: "0px",
       }}
     >
       <Box
@@ -55,21 +70,21 @@ const AuthView = () => {
           alignItems: "center",
           gap: 2,
         }}
-        className="titlebar"
+        className="window-drag"
       ></Box>
       <Card
         sx={{
           background: "rgba(241, 243, 244, 0.6)",
-          backdropFilter: 'blur(10px)',
-          width: '100%',
-          maxWidth: { xl: '30%', lg: '40%', md: '50%', xs: '75%' },
-          boxShadow: 'none',
-          p: { lg: '60px', xs: '36px' },
-          borderRadius: { lg: '60px', xs: '40px' }
+          backdropFilter: "blur(10px)",
+          width: "100%",
+          maxWidth: { xl: "30%", lg: "40%", md: "50%", xs: "75%" },
+          boxShadow: "none",
+          p: { lg: "60px", xs: "36px" },
+          borderRadius: { lg: "60px", xs: "40px" },
         }}
       >
-        <Typography sx={{ color: '#000', fontSize: 32, fontWeight: 600 }}>Welcome Back</Typography>
-        <Typography sx={{ color: '#656565', fontSize: 14, fontWeight: 400 }}>Welcome to Custom Browser - Let's log in account</Typography>
+        <Typography sx={{ color: "#000", fontSize: 32, fontWeight: 600 }}>Welcome Back</Typography>
+        <Typography sx={{ color: "#656565", fontSize: 14, fontWeight: 400 }}>Welcome to Custom Browser - Let's log in account</Typography>
         <Formik
           initialValues={{ userName: "", password: "" }}
           validationSchema={validationSchema}
@@ -98,20 +113,20 @@ const AuthView = () => {
                   alignItems: "center",
                   justifyContent: "center",
                   height: "100%",
-                  p: '0 !important',
-                  pt: '40px !important',
+                  p: "0 !important",
+                  pt: "40px !important",
                 }}
               >
                 <Box
                   sx={{
                     display: "flex",
                     flexDirection: "column",
-                    gap: '15px',
+                    gap: "15px",
                     width: "100%",
                   }}
                 >
                   <FormControl fullWidth>
-                    <FormLabel sx={{ fontSize: 14, mb: '8px', color: "#000", fontWeight: 500 }} htmlFor="user_id">
+                    <FormLabel sx={{ fontSize: 14, mb: "8px", color: "#000", fontWeight: 500 }} htmlFor="user_id">
                       Username
                     </FormLabel>
                     <Field
@@ -121,56 +136,52 @@ const AuthView = () => {
                       error={!!ErrorMessage}
                       helperText={<ErrorMessage name="userName" />}
                       sx={{
-                        color: '#000',
+                        color: "#000",
                         "& .MuiInputBase-input": {
-                          color: '#000',
-                          backgroundColor: '#fff',
-                          borderRadius: '30px',
-                          p: '14px 20px'
+                          color: "#000",
+                          backgroundColor: "#fff",
+                          borderRadius: "30px",
+                          p: "14px 20px",
                         },
                         "& .MuiOutlinedInput-notchedOutline": {
-                          border: 'none'
-                        }
+                          border: "none",
+                        },
                       }}
                     />
                   </FormControl>
                   <FormControl fullWidth>
-                    <FormLabel sx={{ fontSize: 14, mb: '8px', color: "#000", fontWeight: 500 }} htmlFor="user_passkey">
+                    <FormLabel sx={{ fontSize: 14, mb: "8px", color: "#000", fontWeight: 500 }} htmlFor="user_passkey">
                       Password
                     </FormLabel>
                     <Field
                       as={TextField}
                       name="password"
-                      type={showPassword ? 'text' : 'password'}  // Toggle between 'text' and 'password'
+                      type={showPassword ? "text" : "password"} // Toggle between 'text' and 'password'
                       placeholder="Enter your password"
                       error={!!ErrorMessage}
                       helperText={<ErrorMessage name="password" />}
                       InputProps={{
                         endAdornment: (
                           <InputAdornment position="end" sx={{ m: 0 }}>
-                            <IconButton
-                              onClick={handleTogglePasswordVisibility}
-                              edge="end"
-                              sx={{ py: 0 }}
-                            >
+                            <IconButton onClick={handleTogglePasswordVisibility} edge="end" sx={{ py: 0 }}>
                               {showPassword ? <EyeOffIcon /> : <EyeIcon />}
                             </IconButton>
                           </InputAdornment>
                         ),
                       }}
                       sx={{
-                        color: '#000',
+                        color: "#000",
                         "& .MuiInputBase-root": {
-                          color: '#000',
-                          backgroundColor: '#fff',
-                          borderRadius: '30px',
-                          padding: '14px 20px',
+                          color: "#000",
+                          backgroundColor: "#fff",
+                          borderRadius: "30px",
+                          padding: "14px 20px",
                         },
                         "& .MuiInputBase-input": {
-                          padding: '0px',
+                          padding: "0px",
                         },
                         "& .MuiOutlinedInput-notchedOutline": {
-                          border: 'none',
+                          border: "none",
                         },
                       }}
                     />
@@ -186,30 +197,30 @@ const AuthView = () => {
                           "& .MuiSvgIcon-root": {
                             fontSize: 20,
                           },
-                          color: '#000',
-                          '&.Mui-checked': {
-                            color: '#000',
+                          color: "#000",
+                          "&.Mui-checked": {
+                            color: "#000",
                           },
-                          '&:hover': {
-                            background: 'transparent',
+                          "&:hover": {
+                            background: "transparent",
                           },
                         }}
                       />
                     }
                     label="Remember Me"
                     sx={{
-                      color: '#000',
+                      color: "#000",
                       fontSize: 12,
                       fontWeight: 500,
-                      padding: '0',
-                      marginLeft: '-3px',
-                      display: 'inline-flex',
-                      width: 'fit-content',
+                      padding: "0",
+                      marginLeft: "-3px",
+                      display: "inline-flex",
+                      width: "fit-content",
                       "& .MuiFormControlLabel-label": {
-                        color: '#000',
+                        color: "#000",
                         fontSize: 12,
                         fontWeight: 500,
-                        paddingLeft: '8px',
+                        paddingLeft: "8px",
                       },
                     }}
                   />
@@ -218,7 +229,16 @@ const AuthView = () => {
                   type="submit"
                   disableRipple
                   fullWidth
-                  sx={{ background: '#1C1C1E', color: '#fff', borderRadius: '30px', py: '15px', fontSize: 18, fontWeight: 500, textTransform: 'capitalize', lineHeight: 'normal' }}
+                  sx={{
+                    background: "#1C1C1E",
+                    color: "#fff",
+                    borderRadius: "30px",
+                    py: "15px",
+                    fontSize: 18,
+                    fontWeight: 500,
+                    textTransform: "capitalize",
+                    lineHeight: "normal",
+                  }}
                   variant="contained"
                   disabled={isSubmitting}
                 >
@@ -232,9 +252,8 @@ const AuthView = () => {
           {'Enter "test-dev" as employeeId and "1234" as password to enter the browser.'}
         </Typography> */}
       </Card>
-    </Paper >
+    </Paper>
   );
 };
 
 export default AuthView;
-

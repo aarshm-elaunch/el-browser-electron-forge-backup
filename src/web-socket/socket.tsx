@@ -8,13 +8,13 @@ import { logOut } from "../redux/slices/authSlice";
 
 const SocketContext = createContext<Socket | null>(null);
 
-interface SocketProviderProps extends PropsWithChildren { }
+interface SocketProviderProps extends PropsWithChildren {}
 
 const SocketProvider: FC<SocketProviderProps> = ({ children }) => {
   const [socket, setSocket] = useState<Socket | null>(null);
-  const { token } = useSelector((state: RootState) => state.auth)
+  const { token } = useSelector((state: RootState) => state.auth);
   const [logoutFunc] = useLogoutMutation();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   useEffect(() => {
     const newSocket = io("https://browser.elaunchinfotech.in", {
       query: {
@@ -25,20 +25,16 @@ const SocketProvider: FC<SocketProviderProps> = ({ children }) => {
     newSocket.on("connect", () => {
       console.log("Socket connected:", newSocket.id);
     });
-    newSocket.on('event:logout', (data) => {
-      logoutFunc()
-      dispatch(logOut())
+    newSocket.on("event:logout", (data) => {
+      logoutFunc();
+      dispatch(logOut());
     });
     return () => {
       newSocket.disconnect();
     };
   }, [token]);
 
-  return (
-    <SocketContext.Provider value={socket}>
-      {children}
-    </SocketContext.Provider>
-  );
+  return <SocketContext.Provider value={socket}>{children}</SocketContext.Provider>;
 };
 
 const useSocket = () => {
