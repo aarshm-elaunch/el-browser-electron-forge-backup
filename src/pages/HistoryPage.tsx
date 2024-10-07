@@ -10,7 +10,7 @@ import { debounce } from 'lodash';
 
 const HistoryPage: React.FC = () => {
     const [page, setPage] = useState<number>(1);
-    const limit = 10;
+    const limit = 15;
     const [searchQuery, setSearchQuery] = useState<string>("");
     const [allEntries, setAllEntries] = useState<HistoryEntry[]>([]);
     const containerRef = useRef<HTMLDivElement>(null);
