@@ -1,13 +1,14 @@
 import React from 'react'
-import { Avatar, Box, Typography } from '@mui/material'
+import { Avatar, Box, Skeleton, Typography } from '@mui/material'
 import Image from '../../assets/images/history.jpg'
 import { HistoryEntry } from '../../types/data';
 
 interface HistoryItemProps {
     entry: HistoryEntry;
+    isFetching: boolean;
 }
 
-const HistoryItem: React.FC<HistoryItemProps> = ({ entry }) => {
+const HistoryItem: React.FC<HistoryItemProps> = ({ entry, isFetching }) => {
     return (
         <Box sx={{ display: 'flex', alignItems: 'center', gap: '14px', py: '10px', px: '6px', "&:hover": { bgcolor: "#E4E4E4", borderRadius: '8px' } }}>
             <Avatar
