@@ -29,3 +29,9 @@ export interface GetAccountHistoryParams {
   limit?: number;
   search?: string;
 }
+export interface PostAccountHistoryParams {
+  url: string;
+  title?: string;
+  description?: string;
+  favicon?: string;
+}

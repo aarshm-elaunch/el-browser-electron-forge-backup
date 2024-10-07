@@ -4,11 +4,13 @@ import { RootState } from "../../redux/store";
 import { useEffect } from "react";
 import { updateTabState } from "../../redux/slices/browserSlice";
 import useBrowser from "../../hooks/useBrowser";
+import { usePostAccountHistoryMutation } from "../../redux/api/historyApi";
 
 const WebViewComponent = () => {
   const dispatch = useDispatch();
   const { tabsList, activeTabId } = useSelector((state: RootState) => state.browser);
   const { webviewRef } = useBrowser();
+  const [postHistory] = usePostAccountHistoryMutation();
 
   useEffect(() => {
     const activeTab = tabsList.find((tab) => tab.tabId === activeTabId);
@@ -45,6 +47,32 @@ const WebViewComponent = () => {
       };
     }
   }, [activeTabId, webviewRef]);
+
+  useEffect(() => {
+    const activeTab = tabsList.find((tab) => tab.tabId === activeTabId);
+    const webview = webviewRef.current;
+
+    if (webview && activeTab) {
+      webview.addEventListener("did-finish-load", () => {
+        const url = webview.src;
+        const title = "";
+        const favicon = "";
+
+        postHistory({
+          url,
+          title: title || "Untitled",
+          favicon: favicon || "",
+        });
+      });
+    }
+
+    // Cleanup listener when component unmounts or tab changes
+    return () => {
+      if (webview) {
+        webview.removeEventListener("did-finish-load", () => {});
+      }
+    };
+  }, [activeTabId]); // Trigger effect whenever the active tab changes
 
   return (
     <webview
