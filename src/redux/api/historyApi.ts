@@ -1,21 +1,22 @@
-import { HistoryData } from "src/types/data"
-import { GetAccountHistoryParams } from "../../types/data"
-import { rootApiSlice } from "./rootApiSlice"
+import { GetAccountHistoryParams, HistoryData, PostAccountHistoryParams } from "../../types/data";
+import { rootApiSlice } from "./rootApiSlice";
 
 export const authApiSlice = rootApiSlice.injectEndpoints({
-  endpoints: builder => ({
+  endpoints: (builder) => ({
     getAccountHistory: builder.query<HistoryData, GetAccountHistoryParams>({
       query: ({ limit, page, search }) => ({
         url: `/history/all?search=${encodeURIComponent(search)}&page=${page}&limit=${limit}`,
-        method: "GET"
-      })
-    })
-  })
-})
+        method: "GET",
+      }),
+    }),
+    postAccountHistory: builder.mutation<any, PostAccountHistoryParams>({
+      query: (log) => ({
+        url: "/history/log",
+        method: "POST",
+        body: { ...log },
+      }),
+    }),
+  }),
+});
 
-export const {
-  useGetAccountHistoryQuery
-} = authApiSlice
-
-
-
+export const { useGetAccountHistoryQuery, usePostAccountHistoryMutation } = authApiSlice;
