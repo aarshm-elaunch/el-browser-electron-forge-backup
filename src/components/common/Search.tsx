@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ChangeEvent } from 'react'
 import { Box, IconButton, InputBase, Menu, MenuItem, Paper, Tooltip, useTheme } from '@mui/material'
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
 import { SearchIcon } from '../icons';
@@ -6,9 +6,10 @@ import { SearchIcon } from '../icons';
 interface SearchProps {
     filter?: boolean;
     placeholder: string;
+    onChange?: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
 }
 
-const Search = ({ filter = true, placeholder }: SearchProps) => {
+const Search = ({ filter = true, placeholder, onChange }: SearchProps) => {
     const theme = useTheme();
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
@@ -31,6 +32,7 @@ const Search = ({ filter = true, placeholder }: SearchProps) => {
                     <SearchIcon />
                 </Box>
                 <InputBase
+                    onChange={(e) => onChange(e)}
                     sx={{ ml: 1, flex: 1, color: "#000000" }}
                     placeholder={placeholder}
                     inputProps={{ 'aria-label': placeholder }}
