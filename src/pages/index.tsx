@@ -2,13 +2,13 @@ import { Box, CircularProgress } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { SUMMIT_HEIGHT } from "../utils/constants";
 import { Tab } from "../types/browser";
-import WebContentPage from "./WebContentPage";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../redux/store";
 import { setActiveTab } from "../redux/slices/browserSlice";
 import HomePage from "./HomePage";
 import HistoryPage from "./HistoryPage";
 import DownloadHistoryPage from "./DownloadHistoryPage";
+import WebViewComponent from "../components/webcontent/WebViewComponent";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -92,7 +92,7 @@ const BrowserContent = () => {
           } else {
             return (
               <CustomTabPanel value={tab.tabId} activeTab={activeTab} panelHeight={SUMMIT_HEIGHT} key={tab.tabId}>
-                <WebContentPage />
+                <WebViewComponent />
               </CustomTabPanel>
             );
           }

@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../redux/store";
+import { RootState } from "../../redux/store";
 import { useEffect } from "react";
-import { updateTabState } from "../redux/slices/browserSlice";
-import useBrowser from "../hooks/useBrowser";
+import { updateTabState } from "../../redux/slices/browserSlice";
+import useBrowser from "../../hooks/useBrowser";
 
-const WebContentPage = () => {
+const WebViewComponent = () => {
   const dispatch = useDispatch();
   const { tabsList, activeTabId } = useSelector((state: RootState) => state.browser);
   const { webviewRef } = useBrowser();
@@ -61,4 +61,4 @@ const WebContentPage = () => {
   );
 };
 
-export default WebContentPage;
+export default WebViewComponent;
