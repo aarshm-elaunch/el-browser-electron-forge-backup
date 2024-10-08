@@ -11,27 +11,37 @@ export interface HistoryEntry {
   userId: string;
   url: string;
   title: string;
-  description: string;
+  description?: string;
   favicon: string;
   createdAt: string;
   updatedAt: string;
   __v: number;
 }
 
+export interface HistoryEntriesByDate {
+  date: string;
+  entries: HistoryEntry[];
+}
+
 export interface HistoryData {
   message: string;
-  data: HistoryEntry[];
+  data: HistoryEntriesByDate[];
   totalCount: number;
+  hasMoreData: boolean
 }
 
 export interface GetAccountHistoryParams {
   page?: number;
   limit?: number;
   search?: string;
+  dateRange?: "this_week" | "last_week" | "this_month" | string
 }
+
 export interface PostAccountHistoryParams {
   url: string;
   title?: string;
   description?: string;
   favicon?: string;
 }
+
+export type DateRangeOptions = "this_week" | "last_week" | "this_month" | "yesterday" | string;
