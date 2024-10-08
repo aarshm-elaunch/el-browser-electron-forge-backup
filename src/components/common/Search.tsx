@@ -2,14 +2,16 @@ import React, { ChangeEvent } from 'react'
 import { Box, IconButton, InputBase, Menu, MenuItem, Paper, Tooltip, useTheme } from '@mui/material'
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
 import { SearchIcon } from '../icons';
+import { DateRangeOptions } from '../../types/data';
 
 interface SearchProps {
     filter?: boolean;
     placeholder: string;
-    onChange?: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
+    onChange?: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void,
+    onDateRangeChange?: (dateRange: DateRangeOptions) => void,
 }
 
-const Search = ({ filter = true, placeholder, onChange }: SearchProps) => {
+const Search = ({ filter = true, placeholder, onChange, onDateRangeChange }: SearchProps) => {
     const theme = useTheme();
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
@@ -18,6 +20,10 @@ const Search = ({ filter = true, placeholder, onChange }: SearchProps) => {
         setAnchorEl(event.currentTarget);
     };
 
+    const handleMenuSelect = (dateRange: DateRangeOptions) => {
+        onDateRangeChange(dateRange)
+        handleClose();
+    };
     const handleClose = () => {
         setAnchorEl(null);
     };
@@ -144,10 +150,12 @@ const Search = ({ filter = true, placeholder, onChange }: SearchProps) => {
                                 }
                             }}
                         >
-                            <MenuItem onClick={handleClose}>This Week</MenuItem>
-                            <MenuItem onClick={handleClose}>Last week</MenuItem>
-                            <MenuItem onClick={handleClose}>This month</MenuItem>
-                            <MenuItem onClick={handleClose}>Custom date</MenuItem>
+                            <MenuItem onClick={() => handleMenuSelect("")}>All</MenuItem>
+                            <MenuItem onClick={() => handleMenuSelect("yesterday")}>Yesterday</MenuItem>
+                            <MenuItem onClick={() => handleMenuSelect("this_week")}>This Week</MenuItem>
+                            <MenuItem onClick={() => handleMenuSelect("last_week")}>Last week</MenuItem>
+                            <MenuItem onClick={() => handleMenuSelect("this_month")}>This month</MenuItem>
+                            {/* <MenuItem onClick={()=>handleMenuSelect("this_week")}>Custom date</MenuItem> */}
                         </Menu>
                     </>
                 }
