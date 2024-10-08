@@ -1,28 +1,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { updateTabState } from "../../redux/slices/browserSlice";
 import useBrowser from "../../hooks/useBrowser";
 import { usePostAccountHistoryMutation } from "../../redux/api/historyApi";
+import { Tab } from "../../types/browser";
 
-const WebViewComponent = () => {
+const WebViewComponent = ({ tab }: { tab: Tab }) => {
+  const webviewRef = useRef<HTMLWebViewElement | null>(null);
   const dispatch = useDispatch();
   const { tabsList, activeTabId } = useSelector((state: RootState) => state.browser);
-  const { webviewRef } = useBrowser();
   const [postHistory] = usePostAccountHistoryMutation();
-
   useEffect(() => {
     const activeTab = tabsList.find((tab) => tab.tabId === activeTabId);
-    if (webviewRef.current && activeTab) {
-      // Load the URL when the active tab changes
-      webviewRef.current.src = activeTab.tabURL;
-      // Restore scroll position
-      webviewRef.current.addEventListener("dom-ready", () => {
-        webviewRef.current?.scrollTo({ top: activeTab.scrollPosition, behavior: "smooth" });
-      });
-
-      // Update navigation state (canGoBack/canGoForward) periodically or when needed
+    if (webviewRef.current) {
       const updateNavigationState = (ev: any) => {
         const { url } = ev;
         dispatch(
@@ -36,17 +28,15 @@ const WebViewComponent = () => {
         );
       };
 
-      // Listen for navigation state changes
       webviewRef.current.addEventListener("did-navigate", updateNavigationState);
       webviewRef.current.addEventListener("did-navigate-in-page", updateNavigationState);
 
-      // Clean up listeners when component is unmounted or when activeTab changes
       return () => {
         webviewRef.current?.removeEventListener("did-navigate", updateNavigationState);
         webviewRef.current?.removeEventListener("did-navigate-in-page", updateNavigationState);
       };
     }
-  }, [activeTabId, webviewRef]);
+  }, [tab, webviewRef]);
 
   useEffect(() => {
     const activeTab = tabsList.find((tab) => tab.tabId === activeTabId);
@@ -65,14 +55,12 @@ const WebViewComponent = () => {
         });
       });
     }
-
-    // Cleanup listener when component unmounts or tab changes
     return () => {
       if (webview) {
-        webview.removeEventListener("did-finish-load", () => {});
+        webview.removeEventListener("did-finish-load", () => { });
       }
     };
-  }, [activeTabId]); // Trigger effect whenever the active tab changes
+  }, [tab]);
 
   return (
     <webview
@@ -84,6 +72,7 @@ const WebViewComponent = () => {
         flexGrow: 1,
         backgroundColor: "#fff",
       }}
+      src={tab.tabURL}
       ref={webviewRef}
     />
   );

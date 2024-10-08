@@ -21,27 +21,27 @@ function CustomTabPanel({ activeTab, panelHeight, value, children }: TabPanelPro
   return (
     <div
       role="tabpanel"
-      hidden={value !== activeTab.tabId}
+      // hidden={value !== activeTab.tabId}
+      style={{ display: value === activeTab.tabId ? "flex" : "none" }}
       id={`browser-tabpanel-${activeTab.tabId}`}
       aria-labelledby={`browser-tab-${activeTab.tabId}`}
     >
-      {value === activeTab.tabId && (
-        <Box
-          sx={{
-            height: `calc(100vh - ${panelHeight}px)`,
-            overflow: "hidden",
-            width: "100%",
-            display: "flex",
-            flexGrow: 1,
-            backgroundColor: "#fff",
-          }}
-        >
-          {children}
-        </Box>
-      )}
+      <Box
+        sx={{
+          height: `calc(100vh - ${panelHeight}px)`,
+          overflow: "hidden",
+          width: "100%",
+          display: value === activeTab.tabId ? "flex" : "none",
+          flexGrow: 1,
+          backgroundColor: "#fff",
+        }}
+      >
+        {children}
+      </Box>
     </div>
   );
 }
+
 
 const BrowserContent = () => {
   const [loaded, setLoaded] = useState<boolean>(false);
@@ -92,7 +92,7 @@ const BrowserContent = () => {
           } else {
             return (
               <CustomTabPanel value={tab.tabId} activeTab={activeTab} panelHeight={SUMMIT_HEIGHT} key={tab.tabId}>
-                <WebViewComponent />
+                <WebViewComponent tab={tab} />
               </CustomTabPanel>
             );
           }
