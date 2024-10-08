@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export function trafficLightPositionForMac(titlebarHeight: number) {
   const trafficLightsBtnDimension = 20;
   const trafficLightBtnsLeftPos = 12;
@@ -39,4 +41,22 @@ export const createStandardURL = (inputUrl: string) => {
 
   return url;
 };
+
+export const formatDate = (dateString: string) => {
+  const date = moment(dateString);
+
+  const isToday = date.isSame(moment(), 'day');
+
+  const isYesterday = date.isSame(moment().subtract(1, 'day'), 'day');
+
+  const formattedDate = date.format('dddd D MMM YYYY');
+
+  if (isToday) {
+    return `Today - ${formattedDate}`;
+  } else if (isYesterday) {
+    return `Yesterday - ${formattedDate}`;
+  } else {
+    return formattedDate;
+  }
+}
 
