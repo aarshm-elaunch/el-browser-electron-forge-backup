@@ -21,7 +21,6 @@ function CustomTabPanel({ activeTab, panelHeight, value, children }: TabPanelPro
   return (
     <div
       role="tabpanel"
-      // hidden={value !== activeTab.tabId}
       style={{ display: value === activeTab.tabId ? "flex" : "none" }}
       id={`browser-tabpanel-${activeTab.tabId}`}
       aria-labelledby={`browser-tab-${activeTab.tabId}`}

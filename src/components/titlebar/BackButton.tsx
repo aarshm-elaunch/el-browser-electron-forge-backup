@@ -16,7 +16,7 @@ const BackButton = () => {
       handleGoBack();
     }
   };
-  
+
   return (
     <Tooltip
       title="Click to go back"
@@ -31,6 +31,7 @@ const BackButton = () => {
       }}
     >
       <IconButton
+        disabled={!activeTab.canGoBack}
         disableRipple
         sx={{
           padding: 0,

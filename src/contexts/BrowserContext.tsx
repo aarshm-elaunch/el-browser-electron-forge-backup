@@ -1,5 +1,5 @@
-import { createContext, ReactNode, useRef } from "react";
-
+import { createContext, ReactNode, RefObject, useRef, useState } from "react";
+import { WebviewTag } from "electron";
 // @types
 import { BrowserContextType } from "../types/browser";
 
@@ -10,23 +10,23 @@ type BrowserProviderProps = {
 const BrowserContext = createContext<BrowserContextType | null>(null);
 
 function BrowserProvider({ children }: BrowserProviderProps) {
-  const webviewRef = useRef<HTMLWebViewElement | null>(null);
+  const [activeWebViewRef, setActiveWebViewRef] = useState<RefObject<WebviewTag | null> | null>(null);
 
   // NAVIGATION ACTIONS
   const handleGoBack = () => {
-    if (webviewRef.current?.canGoBack()) {
-      webviewRef.current.goBack();
+    if (activeWebViewRef.current?.canGoBack()) {
+      activeWebViewRef.current.goBack();
     }
   };
 
   const handleGoForward = () => {
-    if (webviewRef.current?.canGoForward()) {
-      webviewRef.current.goForward();
+    if (activeWebViewRef.current?.canGoForward()) {
+      activeWebViewRef.current.goForward();
     }
   };
 
   const handleReload = () => {
-    webviewRef.current?.reload();
+    activeWebViewRef.current?.reload();
   };
 
   return (
@@ -35,7 +35,8 @@ function BrowserProvider({ children }: BrowserProviderProps) {
         handleGoBack,
         handleGoForward,
         handleReload,
-        webviewRef,
+        activeWebViewRef,
+        setActiveWebViewRef,
       }}
     >
       {children}

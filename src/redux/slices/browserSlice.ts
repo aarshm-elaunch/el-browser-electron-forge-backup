@@ -1,6 +1,6 @@
 // redux/slices/browserSlice.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { BrowserState, Tab } from "../../types/browser";
+import { BrowserState, Tab, TabTitleContent } from "../../types/browser";
 import { v4 as uuidv4 } from "uuid";
 import { DOWNLOAD_HISTORY_TAB_ICON, HISTORY_TAB_ICON, NEWTAB_ICON_STRING } from "../../utils/constants";
 
@@ -68,7 +68,14 @@ const browserSlice = createSlice({
     },
     updateTabState: (
       state,
-      action: PayloadAction<{ tabId: string; tabURL: string; canGoBack: boolean; canGoForward: boolean; scrollPos: number }>
+      action: PayloadAction<{
+        tabId: string;
+        tabURL: string;
+        canGoBack: boolean;
+        canGoForward: boolean;
+        scrollPos: number;
+        tabTitleContent: TabTitleContent;
+      }>
     ) => {
       const tab = state.tabsList.find((tab) => tab.tabId === action.payload.tabId);
       if (tab) {
@@ -76,6 +83,7 @@ const browserSlice = createSlice({
         tab.canGoForward = action.payload.canGoForward;
         tab.scrollPosition = action.payload.scrollPos;
         tab.tabURL = action.payload.tabURL;
+        tab.tabTitleContent = action.payload.tabTitleContent;
       }
     },
     openHistoryTab: (state) => {

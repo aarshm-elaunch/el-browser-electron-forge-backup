@@ -1,5 +1,7 @@
+import { WebviewTag } from "electron";
 import { NEWTAB_ICON_STRING } from "../utils/constants";
 import { v4 as uuidv4 } from "uuid";
+import { RefObject } from "react";
 
 export interface TabTitleContent {
   titleString: string;
@@ -15,7 +17,7 @@ export interface Tab {
 }
 export type BrowserState = {
   tabsList: Tab[];
-  activeTabId:string
+  activeTabId: string;
 };
 
 export function addNewTab(): Tab {
@@ -36,5 +38,6 @@ export type BrowserContextType = {
   handleGoBack: () => void;
   handleGoForward: () => void;
   handleReload: () => void;
-  webviewRef: React.RefObject<HTMLWebViewElement>;
+  activeWebViewRef: RefObject<WebviewTag | null>;
+  setActiveWebViewRef: (ref: RefObject<WebviewTag | null>) => void;
 };

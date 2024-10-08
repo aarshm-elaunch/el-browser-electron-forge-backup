@@ -60,25 +60,6 @@ const createWindow = (): void => {
 
   // and load the index.html of the app.
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
-
-  ipcMain.on("extract-metadata", (event) => {
-    const webContents = mainWindow.webContents;
-
-    webContents
-      .executeJavaScript(
-        `
-    const title = document.title || "Untitled";
-    const favicon = document.querySelector('link[rel="icon"]')?.href || document.querySelector('link[rel="apple-touch-icon"]')?.href || '';
-    ({ title, favicon });
-  `
-      )
-      .then((metadata) => {
-        event.reply("metadata-response", metadata); // Send metadata back to renderer
-      })
-      .catch((err) => {
-        console.error("Failed to extract metadata:", err);
-      });
-  });
 };
 
 // This method will be called when Electron has finished
