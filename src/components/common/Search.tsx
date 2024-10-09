@@ -1,8 +1,9 @@
-import React, { ChangeEvent } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import { Box, IconButton, InputBase, Menu, MenuItem, Paper, Tooltip, useTheme } from '@mui/material'
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
 import { SearchIcon } from '../icons';
 import { DateRangeOptions } from '../../types/data';
+import DatePickerModal from '../modals/DatePickerModal';
 
 interface SearchProps {
     filter?: boolean;
@@ -15,6 +16,7 @@ const Search = ({ filter = true, placeholder, onChange, onDateRangeChange }: Sea
     const theme = useTheme();
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
+    const [openModal, setOpenModal] = useState<boolean>(false);
 
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
@@ -26,6 +28,10 @@ const Search = ({ filter = true, placeholder, onChange, onDateRangeChange }: Sea
     };
     const handleClose = () => {
         setAnchorEl(null);
+    };
+
+    const handleCloseModal = (value: string) => {
+        setOpenModal(false);
     };
 
     return (
@@ -155,11 +161,12 @@ const Search = ({ filter = true, placeholder, onChange, onDateRangeChange }: Sea
                             <MenuItem onClick={() => handleMenuSelect("this_week")}>This Week</MenuItem>
                             <MenuItem onClick={() => handleMenuSelect("last_week")}>Last week</MenuItem>
                             <MenuItem onClick={() => handleMenuSelect("this_month")}>This month</MenuItem>
-                            {/* <MenuItem onClick={()=>handleMenuSelect("this_week")}>Custom date</MenuItem> */}
+                            <MenuItem onClick={() => { handleClose(); setOpenModal(true) }}>Custom date</MenuItem>
                         </Menu>
                     </>
                 }
             </Paper>
+            <DatePickerModal open={openModal} onClose={handleCloseModal} />
         </Box>
     )
 }
