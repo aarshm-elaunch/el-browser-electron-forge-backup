@@ -14,8 +14,8 @@ export const CustomTab = styled(Tab, {
   flexGrow: 1,
   flexShrink: 1,
   color: "white",
-  margin: "0 8px 0 0",
-  padding: !selected ? "2px" : "0",
+  margin: "0",
+  padding: "0",
   // display: "flex",
   flexWrap: "nowrap",
   overflow: "hidden",
@@ -27,7 +27,7 @@ export const CustomTab = styled(Tab, {
   border: "none",
   borderBottom: 0,
   position: "relative",
-  borderRadius: selected ? "12px 12px 0 0" : "0", // Top rounded corners
+  borderRadius: "12px 12px 0 0", // Top rounded corners
 
   // "&:after, &:before": {
   //   content: "''",

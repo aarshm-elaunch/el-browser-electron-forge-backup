@@ -50,7 +50,6 @@ const TabsBar = () => {
             alignItems: "center",
             height: `calc(${TABSBAR_HEIGHT}px - 8px)`,
             width: `calc(${TABSBAR_HEIGHT}px - 8px)`,
-            marginLeft: "-6px",
           }}
         >
           <OpenNewTabButton />

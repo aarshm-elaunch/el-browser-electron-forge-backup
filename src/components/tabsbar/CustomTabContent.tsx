@@ -47,7 +47,6 @@ export const TabContent = ({ tabContentProps, selected }: TabContent) => {
         backgroundColor: selected ? "#3D3D3D" : "#2B2B2B",
         "&:hover": {
           backgroundColor: selected ? "#3D3D3D" : "#22211F",
-          borderRadius: !selected ? "6px" : "0",
         },
       }}
     >
@@ -68,7 +67,6 @@ export const TabContent = ({ tabContentProps, selected }: TabContent) => {
                 background: selected
                   ? "linear-gradient(270deg, rgb(61 61 61) 85%, rgb(255 255 255 / 0%) 100%)"
                   : "linear-gradient(270deg, rgb(34 33 31) 85%, rgb(255 255 255 / 0%) 100%)",
-                borderRadius: "6px",
               }
             : {
                 background: selected
