@@ -71,7 +71,7 @@ export const TabContent = ({ tabId, tabTitleContent }: Tab) => {
           borderRadius: "50%",
         }}
       />
-      <Typography component={"span"} fontSize={12} fontWeight={500} sx={{ textTransform: "capitalize" }}>
+      <Typography className="text-ellipsis" component={"span"} fontSize={12} fontWeight={500} sx={{ textTransform: "capitalize", paddingRight: '16px', textAlign: 'start' }}>
         {tabTitleContent.titleString}
       </Typography>
     </Box>
