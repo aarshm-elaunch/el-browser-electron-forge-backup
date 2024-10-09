@@ -34,7 +34,9 @@ export interface GetAccountHistoryParams {
   page?: number;
   limit?: number;
   search?: string;
-  dateRange?: "this_week" | "last_week" | "this_month" | string
+  dateRange?: "this_week" | "last_week" | "this_month" | "custom" | string,
+  start?: string,
+  end?: string
 }
 
 export interface PostAccountHistoryParams {
@@ -45,3 +47,8 @@ export interface PostAccountHistoryParams {
 }
 
 export type DateRangeOptions = "this_week" | "last_week" | "this_month" | "yesterday" | string;
+
+export interface DateRange {
+  start: Date;
+  end: Date;
+}

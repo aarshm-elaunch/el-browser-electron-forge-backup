@@ -29,3 +29,15 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.custom-date-range-picker .rdrDefinedRangesWrapper {
+    display: none; 
+}
+
+.custom-date-range-picker .rdrCalendarWrapper {
+    width: 100% !important;
+}
+
+.custom-date-range-picker .rdrDateRangeWrapper {
+    padding: 0 !important; 
+}

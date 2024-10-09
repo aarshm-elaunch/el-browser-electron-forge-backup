@@ -1,85 +1,93 @@
-import React from 'react'
-import { Dialog, DialogTitle } from "@mui/material";
-import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
-import { pickersLayoutClasses } from '@mui/x-date-pickers/PickersLayout';
-import { StaticDateRangePicker } from '@mui/x-date-pickers-pro/StaticDateRangePicker';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import dayjs from 'dayjs';
+import { Box, Button, Dialog } from "@mui/material";
+import { addDays, subDays } from "date-fns";
+import { useState } from "react";
+import { DateRangePicker } from "react-date-range";
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
+import { DateRange } from "../../types/data";
 
 export interface DatePickerModalProps {
     open: boolean;
     selectedValue?: string;
     onClose: (value: string) => void;
+    onDateRangeSelect: (dateRange: DateRange) => void;
 }
 
 const DatePickerModal = (props: DatePickerModalProps) => {
-    const { onClose, selectedValue, open } = props;
+    const { onClose, selectedValue, open, onDateRangeSelect } = props;
+
+    const [state, setState] = useState([
+        {
+            startDate: subDays(new Date(), 0),
+            endDate: addDays(new Date(), 0),
+            key: "selection"
+        }
+    ]);
+
+    const [tempState, setTempState] = useState(state);
+
+    const handleOnChange = (ranges: any) => {
+        const { selection } = ranges;
+        setTempState([selection]);
+    };
 
     const handleClose = () => {
         onClose(selectedValue);
     };
 
-    const handleListItemClick = (value: string) => {
-        onClose(value);
-    };
-
-    const handleAccept = (dateRange: any) => {
-        console.log('Date range selected:', dateRange);
+    const handleFilter = () => {
+        const currentRange = state[0];
+        const newRange = tempState[0];
+        if (
+            currentRange.startDate.getTime() === newRange.startDate.getTime() &&
+            currentRange.endDate.getTime() === newRange.endDate.getTime()
+        ) {
+            handleClose();
+            return;
+        }
+        onDateRangeSelect({
+            start: newRange.startDate,
+            end: newRange.endDate
+        });
+        setState(tempState);
+        handleClose();
     };
 
     return (
         <Dialog onClose={handleClose} open={open}>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <StaticDateRangePicker
-                    defaultValue={[dayjs('2022-04-17'), dayjs('2022-04-21')]}
-                    onAccept={handleAccept}
-                    sx={{
-                        backgroundColor: '#ffffff',
-                        color: '#000000',
-                        ".MuiDateRangePickerToolbar-root": {
-                            backgroundColor: '#ffffff',
-                            color: '#000000',
-                        },
-                        ".MuiTypography-overline": {
-                            display: "none",
-                        },
-                        [`.${pickersLayoutClasses.contentWrapper}`]: {
-                            alignItems: 'center',
-                        },
-                        ".MuiPickersToolbar-content": {
-                            ".MuiDateRangePickerToolbar-container": {
-                                ".MuiButtonBase-root": {
-                                    ".MuiTypography-root": {
-                                        fontSize: '18px',
-                                        color: '#000000',
-                                    }
-                                },
-                                ".MuiTypography-h5": {
-                                    fontSize: '18px',
-                                    color: '#000000',
-                                }
-                            }
-                        },
-                        ".MuiDateRangeCalendar-root": {
-                            backgroundColor: '#ffffff',
-                            color: '#000000',
-                            "> div:first-of-type": {
-                                display: "none",
-                            }
-                        },
-                        ".MuiPickersDay-root": {
-                            color: '#000000',
-                            "&.Mui-selected": {
-                                backgroundColor: '#1976d2',
-                                color: '#ffffff',
-                            }
-                        }
-                    }}
+            <Box>
+                <DateRangePicker
+                    onChange={handleOnChange}
+                    moveRangeOnFirstSelection={false}
+                    months={1}
+                    ranges={tempState}
+                    direction="horizontal"
+                    staticRanges={[]}
+                    inputRanges={[]}
+                    className="custom-date-range-picker"
+                    maxDate={new Date()}
                 />
-            </LocalizationProvider>
+                <Box sx={{ textAlign: 'right', padding: 1.5, display: "flex", alignItems: "center", gap: "12px" }}>
+                    <Button
+                        sx={{ fontSize: "12px", flexGrow: 1, width: "100%" }}
+                        variant="contained"
+                        color="primary"
+                        onClick={handleFilter}
+                    >
+                        Filter
+                    </Button>
+                    <Button
+                        sx={{ fontSize: "12px", flexGrow: 1, width: "100%" }}
+                        variant="contained"
+                        color="error"
+                        onClick={handleFilter}
+                    >
+                        Cancel
+                    </Button>
+                </Box>
+            </Box>
         </Dialog>
     );
-}
+};
 
 export default DatePickerModal;

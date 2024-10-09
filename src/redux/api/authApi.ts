@@ -40,6 +40,13 @@ export const authApiSlice = rootApiSlice.injectEndpoints({
                 }
             }
         }),
+        verify2fa: builder.mutation<any, { email: string, code: string }>({
+            query: (credentials) => ({
+                url: '/auth/verify-2fa',
+                method: 'POST',
+                body: { ...credentials }
+            }),
+        }),
     })
 })
 
@@ -47,5 +54,6 @@ export const {
     useLoginMutation,
     useLogoutMutation,
     useRegisterMutation,
-    useGetMyAccountQuery
+    useGetMyAccountQuery,
+    useVerify2faMutation
 } = authApiSlice 
