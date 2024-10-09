@@ -9,25 +9,25 @@ export const CustomTab = styled(Tab, {
 })<{ selected?: boolean }>(({ selected }) => ({
   minHeight: "unset",
   height: `calc(${TABSBAR_HEIGHT}px - 8px)`,
-  minWidth: "unset",
+  minWidth: "20px",
   maxWidth: TAB_MAX_WIDTH,
   flexGrow: 1,
-  backgroundColor: selected ? "#2A2927" : "#171715",
+  flexShrink: 1,
   color: "white",
-  padding: "0 12px 0",
-  display: "flex",
+  margin: "0 8px 0 0",
+  padding: !selected ? "2px" : "0",
+  // display: "flex",
   flexWrap: "nowrap",
-  overflow: "visible",
-  width: "fit-content",
-  justifyContent: "flex-start",
+  overflow: "hidden",
+  width: "auto",
   "&:hover": {
-    backgroundColor: selected ? "#2A2927" : "#22211F",
+    backgroundColor: "unset",
   },
   transition: "background-color 0.1s",
   border: "none",
   borderBottom: 0,
   position: "relative",
-  borderRadius: "12px 12px 0 0", // Top rounded corners
+  borderRadius: selected ? "12px 12px 0 0" : "0", // Top rounded corners
 
   // "&:after, &:before": {
   //   content: "''",

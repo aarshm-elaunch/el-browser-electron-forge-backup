@@ -29,8 +29,9 @@ const OpenNewTabButton = () => {
         disableRipple
         onClick={handleAddNewTab}
         sx={{
-          width: "80%",
-          height: "80%",
+          width: 28,
+          height: 28,
+          flexShrink: 0,
           p: "2px",
           borderRadius: "50%",
           display: "flex",

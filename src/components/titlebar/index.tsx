@@ -55,7 +55,7 @@ function Titlebar() {
         padding: "0 100px 0 1rem",
         position: "relative",
         height: TITLEBAR_HEIGHT,
-        backgroundColor: theme.palette.mode === "dark" ? "#2B2B29" : theme.palette.primary.light,
+        backgroundColor: theme.palette.mode === "dark" ? "#3D3D3D" : theme.palette.primary.light,
       }}
     >
       <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>

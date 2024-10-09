@@ -24,16 +24,20 @@ const TabsBar = () => {
         height: TABSBAR_HEIGHT,
         width: "100%",
         padding: "0 80px",
-        // bgcolor: theme.palette.mode === "light" ? theme.palette.primary.light : "#2B2B29",
       }}
     >
-      <CustomTabs sx={{ alignItems: "flex-end", bgcolor: "inherit" }} value={activeTabId} onChange={handleTabChange}>
+      <CustomTabs
+        sx={{ alignItems: "flex-end", bgcolor: "inherit", display: "flex", flexWrap: "nowrap", flexShrink: 1 }}
+        value={activeTabId}
+        scrollButtons={false}
+        onChange={handleTabChange}
+      >
         {tabsList.map((tab) => (
           <CustomTab
             className="window-no-drag"
             disableRipple
             key={tab.tabId}
-            label={<TabContent {...tab} />}
+            label={<TabContent selected={activeTabId === tab.tabId} tabContentProps={tab} />}
             selected={activeTabId === tab.tabId}
             value={tab.tabId}
           />
@@ -46,6 +50,7 @@ const TabsBar = () => {
             alignItems: "center",
             height: `calc(${TABSBAR_HEIGHT}px - 8px)`,
             width: `calc(${TABSBAR_HEIGHT}px - 8px)`,
+            marginLeft: "-6px",
           }}
         >
           <OpenNewTabButton />
