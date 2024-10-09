@@ -47,7 +47,7 @@ export const TabContent = ({ tabContentProps, selected }: TabContent) => {
         backgroundColor: selected ? "#3D3D3D" : "#2B2B2B",
         "&:hover": {
           backgroundColor: selected ? "#3D3D3D" : "#22211F",
-          borderRadius: "6px",
+          borderRadius: !selected ? "6px" : "0",
         },
       }}
     >
