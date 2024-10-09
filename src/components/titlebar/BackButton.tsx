@@ -31,7 +31,7 @@ const BackButton = () => {
       }}
     >
       <IconButton
-        disabled={!activeTab.canGoBack}
+        disabled={!activeTab?.canGoBack}
         disableRipple
         sx={{
           padding: 0,

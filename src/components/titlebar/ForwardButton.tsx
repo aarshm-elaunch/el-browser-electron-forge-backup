@@ -31,7 +31,7 @@ const ForwardButton = () => {
       }}
     >
       <IconButton
-        disabled={!activeTab.canGoForward}
+        disabled={!activeTab?.canGoForward}
         disableRipple
         sx={{
           padding: 0,
