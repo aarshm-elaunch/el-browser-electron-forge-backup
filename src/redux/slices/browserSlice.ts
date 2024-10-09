@@ -87,34 +87,52 @@ const browserSlice = createSlice({
       }
     },
     openHistoryTab: (state) => {
-      const newTab: Tab = {
-        tabId: uuidv4(),
-        tabURL: "history",
-        tabTitleContent: {
-          favIconURL: HISTORY_TAB_ICON,
-          titleString: "History",
-        },
-        canGoBack: false,
-        canGoForward: false,
-        scrollPosition: 0,
-      };
-      state.tabsList.push(newTab);
-      state.activeTabId = newTab.tabId; // Make new tab active
+      const existingHistoryTab = state.tabsList.find((tab) => tab.tabURL === "history");
+
+      if (existingHistoryTab) {
+        // If history tab is already open, just make it the active tab
+        state.activeTabId = existingHistoryTab.tabId;
+      } else {
+        // If history tab is not open, create a new tab and make it active
+        const newTab: Tab = {
+          tabId: uuidv4(),
+          tabURL: "history",
+          tabTitleContent: {
+            favIconURL: HISTORY_TAB_ICON,
+            titleString: "History",
+          },
+          canGoBack: false,
+          canGoForward: false,
+          scrollPosition: 0,
+        };
+
+        state.tabsList.push(newTab);
+        state.activeTabId = newTab.tabId; // Make the new history tab active
+      }
     },
     openDownloadTab: (state) => {
-      const newTab: Tab = {
-        tabId: uuidv4(),
-        tabURL: "downloads",
-        tabTitleContent: {
-          favIconURL: DOWNLOAD_HISTORY_TAB_ICON,
-          titleString: "Download history",
-        },
-        canGoBack: false,
-        canGoForward: false,
-        scrollPosition: 0,
-      };
-      state.tabsList.push(newTab);
-      state.activeTabId = newTab.tabId; // Make new tab active
+      const existingDownloadsTab = state.tabsList.find((tab) => tab.tabURL === "downloads");
+
+      if (existingDownloadsTab) {
+        // If history tab is already open, just make it the active tab
+        state.activeTabId = existingDownloadsTab.tabId;
+      } else {
+        // If history tab is not open, create a new tab and make it active
+        const newTab: Tab = {
+          tabId: uuidv4(),
+          tabURL: "downloads",
+          tabTitleContent: {
+            favIconURL: DOWNLOAD_HISTORY_TAB_ICON,
+            titleString: "Download history",
+          },
+          canGoBack: false,
+          canGoForward: false,
+          scrollPosition: 0,
+        };
+
+        state.tabsList.push(newTab);
+        state.activeTabId = newTab.tabId; // Make the new history tab active
+      }
     },
   },
 });
