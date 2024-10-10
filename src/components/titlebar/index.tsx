@@ -11,6 +11,7 @@ import { RootState } from "../../redux/store";
 import { loadUrl } from "../../redux/slices/browserSlice";
 import { createStandardURL } from "../../utils";
 import UserAvatarMenu from "./UserAvatarMenu";
+import { Tab } from "../../types/browser";
 
 function Titlebar() {
   const [enteredURL, setEnteredURL] = useState<string>("");
@@ -19,7 +20,7 @@ function Titlebar() {
   const { tabsList, activeTabId } = useSelector((state: RootState) => state.browser);
 
   useEffect(() => {
-    const activeTab = tabsList.find((tab) => tab.tabId === activeTabId);
+    const activeTab = tabsList.find((tab: Tab) => tab.tabId === activeTabId);
     const listenEnterPress = (ev: KeyboardEvent) => {
       if (ev.key === "Enter") {
         if (enteredURL !== "") {
@@ -34,7 +35,7 @@ function Titlebar() {
   }, [enteredURL, activeTabId]);
 
   useEffect(() => {
-    const activeTab = tabsList.find((tab) => tab.tabId === activeTabId);
+    const activeTab = tabsList.find((tab: Tab) => tab.tabId === activeTabId);
     if (activeTab) {
       setEnteredURL(activeTab.tabURL);
     }

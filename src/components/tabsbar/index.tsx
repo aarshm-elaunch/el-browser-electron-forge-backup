@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { setActiveTab } from "../../redux/slices/browserSlice";
 import OpenNewTabButton from "../titlebar/OpenNewTabButton";
+import { Tab } from "../../types/browser";
 
 const TabsBar = () => {
   const dispatch = useDispatch();
@@ -32,7 +33,7 @@ const TabsBar = () => {
         scrollButtons={false}
         onChange={handleTabChange}
       >
-        {tabsList.map((tab) => (
+        {tabsList.map((tab: Tab) => (
           <CustomTab
             className="window-no-drag"
             disableRipple

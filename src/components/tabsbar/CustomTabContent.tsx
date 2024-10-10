@@ -22,7 +22,7 @@ export const TabContent = ({ tabContentProps, selected }: TabContent) => {
 
   const handleCloseTab = () => {
     const clonedTabsList = cloneDeep(tabsList);
-    const filteredTabs = clonedTabsList.filter((tab) => tab.tabId !== tabId);
+    const filteredTabs = clonedTabsList.filter((tab: Tab) => tab.tabId !== tabId);
 
     if (filteredTabs.length === 0) {
       window.electron.ipcRenderer.send("quit-app");
