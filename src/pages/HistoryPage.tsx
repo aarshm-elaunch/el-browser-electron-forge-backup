@@ -3,7 +3,7 @@ import { debounce } from 'lodash';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Search from '../components/common/Search';
 import useScrollToBottom from '../hooks/useScrollToBottom';
-import { useGetAccountHistoryQuery } from '../redux/api/historyApi';
+import { useGetAccountHistoryQuery } from '../redux/api/browseHistoryApi';
 import { DateRange, DateRangeOptions, HistoryEntriesByDate } from '../types/data';
 import HistoryItem from '../components/common/HistoryItem';
 import { formatDate } from '../utils/index';
