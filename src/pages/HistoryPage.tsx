@@ -15,11 +15,10 @@ const HistoryPage: React.FC = () => {
     const limit = 25;
     const [searchQuery, setSearchQuery] = useState<string>("");
     const [allEntries, setAllEntries] = useState<HistoryEntriesByDate[]>([]);
-    const [customDateRange, setCustomDateRange] = useState<{ start: string, end: string }>({ start: "", end: "" })
     const [dateRange, setDateRange] = useState<DateRangeOptions>("all")
     const containerRef = useRef<HTMLDivElement>(null);
     const hasMoreDataRef = useRef<boolean>(true);
-    const { data, isFetching } = useGetAccountHistoryQuery({ page, limit, search: searchQuery, dateRange, start: customDateRange.start, end: customDateRange.end });
+    const { data, isFetching } = useGetAccountHistoryQuery({ page, limit, search: searchQuery, dateRange });
 
     useEffect(() => {
         if (data && data.data) {
@@ -73,7 +72,6 @@ const HistoryPage: React.FC = () => {
     const handleCustomDateRangeChange = (dateRange: DateRange) => {
         setAllEntries([]);
         setPage(1);
-        setDateRange("custom");
         const startDate = moment(dateRange.start).startOf('day').toISOString();
         const endDate = moment(dateRange.end).endOf('day').toISOString();
         console.log({
@@ -81,11 +79,6 @@ const HistoryPage: React.FC = () => {
             end: dateRange.end,
             formattedStart: startDate,
             formattedEnd: endDate
-        });
-
-        setCustomDateRange({
-            start: startDate,
-            end: endDate
         });
     };
 

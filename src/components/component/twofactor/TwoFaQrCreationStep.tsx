@@ -2,17 +2,18 @@ import { Box, Button, DialogContentText, IconButton, InputBase, Paper, Tooltip }
 import { useGenerate2faSecretQuery } from '../../../redux/api/authApi';
 import { QRCodeSVG } from 'qrcode.react';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-const TwoFaQrCreationStep = ({ activeStep, step, handleNext }: {
+const TwoFaQrCreationStep = ({ activeStep, step, handleNext, handleGoBack, onClose }: {
     activeStep: number;
     step: number;
-    handleNext: () => void;
+    handleNext?: () => void;
+    handleGoBack?: () => void;
+    onClose?: () => void;
 }) => {
     const { data, isFetching } = useGenerate2faSecretQuery(undefined, { skip: activeStep !== step });
-    console.log(data, "data")
     return (
         <Box sx={{ display: activeStep === step ? 'block' : 'none' }}>
-            <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "12px", flexDirection: "column", textAlign: "center" }}>
-                <DialogContentText sx={{ fontSize: "14px", color: (theme) => theme.palette.primary.dark }} id="alert-dialog-description">
+            <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "12px", flexDirection: "column", textAlign: "center", mb: 2 }}>
+                <DialogContentText sx={{ fontSize: 14, color: "#000", fontWeight: 500 }} id="alert-dialog-description">
                     Scan this QR code in the Google Authenticator App
                 </DialogContentText>
                 <Box sx={{ width: "140px", height: "140px", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "12px", border: "1px solid #e3e3e3" }}>
@@ -58,13 +59,27 @@ const TwoFaQrCreationStep = ({ activeStep, step, handleNext }: {
             </Box>
             <Box
                 sx={{
-                    pt: '8px'
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "12px"
                 }}>
+                <Button
+                    variant="outlined"
+                    onClick={() => handleGoBack()}
+                    sx={{
+                        width: '100%',
+                        flexGrow: "1",
+                        boxShadow: 'none',
+                    }}
+                >
+                    Back
+                </Button>
                 <Button
                     variant="contained"
                     onClick={() => handleNext()}
                     sx={{
                         width: '100%',
+                        flexGrow: "1",
                         backgroundColor: '#000',
                         boxShadow: 'none',
                     }}

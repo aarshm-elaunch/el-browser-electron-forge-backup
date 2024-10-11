@@ -8,7 +8,8 @@ export const authApiSlice = rootApiSlice.injectEndpoints({
             query: () => ({
                 url: "/auth/my-account",
                 method: "GET"
-            })
+            }),
+            providesTags: ['Account']
         }),
         register: builder.mutation<any, { email: string, password: string, name: string }>({
             query: credentials => ({
@@ -54,6 +55,22 @@ export const authApiSlice = rootApiSlice.injectEndpoints({
                 method: "GET"
             })
         }),
+        enable2fa: builder.mutation<any, { code: string }>({
+            query: (credentials) => ({
+                url: '/auth/2fa/enable',
+                method: 'POST',
+                body: { ...credentials }
+            }),
+            invalidatesTags: ["Account"]
+        }),
+        disable2fa: builder.mutation<any, { code: string }>({
+            query: (credentials) => ({
+                url: '/auth/2fa/disable',
+                method: 'POST',
+                body: { ...credentials }
+            }),
+            invalidatesTags: ["Account"]
+        }), 
     })
 })
 
@@ -63,5 +80,7 @@ export const {
     useRegisterMutation,
     useGetMyAccountQuery,
     useVerify2faMutation,
-    useGenerate2faSecretQuery
+    useGenerate2faSecretQuery,
+    useEnable2faMutation,
+    useDisable2faMutation
 } = authApiSlice 

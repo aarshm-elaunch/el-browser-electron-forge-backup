@@ -1,8 +1,12 @@
-import React, { useState } from 'react'
-import { Box, Button, Grid2, Switch, Tab, Tabs, Typography } from '@mui/material'
+import { Box, Button, Grid2, Tab, Tabs, Typography } from '@mui/material';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import Search from '../components/common/Search';
 import { IconLock, ThemeIcon } from '../components/icons';
-import TwoFactorAuthModal from '../components/modals/TwoFactorAuthModal';
+import EnableTwoFactorAuthModal from '../components/modals/EnableTwoFactorAuthModal';
+import { RootState } from '../redux/store';
+import { User } from '../types/data';
+import DisableTwoFactorAuthModal from '../components/modals/DisableTwoFactorAuthModal';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -35,15 +39,15 @@ function a11yProps(index: number) {
 
 const SettingsPage = () => {
   const [value, setValue] = useState(0);
-  const [openModal, setOpenModal] = useState(false);
+  const [openEnable2FAModal, setOpenEnable2FAModal] = useState(false);
+  const [openDisable2FAModal, setOpenDisable2FAModal] = useState(false);
+  const { userInfo } = useSelector((state: RootState) => state.auth);
+  const { twoFactorEnabled } = userInfo as User
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
 
-  const handleCloseModal = (value: string) => {
-    setOpenModal(false);
-  };
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
@@ -127,25 +131,46 @@ const SettingsPage = () => {
                             <Typography sx={{ color: (theme) => theme.palette.primary.dark, fontSize: 15, fontWeight: 500 }}>Secure your Account</Typography>
                             <Typography sx={{ color: (theme) => theme.palette.primary.dark, fontSize: 14, fontWeight: 400 }}>Enable two-factor authentication to add and extra layer of Security</Typography>
                           </Box>
-                          <Button
-                            variant="contained"
-                            sx={{
-                              backgroundColor: '#22b142',
-                              textTransform: "none",
-                              boxShadow: 'none',
-                              lineHeight: 'normal',
-                              p: '8px 10px',
-                              fontSize: '14px',
-                              flexShrink: '0',
-                              '&:hover': {
-                                backgroundColor: '#199735',
-                                boxShadow: 'none',
-                              }
-                            }}
-                            onClick={() => setOpenModal(true)}
-                          >
-                            Enable 2FA
-                          </Button>
+                          {
+                            twoFactorEnabled ? (
+                              <Button
+                                variant="outlined"
+                                sx={{
+                                  textTransform: "none",
+                                  boxShadow: 'none',
+                                  lineHeight: 'normal',
+                                  p: '8px 10px',
+                                  fontSize: '14px',
+                                  flexShrink: '0',
+                                  border: "1px solid #e3e3e3",
+                                  color: "#282828"
+                                }}
+                                onClick={() => setOpenDisable2FAModal(true)}
+                              >
+                                Disable 2FA
+                              </Button>
+                            ) : (
+                              <Button
+                                variant="contained"
+                                sx={{
+                                  backgroundColor: '#22b142',
+                                  textTransform: "none",
+                                  boxShadow: 'none',
+                                  lineHeight: 'normal',
+                                  p: '8px 10px',
+                                  fontSize: '14px',
+                                  flexShrink: '0',
+                                  '&:hover': {
+                                    backgroundColor: '#199735',
+                                    boxShadow: 'none',
+                                  }
+                                }}
+                                onClick={() => setOpenEnable2FAModal(true)}
+                              >
+                                Enable 2FA
+                              </Button>
+                            )
+                          }
                         </Box>
                       </Box>
                     </Box>
@@ -166,7 +191,8 @@ const SettingsPage = () => {
           </Grid2 >
         </Grid2 >
       </Box >
-      <TwoFactorAuthModal open={openModal} onClose={handleCloseModal} />
+      <EnableTwoFactorAuthModal open={openEnable2FAModal} onClose={() => setOpenEnable2FAModal(false)} />
+      <DisableTwoFactorAuthModal open={openDisable2FAModal} onClose={() => setOpenDisable2FAModal(false)} />
     </>
   )
 }
