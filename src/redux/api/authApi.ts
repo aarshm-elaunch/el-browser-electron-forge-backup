@@ -44,7 +44,7 @@ export const authApiSlice = rootApiSlice.injectEndpoints({
         }),
         verify2fa: builder.mutation<any, { email: string, code: string }>({
             query: (credentials) => ({
-                url: '/auth/verify-2fa',
+                url: '/auth/2fa/verify',
                 method: 'POST',
                 body: { ...credentials }
             }),
@@ -70,7 +70,7 @@ export const authApiSlice = rootApiSlice.injectEndpoints({
                 body: { ...credentials }
             }),
             invalidatesTags: ["Account"]
-        }), 
+        }),
     })
 })
 
