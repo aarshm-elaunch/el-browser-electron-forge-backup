@@ -1,3 +1,4 @@
+import { Generate2faSecretResponse } from "../../types/data"
 import { logOut } from "../slices/authSlice"
 import { rootApiSlice } from "./rootApiSlice"
 
@@ -47,6 +48,12 @@ export const authApiSlice = rootApiSlice.injectEndpoints({
                 body: { ...credentials }
             }),
         }),
+        generate2faSecret: builder.query<Generate2faSecretResponse, void>({
+            query: () => ({
+                url: "/auth/2fa/generate-secret",
+                method: "GET"
+            })
+        }),
     })
 })
 
@@ -55,5 +62,6 @@ export const {
     useLogoutMutation,
     useRegisterMutation,
     useGetMyAccountQuery,
-    useVerify2faMutation
+    useVerify2faMutation,
+    useGenerate2faSecretQuery
 } = authApiSlice 

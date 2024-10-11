@@ -46,9 +46,15 @@ export interface PostAccountHistoryParams {
   favicon?: string;
 }
 
-export type DateRangeOptions = "this_week" | "last_week" | "this_month" | "yesterday" | string;
-
 export interface DateRange {
   start: Date;
   end: Date;
 }
+
+export interface Generate2faSecretResponse {
+  message: string;
+  secret: string;
+  otpauth: string;
+}
+
+export type DateRangeOptions = "this_week" | "last_week" | "this_month" | "yesterday" | "all";

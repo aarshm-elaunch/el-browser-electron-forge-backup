@@ -4,8 +4,8 @@ import { rootApiSlice } from "./rootApiSlice";
 export const authApiSlice = rootApiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getAccountHistory: builder.query<HistoryData, GetAccountHistoryParams>({
-            query: ({ limit, page, search, dateRange, end, start }) => ({
-                url: `/browse-history/all?search=${encodeURIComponent(search)}&page=${page}&limit=${limit}&dateRange=${dateRange}&start=${start}&end=${end}`,
+            query: ({ limit, page, search, dateRange }) => ({
+                url: `/browse-history/all?search=${encodeURIComponent(search)}&page=${page}&limit=${limit}&dateRange=${dateRange}`,
                 method: "GET",
             }),
         }),

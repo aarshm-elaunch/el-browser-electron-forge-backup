@@ -10,10 +10,10 @@ interface SearchProps {
     placeholder: string;
     onChange?: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void,
     onDateRangeChange?: (dateRange: DateRangeOptions) => void,
-    onCustomDateRangeChange?: (dateRange: DateRange) => void,
+    selectedDateRange?: DateRangeOptions
 }
 
-const Search = ({ filter = true, placeholder, onChange, onDateRangeChange, onCustomDateRangeChange }: SearchProps) => {
+const Search = ({ filter = true, placeholder, onChange, onDateRangeChange, selectedDateRange }: SearchProps) => {
     const theme = useTheme();
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
@@ -157,17 +157,17 @@ const Search = ({ filter = true, placeholder, onChange, onDateRangeChange, onCus
                                 }
                             }}
                         >
-                            <MenuItem onClick={() => handleMenuSelect("")}>All</MenuItem>
+                            <MenuItem onClick={() => handleMenuSelect("all")}>All</MenuItem>
                             <MenuItem onClick={() => handleMenuSelect("yesterday")}>Yesterday</MenuItem>
                             <MenuItem onClick={() => handleMenuSelect("this_week")}>This Week</MenuItem>
                             <MenuItem onClick={() => handleMenuSelect("last_week")}>Last week</MenuItem>
                             <MenuItem onClick={() => handleMenuSelect("this_month")}>This month</MenuItem>
-                            <MenuItem onClick={() => { handleClose(); setOpenModal(true) }}>Custom date</MenuItem>
+                            {/* <MenuItem onClick={() => { handleClose(); setOpenModal(true) }}>Custom date</MenuItem> */}
                         </Menu>
                     </>
                 }
             </Paper>
-            <DatePickerModal onDateRangeSelect={onCustomDateRangeChange} open={openModal} onClose={handleCloseModal} />
+            {/* <DatePickerModal open={openModal} onClose={handleCloseModal} /> */}
         </Box>
     )
 }

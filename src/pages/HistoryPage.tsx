@@ -15,8 +15,8 @@ const HistoryPage: React.FC = () => {
     const limit = 25;
     const [searchQuery, setSearchQuery] = useState<string>("");
     const [allEntries, setAllEntries] = useState<HistoryEntriesByDate[]>([]);
-    const [dateRange, setDateRange] = useState<DateRangeOptions>("")
     const [customDateRange, setCustomDateRange] = useState<{ start: string, end: string }>({ start: "", end: "" })
+    const [dateRange, setDateRange] = useState<DateRangeOptions>("all")
     const containerRef = useRef<HTMLDivElement>(null);
     const hasMoreDataRef = useRef<boolean>(true);
     const { data, isFetching } = useGetAccountHistoryQuery({ page, limit, search: searchQuery, dateRange, start: customDateRange.start, end: customDateRange.end });
@@ -62,11 +62,12 @@ const HistoryPage: React.FC = () => {
         }, 500), []
     );
 
-    const handleSelectDateRange = (dateRange: DateRangeOptions) => {
-        setAllEntries([])
-        setPage(1)
-        setDateRange(dateRange)
-
+    const handleSelectDateRange = (selectedDateRange: DateRangeOptions) => {
+        if (dateRange !== selectedDateRange) {
+            setAllEntries([])
+            setPage(1)
+            setDateRange(selectedDateRange)
+        }
     }
 
     const handleCustomDateRangeChange = (dateRange: DateRange) => {
@@ -91,7 +92,7 @@ const HistoryPage: React.FC = () => {
     return (
         <Box sx={{ maxWidth: { md: '60%', xs: '85%' }, flexGrow: 1 }} mx={'auto'} py={4}>
             <Typography sx={{ color: (theme) => theme.palette.primary.dark, fontSize: 28, fontWeight: 600 }}>History</Typography>
-            <Search onCustomDateRangeChange={handleCustomDateRangeChange} onDateRangeChange={(dateRange: DateRangeOptions) => handleSelectDateRange(dateRange)} onChange={(e) => handleSearch(e.target.value)} placeholder='Search History Here...' />
+            <Search selectedDateRange={dateRange} onDateRangeChange={(dateRange: DateRangeOptions) => handleSelectDateRange(dateRange)} onChange={(e) => handleSearch(e.target.value)} placeholder='Search History Here...' />
             <Box
                 ref={containerRef}
                 className="hidden-scrollbar"
