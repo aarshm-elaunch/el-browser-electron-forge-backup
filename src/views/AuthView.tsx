@@ -105,7 +105,6 @@ const AuthView = () => {
                 setInProcessEmail(values.email)
               } else {
                 toast.success("Login Successful");
-                console.log(response, "response");
                 dispatch(setAuthenticatationFlag(true));
                 dispatch(setToken(response.token));
               }

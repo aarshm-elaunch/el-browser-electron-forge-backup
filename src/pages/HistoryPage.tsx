@@ -74,12 +74,6 @@ const HistoryPage: React.FC = () => {
         setPage(1);
         const startDate = moment(dateRange.start).startOf('day').toISOString();
         const endDate = moment(dateRange.end).endOf('day').toISOString();
-        console.log({
-            start: dateRange.start,
-            end: dateRange.end,
-            formattedStart: startDate,
-            formattedEnd: endDate
-        });
     };
 
     return (

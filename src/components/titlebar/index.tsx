@@ -18,9 +18,9 @@ function Titlebar() {
   const theme = useTheme();
   const dispatch = useDispatch();
   const { tabsList, activeTabId } = useSelector((state: RootState) => state.browser);
+  const activeTab = tabsList.find((tab: Tab) => tab.tabId === activeTabId);
 
   useEffect(() => {
-    const activeTab = tabsList.find((tab: Tab) => tab.tabId === activeTabId);
     const listenEnterPress = (ev: KeyboardEvent) => {
       if (ev.key === "Enter") {
         if (enteredURL !== "") {
@@ -29,10 +29,10 @@ function Titlebar() {
       }
     };
 
-    document.addEventListener("keydown", listenEnterPress);
+    window.addEventListener("keypress", listenEnterPress);
 
-    return () => document.removeEventListener("keydown", listenEnterPress);
-  }, [enteredURL, activeTabId]);
+    return () => window.removeEventListener("keypress", listenEnterPress);
+  }, [enteredURL]);
 
   useEffect(() => {
     const activeTab = tabsList.find((tab: Tab) => tab.tabId === activeTabId);

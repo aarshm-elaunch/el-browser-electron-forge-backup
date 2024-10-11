@@ -50,7 +50,7 @@ const BrowserContent = () => {
 
   useEffect(() => {
     if (!activeTab && tabsList.length > 0) {
-      dispatch(setActiveTab(tabsList[0].tabId));
+      dispatch(setActiveTab(tabsList[tabsList.length - 1].tabId));
     }
   }, [activeTab, tabsList, dispatch]);
 
@@ -60,9 +60,9 @@ const BrowserContent = () => {
     } else {
       setTimeout(() => {
         setLoaded(true);
-      }, 100);
+      }, 50);
     }
-  }, [activeTab]);
+  }, [activeTab, tabsList]);
 
   return (
     <>
@@ -97,7 +97,7 @@ const BrowserContent = () => {
           } else {
             return (
               <CustomTabPanel value={tab.tabId} activeTab={activeTab} panelHeight={SUMMIT_HEIGHT} key={tab.tabId}>
-                <WebViewComponent tab={tab} />
+                <WebViewComponent tab={tab} webViewSrc = {tab.tabURL} />
               </CustomTabPanel>
             );
           }

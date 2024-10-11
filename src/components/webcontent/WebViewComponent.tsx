@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { updateTabState } from "../../redux/slices/browserSlice";
 import useBrowser from "../../hooks/useBrowser";
 import { usePostAccountHistoryMutation } from "../../redux/api/browseHistoryApi";
 import { Tab } from "../../types/browser";
 import { WebviewTag } from "electron";
 
-const WebViewComponent = ({ tab }: { tab: Tab }) => {
+const WebViewComponent = ({ tab, webViewSrc }: { tab: Tab; webViewSrc: string }) => {
   const webviewRef = useRef<WebviewTag | null>(null);
   const { setActiveWebViewRef } = useBrowser();
   const dispatch = useDispatch();
@@ -96,7 +96,7 @@ const WebViewComponent = ({ tab }: { tab: Tab }) => {
         flexGrow: 1,
         backgroundColor: "#fff",
       }}
-      src={tab.tabURL}
+      src={webViewSrc}
       ref={webviewRef}
     />
   );

@@ -42,21 +42,9 @@ const browserSlice = createSlice({
     },
     closeTab: (state, action: PayloadAction<string>) => {
       const updatedTabsList = state.tabsList.filter((tab) => tab.tabId !== action.payload);
-      // Check if there are still tabs left
-      let newActiveTabId = state.activeTabId;
-      if (updatedTabsList.length > 0) {
-        // If the closed tab was the active one, assign the last tab as active
-        if (state.activeTabId === action.payload) {
-          newActiveTabId = updatedTabsList[updatedTabsList.length - 1].tabId;
-        }
-      } else {
-        // No tabs left
-        newActiveTabId = null;
-      }
       return {
         ...state,
         tabsList: updatedTabsList,
-        activeTabId: newActiveTabId, // Ensure activeTabId is updated
       };
     },
     setActiveTab: (state, action: PayloadAction<string>) => {
