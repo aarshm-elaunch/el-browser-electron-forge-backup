@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { setActiveTab } from "../../redux/slices/browserSlice";
 import OpenNewTabButton from "../titlebar/OpenNewTabButton";
+import { Tab } from "../../types/browser";
 
 const TabsBar = () => {
   const dispatch = useDispatch();
@@ -24,16 +25,20 @@ const TabsBar = () => {
         height: TABSBAR_HEIGHT,
         width: "100%",
         padding: "0 80px",
-        // bgcolor: theme.palette.mode === "light" ? theme.palette.primary.light : "#2B2B29",
       }}
     >
-      <CustomTabs sx={{ alignItems: "flex-end", bgcolor: "inherit" }} value={activeTabId} onChange={handleTabChange}>
-        {tabsList.map((tab) => (
+      <CustomTabs
+        sx={{ alignItems: "flex-end", bgcolor: "inherit", display: "flex", flexWrap: "nowrap", flexShrink: 1 }}
+        value={activeTabId}
+        scrollButtons={false}
+        onChange={handleTabChange}
+      >
+        {tabsList.map((tab: Tab) => (
           <CustomTab
             className="window-no-drag"
             disableRipple
             key={tab.tabId}
-            label={<TabContent {...tab} />}
+            label={<TabContent selected={activeTabId === tab.tabId} tabContentProps={tab} />}
             selected={activeTabId === tab.tabId}
             value={tab.tabId}
           />

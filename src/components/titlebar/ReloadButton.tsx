@@ -4,12 +4,13 @@ import React from "react";
 import useBrowser from "../../hooks/useBrowser";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
+import { Tab } from "../../types/browser";
 
 const ReloadButton = () => {
   const theme = useTheme();
   const { handleReload } = useBrowser();
   const { tabsList, activeTabId } = useSelector((state: RootState) => state.browser);
-  const activeTab = tabsList.find((tab) => tab.tabId === activeTabId);
+  const activeTab = tabsList.find((tab:Tab) => tab.tabId === activeTabId);
 
   const handleClick = () => {
     if (activeTab) {
