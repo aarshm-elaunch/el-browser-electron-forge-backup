@@ -9,6 +9,7 @@ import HomePage from "./HomePage";
 import HistoryPage from "./HistoryPage";
 import DownloadHistoryPage from "./DownloadHistoryPage";
 import WebViewComponent from "../components/webcontent/WebViewComponent";
+import SettingsPage from "./SettingsPage";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -86,6 +87,12 @@ const BrowserContent = () => {
             return (
               <CustomTabPanel value={tab.tabId} activeTab={activeTab} panelHeight={SUMMIT_HEIGHT} key={tab.tabId}>
                 <DownloadHistoryPage />
+              </CustomTabPanel>
+            );
+          } else if (tab.tabURL === "setting") {
+            return (
+              <CustomTabPanel value={tab.tabId} activeTab={activeTab} panelHeight={SUMMIT_HEIGHT} key={tab.tabId}>
+                <SettingsPage />
               </CustomTabPanel>
             );
           } else {
