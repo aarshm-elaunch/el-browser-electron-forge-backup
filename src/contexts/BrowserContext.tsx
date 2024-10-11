@@ -1,5 +1,5 @@
 import { createContext, ReactNode, RefObject, useRef, useState } from "react";
-import { WebviewTag } from "electron";
+import { ipcMain, ipcRenderer, WebviewTag } from "electron";
 // @types
 import { BrowserContextType } from "../types/browser";
 

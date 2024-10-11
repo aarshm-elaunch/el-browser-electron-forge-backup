@@ -11,6 +11,7 @@ import { RootState } from "../../redux/store";
 import { loadUrl } from "../../redux/slices/browserSlice";
 import { createStandardURL } from "../../utils";
 import UserAvatarMenu from "./UserAvatarMenu";
+import { Tab } from "../../types/browser";
 
 function Titlebar() {
   const [enteredURL, setEnteredURL] = useState<string>("");
@@ -19,7 +20,7 @@ function Titlebar() {
   const { tabsList, activeTabId } = useSelector((state: RootState) => state.browser);
 
   useEffect(() => {
-    const activeTab = tabsList.find((tab) => tab.tabId === activeTabId);
+    const activeTab = tabsList.find((tab: Tab) => tab.tabId === activeTabId);
     const listenEnterPress = (ev: KeyboardEvent) => {
       if (ev.key === "Enter") {
         if (enteredURL !== "") {
@@ -34,7 +35,7 @@ function Titlebar() {
   }, [enteredURL, activeTabId]);
 
   useEffect(() => {
-    const activeTab = tabsList.find((tab) => tab.tabId === activeTabId);
+    const activeTab = tabsList.find((tab: Tab) => tab.tabId === activeTabId);
     if (activeTab) {
       setEnteredURL(activeTab.tabURL);
     }
@@ -55,7 +56,7 @@ function Titlebar() {
         padding: "0 100px 0 1rem",
         position: "relative",
         height: TITLEBAR_HEIGHT,
-        backgroundColor: theme.palette.mode === "dark" ? "#2B2B29" : theme.palette.primary.light,
+        backgroundColor: theme.palette.mode === "dark" ? "#3D3D3D" : theme.palette.primary.light,
       }}
     >
       <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>

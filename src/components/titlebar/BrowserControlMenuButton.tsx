@@ -2,8 +2,8 @@ import { MoreVert } from "@mui/icons-material";
 import { alpha, Box, IconButton, Menu, MenuItem, Tooltip, useTheme } from "@mui/material";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { openDownloadTab, openHistoryTab } from "../../redux/slices/browserSlice";
-import { DownloadIcon, HistoryIcon, NextIcon } from "../icons";
+import { openDownloadTab, openHistoryTab, openSettingTab } from "../../redux/slices/browserSlice";
+import { DownloadIcon, HistoryIcon, NextIcon, SettingIcon } from "../icons";
 
 const BrowserControlMenuButton = () => {
   const theme = useTheme();
@@ -26,6 +26,11 @@ const BrowserControlMenuButton = () => {
 
   const handleOpenUserHistory = () => {
     dispatch(openHistoryTab());
+    handleClose()
+  };
+
+  const handleOpenSetting = () => {
+    dispatch(openSettingTab());
     handleClose()
   };
 
@@ -150,6 +155,15 @@ const BrowserControlMenuButton = () => {
           <Box className="first_part" sx={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
             <DownloadIcon />
             Download
+          </Box>
+          <Box className="end_part">
+            <NextIcon />
+          </Box>
+        </MenuItem>
+        <MenuItem sx={{ fontSize: 14 }} onClick={handleOpenSetting}>
+          <Box className="first_part" sx={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+            <SettingIcon />
+            Setting
           </Box>
           <Box className="end_part">
             <NextIcon />

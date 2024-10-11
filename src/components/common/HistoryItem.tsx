@@ -8,6 +8,7 @@ import { RootState } from "../../redux/store";
 import useBrowser from "../../hooks/useBrowser";
 import { useDispatch } from "react-redux";
 import { updateTabState } from "../../redux/slices/browserSlice";
+import { Tab } from "../../types/browser";
 
 interface HistoryItemProps {
   entry: HistoryEntry;
@@ -19,7 +20,7 @@ const HistoryItem: React.FC<HistoryItemProps> = ({ entry, isFetching }) => {
   const { activeWebViewRef } = useBrowser();
   const { tabsList, activeTabId } = useSelector((state: RootState) => state.browser);
 
-  const activeTab = tabsList.find((tab) => tab.tabId === activeTabId);
+  const activeTab = tabsList.find((tab: Tab) => tab.tabId === activeTabId);
 
   const updateNavigationState = (entry: HistoryEntry) => {
     dispatch(

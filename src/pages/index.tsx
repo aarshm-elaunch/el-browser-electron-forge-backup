@@ -9,6 +9,7 @@ import HomePage from "./HomePage";
 import HistoryPage from "./HistoryPage";
 import DownloadHistoryPage from "./DownloadHistoryPage";
 import WebViewComponent from "../components/webcontent/WebViewComponent";
+import SettingsPage from "./SettingsPage";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -41,12 +42,11 @@ function CustomTabPanel({ activeTab, panelHeight, value, children }: TabPanelPro
   );
 }
 
-
 const BrowserContent = () => {
   const [loaded, setLoaded] = useState<boolean>(false);
   const dispatch = useDispatch();
   const { tabsList, activeTabId } = useSelector((state: RootState) => state.browser);
-  const activeTab = tabsList.find((tab) => tab.tabId === activeTabId);
+  const activeTab = tabsList.find((tab: Tab) => tab.tabId === activeTabId);
 
   useEffect(() => {
     if (!activeTab && tabsList.length > 0) {
@@ -69,7 +69,7 @@ const BrowserContent = () => {
       {tabsList.length > 0 &&
         activeTab &&
         loaded &&
-        tabsList.map((tab) => {
+        tabsList.map((tab: Tab) => {
           if (tab.tabURL === "about:blank") {
             return (
               <CustomTabPanel value={tab.tabId} activeTab={activeTab} panelHeight={SUMMIT_HEIGHT} key={tab.tabId}>
@@ -86,6 +86,12 @@ const BrowserContent = () => {
             return (
               <CustomTabPanel value={tab.tabId} activeTab={activeTab} panelHeight={SUMMIT_HEIGHT} key={tab.tabId}>
                 <DownloadHistoryPage />
+              </CustomTabPanel>
+            );
+          } else if (tab.tabURL === "setting") {
+            return (
+              <CustomTabPanel value={tab.tabId} activeTab={activeTab} panelHeight={SUMMIT_HEIGHT} key={tab.tabId}>
+                <SettingsPage />
               </CustomTabPanel>
             );
           } else {

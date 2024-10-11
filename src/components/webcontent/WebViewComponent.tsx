@@ -16,7 +16,7 @@ const WebViewComponent = ({ tab }: { tab: Tab }) => {
   const [postHistory] = usePostAccountHistoryMutation();
 
   useEffect(() => {
-    const activeTab = tabsList.find((tab) => tab.tabId === activeTabId);
+    const activeTab = tabsList.find((tab: Tab) => tab.tabId === activeTabId);
     if (webviewRef.current) {
       const updateNavigationState = (ev: any) => {
         const { url } = ev;
@@ -80,7 +80,7 @@ const WebViewComponent = ({ tab }: { tab: Tab }) => {
   }, [tab, webviewRef]);
 
   useEffect(() => {
-    const activeTab = tabsList.find((tab) => tab.tabId === activeTabId);
+    const activeTab = tabsList.find((tab: Tab) => tab.tabId === activeTabId);
     if (tab.tabId === activeTab.tabId) {
       setActiveWebViewRef(webviewRef); // Set the active webview ref in the context
     }
