@@ -4,6 +4,7 @@ export interface User {
   email: string;
   profileImage: string;
   role: "USER" | "ADMIN";
+  twoFactorEnabled: boolean,
 }
 
 export interface HistoryEntry {
@@ -34,7 +35,9 @@ export interface GetAccountHistoryParams {
   page?: number;
   limit?: number;
   search?: string;
-  dateRange?: "this_week" | "last_week" | "this_month" | string
+  dateRange?: "this_week" | "last_week" | "this_month" | "custom" | string,
+  start?: string,
+  end?: string
 }
 
 export interface PostAccountHistoryParams {
@@ -44,4 +47,15 @@ export interface PostAccountHistoryParams {
   favicon?: string;
 }
 
-export type DateRangeOptions = "this_week" | "last_week" | "this_month" | "yesterday" | string;
+export interface DateRange {
+  start: Date;
+  end: Date;
+}
+
+export interface Generate2faSecretResponse {
+  message: string;
+  secret: string;
+  otpauth: string;
+}
+
+export type DateRangeOptions = "this_week" | "last_week" | "this_month" | "yesterday" | "all";

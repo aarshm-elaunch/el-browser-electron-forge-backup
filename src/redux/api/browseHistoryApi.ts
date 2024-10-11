@@ -5,13 +5,13 @@ export const authApiSlice = rootApiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getAccountHistory: builder.query<HistoryData, GetAccountHistoryParams>({
             query: ({ limit, page, search, dateRange }) => ({
-                url: `/history/all?search=${encodeURIComponent(search)}&page=${page}&limit=${limit}&dateRange=${dateRange}`,
+                url: `/browse-history/all?search=${encodeURIComponent(search)}&page=${page}&limit=${limit}&dateRange=${dateRange}`,
                 method: "GET",
             }),
         }),
         postAccountHistory: builder.mutation<any, PostAccountHistoryParams>({
             query: (log) => ({
-                url: "/history/log",
+                url: "/browse-history/log",
                 method: "POST",
                 body: { ...log },
             }),

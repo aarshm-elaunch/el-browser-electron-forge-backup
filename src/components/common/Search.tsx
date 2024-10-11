@@ -2,7 +2,7 @@ import React, { ChangeEvent, useState } from 'react'
 import { Box, IconButton, InputBase, Menu, MenuItem, Paper, Tooltip, useTheme } from '@mui/material'
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
 import { SearchIcon } from '../icons';
-import { DateRangeOptions } from '../../types/data';
+import { DateRange, DateRangeOptions } from '../../types/data';
 import DatePickerModal from '../modals/DatePickerModal';
 
 interface SearchProps {
@@ -10,9 +10,10 @@ interface SearchProps {
     placeholder: string;
     onChange?: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void,
     onDateRangeChange?: (dateRange: DateRangeOptions) => void,
+    selectedDateRange?: DateRangeOptions
 }
 
-const Search = ({ filter = true, placeholder, onChange, onDateRangeChange }: SearchProps) => {
+const Search = ({ filter = true, placeholder, onChange, onDateRangeChange, selectedDateRange }: SearchProps) => {
     const theme = useTheme();
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
@@ -156,17 +157,17 @@ const Search = ({ filter = true, placeholder, onChange, onDateRangeChange }: Sea
                                 }
                             }}
                         >
-                            <MenuItem onClick={() => handleMenuSelect("")}>All</MenuItem>
+                            <MenuItem onClick={() => handleMenuSelect("all")}>All</MenuItem>
                             <MenuItem onClick={() => handleMenuSelect("yesterday")}>Yesterday</MenuItem>
                             <MenuItem onClick={() => handleMenuSelect("this_week")}>This Week</MenuItem>
                             <MenuItem onClick={() => handleMenuSelect("last_week")}>Last week</MenuItem>
                             <MenuItem onClick={() => handleMenuSelect("this_month")}>This month</MenuItem>
-                            <MenuItem onClick={() => { handleClose(); setOpenModal(true) }}>Custom date</MenuItem>
+                            {/* <MenuItem onClick={() => { handleClose(); setOpenModal(true) }}>Custom date</MenuItem> */}
                         </Menu>
                     </>
                 }
             </Paper>
-            <DatePickerModal open={openModal} onClose={handleCloseModal} />
+            {/* <DatePickerModal open={openModal} onClose={handleCloseModal} /> */}
         </Box>
     )
 }

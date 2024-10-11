@@ -4,7 +4,7 @@ import { RootState } from "../../redux/store";
 import { useEffect, useRef } from "react";
 import { updateTabState } from "../../redux/slices/browserSlice";
 import useBrowser from "../../hooks/useBrowser";
-import { usePostAccountHistoryMutation } from "../../redux/api/historyApi";
+import { usePostAccountHistoryMutation } from "../../redux/api/browseHistoryApi";
 import { Tab } from "../../types/browser";
 import { WebviewTag } from "electron";
 

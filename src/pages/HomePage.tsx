@@ -35,8 +35,8 @@ const HomePage = () => {
                     <Search placeholder="Search Here..." filter={false} />
                     <Box sx={{ width: "100%" }}>
                         <Grid2 container spacing={3}>
-                            {Array.from({ length: 7 }).map(() => (
-                                <Grid2 size={3}>
+                            {Array.from({ length: 7 }).map((_, index: number) => (
+                                <Grid2 size={3} key={index}>
                                     <BookmarkCard />
                                 </Grid2>
                             ))}

@@ -14,6 +14,7 @@ const Views = () => {
   const { data, refetch } = useGetMyAccountQuery(null, {
     skip: !isAuthenticated
   });
+  console.log(data, "data")
   const dispactch = useDispatch()
   useEffect(() => {
     if (data) {
@@ -22,7 +23,8 @@ const Views = () => {
         id: data._id,
         profileImage: data.profileImage,
         role: data.role,
-        username: data.username
+        username: data.username,
+        twoFactorEnabled: data.twoFactor.enabled
       }
       dispactch(setUserInfo(userInfoObj))
     }
@@ -30,7 +32,7 @@ const Views = () => {
 
   return <>
     {isAuthenticated ? <UserView /> : <AuthView />}
-    <Toaster richColors position="top-right" />
+    <Toaster position="bottom-right" />
   </>;
 };
 

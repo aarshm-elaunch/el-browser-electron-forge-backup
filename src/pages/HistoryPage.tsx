@@ -3,18 +3,19 @@ import { debounce } from 'lodash';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Search from '../components/common/Search';
 import useScrollToBottom from '../hooks/useScrollToBottom';
-import { useGetAccountHistoryQuery } from '../redux/api/historyApi';
-import { DateRangeOptions, HistoryEntriesByDate } from '../types/data';
+import { useGetAccountHistoryQuery } from '../redux/api/browseHistoryApi';
+import { DateRange, DateRangeOptions, HistoryEntriesByDate } from '../types/data';
 import HistoryItem from '../components/common/HistoryItem';
 import { formatDate } from '../utils/index';
 import HistorySkelaton from '../components/common/HistorySkelaton';
+import moment from 'moment';
 
 const HistoryPage: React.FC = () => {
     const [page, setPage] = useState<number>(1);
     const limit = 25;
     const [searchQuery, setSearchQuery] = useState<string>("");
     const [allEntries, setAllEntries] = useState<HistoryEntriesByDate[]>([]);
-    const [dateRange, setDateRange] = useState<DateRangeOptions>("")
+    const [dateRange, setDateRange] = useState<DateRangeOptions>("all")
     const containerRef = useRef<HTMLDivElement>(null);
     const hasMoreDataRef = useRef<boolean>(true);
     const { data, isFetching } = useGetAccountHistoryQuery({ page, limit, search: searchQuery, dateRange });
@@ -60,16 +61,31 @@ const HistoryPage: React.FC = () => {
         }, 500), []
     );
 
-    const handleSelectDateRange = (dateRange: DateRangeOptions) => {
-        setAllEntries([])
-        setPage(1)
-        setDateRange(dateRange)
+    const handleSelectDateRange = (selectedDateRange: DateRangeOptions) => {
+        if (dateRange !== selectedDateRange) {
+            setAllEntries([])
+            setPage(1)
+            setDateRange(selectedDateRange)
+        }
     }
+
+    const handleCustomDateRangeChange = (dateRange: DateRange) => {
+        setAllEntries([]);
+        setPage(1);
+        const startDate = moment(dateRange.start).startOf('day').toISOString();
+        const endDate = moment(dateRange.end).endOf('day').toISOString();
+        console.log({
+            start: dateRange.start,
+            end: dateRange.end,
+            formattedStart: startDate,
+            formattedEnd: endDate
+        });
+    };
 
     return (
         <Box sx={{ maxWidth: { md: '60%', xs: '85%' }, flexGrow: 1 }} mx={'auto'} py={4}>
             <Typography sx={{ color: (theme) => theme.palette.primary.dark, fontSize: 28, fontWeight: 600 }}>History</Typography>
-            <Search onDateRangeChange={(dateRange: DateRangeOptions) => handleSelectDateRange(dateRange)} onChange={(e) => handleSearch(e.target.value)} placeholder='Search History Here...' />
+            <Search selectedDateRange={dateRange} onDateRangeChange={(dateRange: DateRangeOptions) => handleSelectDateRange(dateRange)} onChange={(e) => handleSearch(e.target.value)} placeholder='Search History Here...' />
             <Box
                 ref={containerRef}
                 className="hidden-scrollbar"

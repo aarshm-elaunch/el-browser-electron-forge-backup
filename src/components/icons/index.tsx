@@ -100,8 +100,8 @@ export const LinkIcon = ({ width = 24, height = 24, ...props }: SVGProps<SVGSVGE
 
 export const FolderIcon = ({ width = 24, height = 24, ...props }: SVGProps<SVGSVGElement>) => (
   <svg width={width} height={height} {...props} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M22 11.1V16.5C22 20.1 21 21 17 21H7C3 21 2 20.1 2 16.5V7.5C2 3.9 3 3 7 3H8.5C10 3 10.33 3.396 10.9 4.08L12.4 5.88C12.78 6.33 13 6.6 14 6.6H17C21 6.6 22 7.5 22 11.1Z" stroke="#1C1C1E" stroke-miterlimit="10" />
-    <path d="M8 3H17C19 3 20 3.91324 20 5.73973V7" stroke="#1C1C1E" stroke-miterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M22 11.1V16.5C22 20.1 21 21 17 21H7C3 21 2 20.1 2 16.5V7.5C2 3.9 3 3 7 3H8.5C10 3 10.33 3.396 10.9 4.08L12.4 5.88C12.78 6.33 13 6.6 14 6.6H17C21 6.6 22 7.5 22 11.1Z" stroke="#1C1C1E" strokeMiterlimit="10" />
+    <path d="M8 3H17C19 3 20 3.91324 20 5.73973V7" stroke="#1C1C1E" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
@@ -130,35 +130,35 @@ export const SearchIcon = ({ width = 26, height = 26, ...props }: SVGProps<SVGSV
 
 export const EyeOffIcon = ({ width = 24, height = 24, ...props }: SVGProps<SVGSVGElement>) => (
   <svg width={width} height={height} {...props} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M14.53 9.47004L9.47004 14.53C8.82004 13.88 8.42004 12.99 8.42004 12C8.42004 10.02 10.02 8.42004 12 8.42004C12.99 8.42004 13.88 8.82004 14.53 9.47004Z" stroke="#1C1C1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-    <path d="M17.82 5.76998C16.07 4.44998 14.07 3.72998 12 3.72998C8.46997 3.72998 5.17997 5.80998 2.88997 9.40998C1.98997 10.82 1.98997 13.19 2.88997 14.6C3.67997 15.84 4.59997 16.91 5.59997 17.77" stroke="#1C1C1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-    <path d="M8.42004 19.5301C9.56004 20.0101 10.77 20.2701 12 20.2701C15.53 20.2701 18.82 18.1901 21.11 14.5901C22.01 13.1801 22.01 10.8101 21.11 9.40005C20.78 8.88005 20.42 8.39005 20.05 7.93005" stroke="#1C1C1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-    <path d="M15.5099 12.7C15.2499 14.11 14.0999 15.26 12.6899 15.52" stroke="#1C1C1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-    <path d="M9.47 14.53L2 22" stroke="#1C1C1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-    <path d="M22 2L14.53 9.47" stroke="#1C1C1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M14.53 9.47004L9.47004 14.53C8.82004 13.88 8.42004 12.99 8.42004 12C8.42004 10.02 10.02 8.42004 12 8.42004C12.99 8.42004 13.88 8.82004 14.53 9.47004Z" stroke="#1C1C1E" strokeWidth="1.5" stroke-linecap="round" strokeLinejoin="round" />
+    <path d="M17.82 5.76998C16.07 4.44998 14.07 3.72998 12 3.72998C8.46997 3.72998 5.17997 5.80998 2.88997 9.40998C1.98997 10.82 1.98997 13.19 2.88997 14.6C3.67997 15.84 4.59997 16.91 5.59997 17.77" stroke="#1C1C1E" strokeWidth="1.5" stroke-linecap="round" strokeLinejoin="round" />
+    <path d="M8.42004 19.5301C9.56004 20.0101 10.77 20.2701 12 20.2701C15.53 20.2701 18.82 18.1901 21.11 14.5901C22.01 13.1801 22.01 10.8101 21.11 9.40005C20.78 8.88005 20.42 8.39005 20.05 7.93005" stroke="#1C1C1E" strokeWidth="1.5" stroke-linecap="round" strokeLinejoin="round" />
+    <path d="M15.5099 12.7C15.2499 14.11 14.0999 15.26 12.6899 15.52" stroke="#1C1C1E" strokeWidth="1.5" stroke-linecap="round" strokeLinejoin="round" />
+    <path d="M9.47 14.53L2 22" stroke="#1C1C1E" strokeWidth="1.5" stroke-linecap="round" strokeLinejoin="round" />
+    <path d="M22 2L14.53 9.47" stroke="#1C1C1E" strokeWidth="1.5" stroke-linecap="round" strokeLinejoin="round" />
   </svg>
 
 );
 export const EyeIcon = ({ width = 24, height = 24, ...props }: SVGProps<SVGSVGElement>) => (
   <svg width={width} height={height} {...props} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M15.58 11.9999C15.58 13.9799 13.98 15.5799 12 15.5799C10.02 15.5799 8.42004 13.9799 8.42004 11.9999C8.42004 10.0199 10.02 8.41992 12 8.41992C13.98 8.41992 15.58 10.0199 15.58 11.9999Z" stroke="#1C1C1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-    <path d="M12 20.27C15.53 20.27 18.82 18.19 21.11 14.59C22.01 13.18 22.01 10.81 21.11 9.39997C18.82 5.79997 15.53 3.71997 12 3.71997C8.46997 3.71997 5.17997 5.79997 2.88997 9.39997C1.98997 10.81 1.98997 13.18 2.88997 14.59C5.17997 18.19 8.46997 20.27 12 20.27Z" stroke="#1C1C1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M15.58 11.9999C15.58 13.9799 13.98 15.5799 12 15.5799C10.02 15.5799 8.42004 13.9799 8.42004 11.9999C8.42004 10.0199 10.02 8.41992 12 8.41992C13.98 8.41992 15.58 10.0199 15.58 11.9999Z" stroke="#1C1C1E" strokeWidth="1.5" stroke-linecap="round" strokeLinejoin="round" />
+    <path d="M12 20.27C15.53 20.27 18.82 18.19 21.11 14.59C22.01 13.18 22.01 10.81 21.11 9.39997C18.82 5.79997 15.53 3.71997 12 3.71997C8.46997 3.71997 5.17997 5.79997 2.88997 9.39997C1.98997 10.81 1.98997 13.18 2.88997 14.59C5.17997 18.19 8.46997 20.27 12 20.27Z" stroke="#1C1C1E" strokeWidth="1.5" stroke-linecap="round" strokeLinejoin="round" />
   </svg>
 );
 
 export const HistoryIcon = ({ width = 24, height = 24, ...props }: SVGProps<SVGSVGElement>) => (
   <svg width={width} height={height} {...props} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M14.8901 5.0799C14.0201 4.8199 13.0601 4.6499 12.0001 4.6499C7.21008 4.6499 3.33008 8.5299 3.33008 13.3199C3.33008 18.1199 7.21008 21.9999 12.0001 21.9999C16.7901 21.9999 20.6701 18.1199 20.6701 13.3299C20.6701 11.5499 20.1301 9.8899 19.2101 8.5099" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-    <path d="M16.13 5.32L13.24 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-    <path d="M16.13 5.32007L12.76 7.78007" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M14.8901 5.0799C14.0201 4.8199 13.0601 4.6499 12.0001 4.6499C7.21008 4.6499 3.33008 8.5299 3.33008 13.3199C3.33008 18.1199 7.21008 21.9999 12.0001 21.9999C16.7901 21.9999 20.6701 18.1199 20.6701 13.3299C20.6701 11.5499 20.1301 9.8899 19.2101 8.5099" stroke="currentColor" strokeWidth="1.5" stroke-linecap="round" strokeLinejoin="round" />
+    <path d="M16.13 5.32L13.24 2" stroke="currentColor" strokeWidth="1.5" stroke-linecap="round" strokeLinejoin="round" />
+    <path d="M16.13 5.32007L12.76 7.78007" stroke="currentColor" strokeWidth="1.5" stroke-linecap="round" strokeLinejoin="round" />
   </svg>
 );
 
 export const DownloadIcon = ({ width = 24, height = 24, ...props }: SVGProps<SVGSVGElement>) => (
   <svg width={width} height={height} {...props} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M9.32007 11.6799L11.8801 14.2399L14.4401 11.6799" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-    <path d="M11.8799 4V14.17" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-    <path d="M20 12.1799C20 16.5999 17 20.1799 12 20.1799C7 20.1799 4 16.5999 4 12.1799" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M9.32007 11.6799L11.8801 14.2399L14.4401 11.6799" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10" stroke-linecap="round" strokeLinejoin="round" />
+    <path d="M11.8799 4V14.17" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10" stroke-linecap="round" strokeLinejoin="round" />
+    <path d="M20 12.1799C20 16.5999 17 20.1799 12 20.1799C7 20.1799 4 16.5999 4 12.1799" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10" stroke-linecap="round" strokeLinejoin="round" />
   </svg>
 );
 
@@ -171,14 +171,14 @@ export const SettingIcon = ({ width = 24, height = 24, ...props }: SVGProps<SVGS
 
 export const NextRoundedIcon = ({ width = 24, height = 24, ...props }: SVGProps<SVGSVGElement>) => (
   <svg width={width} height={height} {...props} viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M9 16.5C13.1421 16.5 16.5 13.1421 16.5 9C16.5 4.85786 13.1421 1.5 9 1.5C4.85786 1.5 1.5 4.85786 1.5 9C1.5 13.1421 4.85786 16.5 9 16.5Z" fill="white" stroke="currentColor" stroke-opacity="0.3" stroke-width="0.533333" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-    <path d="M8.05493 11.6475L10.6949 9.00004L8.05493 6.35254" stroke="currentColor" stroke-width="0.533333" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M9 16.5C13.1421 16.5 16.5 13.1421 16.5 9C16.5 4.85786 13.1421 1.5 9 1.5C4.85786 1.5 1.5 4.85786 1.5 9C1.5 13.1421 4.85786 16.5 9 16.5Z" fill="white" stroke="currentColor" stroke-opacity="0.3" strokeWidth="0.533333" strokeMiterlimit="10" stroke-linecap="round" strokeLinejoin="round" />
+    <path d="M8.05493 11.6475L10.6949 9.00004L8.05493 6.35254" stroke="currentColor" strokeWidth="0.533333" stroke-linecap="round" strokeLinejoin="round" />
   </svg>
 );
 
 export const NextIcon = ({ width = 6, height = 14, ...props }: SVGProps<SVGSVGElement>) => (
   <svg width={width} height={height} {...props} viewBox="0 0 4 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M1.05493 5.64754L3.69493 3.00004L1.05493 0.352539" stroke="currentColor" stroke-width="0.533333" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M1.05493 5.64754L3.69493 3.00004L1.05493 0.352539" stroke="currentColor" strokeWidth="0.533333" stroke-linecap="round" strokeLinejoin="round" />
   </svg>
 );
 
