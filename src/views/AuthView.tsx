@@ -24,6 +24,7 @@ import bgImage from "../assets/images/bg_main.jpg";
 import { EyeIcon, EyeOffIcon } from "../components/icons";
 import { useLoginMutation, useVerify2faMutation } from "../redux/api/authApi";
 import { setAuthenticatationFlag, setToken } from "../redux/slices/authSlice";
+import Loader from "../components/common/Loader";
 
 const loginFormvalidationSchema = Yup.object().shape({
   email: Yup.string().required("Email  is required"),
@@ -36,8 +37,8 @@ const twoFaValidationSchema = Yup.object().shape({
 
 const AuthView = () => {
   const theme = useTheme();
-  const [loginFunc, { isLoading }] = useLoginMutation();
-  const [verify2faFunc] = useVerify2faMutation();
+  const [loginFunc, { isLoading: isLoginLoading }] = useLoginMutation();
+  const [verify2faFunc, { isLoading: is2faVaificationLoading }] = useVerify2faMutation();
   const [popupAuthenticatorUI, setPopupAuthenticatorUI] = useState<boolean>(false);
   const [inProcessEmail, setInProcessEmail] = useState<string>("");
   const dispatch = useDispatch();
@@ -250,11 +251,16 @@ const AuthView = () => {
                     fontWeight: 500,
                     textTransform: "capitalize",
                     lineHeight: "normal",
+                    "&.Mui-disabled": {
+                      opacity: 0.5,
+                      background: "#1C1C1E",
+                      color: "#fff",
+                    }
                   }}
                   variant="contained"
-                  disabled={isSubmitting}
+                  disabled={isLoginLoading}
                 >
-                  Log In
+                  {isLoginLoading ? <Loader size={20} /> : "Log In"}
                 </Button>
               </CardContent>
             </Form>
@@ -353,9 +359,9 @@ const AuthView = () => {
                     lineHeight: "normal",
                   }}
                   variant="contained"
-                  disabled={isSubmitting}
+                  disabled={is2faVaificationLoading}
                 >
-                  Verify
+                  {is2faVaificationLoading ? <Loader size={20} /> : "Verify"}
                 </Button>
               </CardContent>
             </Form>

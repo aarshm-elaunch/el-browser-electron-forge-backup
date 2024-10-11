@@ -25,10 +25,10 @@ const UserAvatarMenu = () => {
       const response = await logoutFunc()
         .unwrap()
         .then(() => {
-          toast.success("Logout Successful", { position: "bottom-right" });
+          toast.success("Logout Successful");
         });
     } catch (error: any) {
-      toast.error(error?.data?.message, { position: "bottom-right" });
+      toast.error(error?.data?.message);
     }
   };
 

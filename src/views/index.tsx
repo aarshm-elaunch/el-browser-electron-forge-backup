@@ -32,7 +32,7 @@ const Views = () => {
 
   return <>
     {isAuthenticated ? <UserView /> : <AuthView />}
-    <Toaster richColors position="top-right" />
+    <Toaster position="bottom-right" />
   </>;
 };
 

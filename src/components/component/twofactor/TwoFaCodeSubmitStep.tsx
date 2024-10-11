@@ -18,7 +18,7 @@ const TwoFaCodeSubmitStep = ({ activeStep, step, handleNext, handleGoBack, onClo
     onClose?: () => void;
     resetState?: () => void;
 }) => {
-    const [enable2faFunc, { }] = useEnable2faMutation()
+    const [enable2faFunc, { isLoading }] = useEnable2faMutation()
     return (
         <Box sx={{ display: activeStep === step ? 'block' : 'none' }}>
             <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "12px", flexDirection: "column", textAlign: "center" }}>
@@ -114,7 +114,13 @@ const TwoFaCodeSubmitStep = ({ activeStep, step, handleNext, handleGoBack, onClo
                                                 flexGrow: "1",
                                                 backgroundColor: '#000',
                                                 boxShadow: 'none',
+                                                "&.Mui-disabled": {
+                                                    opacity: 0.5,
+                                                    backgroundColor: '#000',
+                                                    color: "#ffffff"
+                                                }
                                             }}
+                                            disabled={isLoading}
                                         >
                                             Submit
                                         </Button>
