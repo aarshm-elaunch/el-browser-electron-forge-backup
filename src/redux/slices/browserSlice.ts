@@ -122,23 +122,29 @@ const browserSlice = createSlice({
         };
 
         state.tabsList.push(newTab);
-        state.activeTabId = newTab.tabId; // Make the new history tab active
+        state.activeTabId = newTab.tabId;
       }
     },
     openSettingTab: (state) => {
-      const newTab: Tab = {
-        tabId: uuidv4(),
-        tabURL: "setting",
-        tabTitleContent: {
-          favIconURL: SETTING_TAB_ICON,
-          titleString: "Setting",
-        },
-        canGoBack: false,
-        canGoForward: false,
-        scrollPosition: 0,
-      };
-      state.tabsList.push(newTab);
-      state.activeTabId = newTab.tabId; // Make new tab active
+      const existingSettingTab = state.tabsList.find((tab) => tab.tabURL === "setting");
+
+      if (existingSettingTab) {
+        state.activeTabId = existingSettingTab.tabId;
+      } else {
+        const newTab: Tab = {
+          tabId: uuidv4(),
+          tabURL: "setting",
+          tabTitleContent: {
+            favIconURL: SETTING_TAB_ICON,
+            titleString: "Setting",
+          },
+          canGoBack: false,
+          canGoForward: false,
+          scrollPosition: 0,
+        };
+        state.tabsList.push(newTab);
+        state.activeTabId = newTab.tabId;
+      }
     },
     resetNewTabAdded(state) {
       state.newTabAdded = false;
