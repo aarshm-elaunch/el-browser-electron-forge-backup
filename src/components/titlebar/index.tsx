@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Box, TextField, useTheme } from "@mui/material";
 import { TITLEBAR_HEIGHT } from "../../utils/constants";
 import { Search } from "@mui/icons-material";
@@ -8,7 +8,7 @@ import ForwardButton from "./ForwardButton";
 import ReloadButton from "./ReloadButton";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
-import { loadUrl } from "../../redux/slices/browserSlice";
+import { loadUrl, resetNewTabAdded } from "../../redux/slices/browserSlice";
 import { createStandardURL } from "../../utils";
 import UserAvatarMenu from "./UserAvatarMenu";
 import { Tab } from "../../types/browser";
@@ -17,14 +17,23 @@ function Titlebar() {
   const [enteredURL, setEnteredURL] = useState<string>("");
   const theme = useTheme();
   const dispatch = useDispatch();
-  const { tabsList, activeTabId } = useSelector((state: RootState) => state.browser);
+  const { tabsList, activeTabId, newTabAdded } = useSelector((state: RootState) => state.browser);
   const activeTab = tabsList.find((tab: Tab) => tab.tabId === activeTabId);
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    if (newTabAdded) {
+      inputRef.current?.focus(); // Focus on input when a new tab is added
+      dispatch(resetNewTabAdded()); // Reset the newTabAdded state
+    }
+  }, [newTabAdded, dispatch]);
 
   useEffect(() => {
     const listenEnterPress = (ev: KeyboardEvent) => {
       if (ev.key === "Enter") {
         if (enteredURL !== "") {
           dispatch(loadUrl({ tabId: activeTab.tabId, url: createStandardURL(enteredURL) }));
+          inputRef.current?.blur(); // Remove focus after entering the URL
         }
       }
     };
@@ -32,12 +41,20 @@ function Titlebar() {
     window.addEventListener("keypress", listenEnterPress);
 
     return () => window.removeEventListener("keypress", listenEnterPress);
-  }, [enteredURL]);
+  }, [enteredURL, activeTab, dispatch]);
 
   useEffect(() => {
     const activeTab = tabsList.find((tab: Tab) => tab.tabId === activeTabId);
+    console.log(activeTab, "activeTab")
     if (activeTab) {
       setEnteredURL(activeTab.tabURL);
+    }
+  }, [tabsList, activeTabId]);
+
+  useEffect(() => {
+    const activeTab = tabsList.find((tab: Tab) => tab.tabId === activeTabId);
+    if (activeTab && activeTab.tabURL === "") {
+      inputRef.current?.focus();
     }
   }, [tabsList, activeTabId]);
 
@@ -80,6 +97,7 @@ function Titlebar() {
           placeholder="search google or enter address"
           onChange={handleOnURLChange}
           value={enteredURL}
+          inputRef={inputRef}
           sx={{
             height: "100%",
             width: "100%",

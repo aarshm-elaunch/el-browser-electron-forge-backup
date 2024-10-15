@@ -1,5 +1,6 @@
 import { Generate2faSecretResponse } from "../../types/data"
 import { logOut } from "../slices/authSlice"
+import { resetTabsState } from "../slices/browserSlice"
 import { rootApiSlice } from "./rootApiSlice"
 
 export const authApiSlice = rootApiSlice.injectEndpoints({
@@ -36,6 +37,8 @@ export const authApiSlice = rootApiSlice.injectEndpoints({
                     console.log(data)
                     setTimeout(() => {
                         dispatch(logOut(null))
+                        dispatch(resetTabsState())
+                        dispatch(rootApiSlice.util.resetApiState())
                     }, 1000)
                 } catch (err) {
                     console.log(err)

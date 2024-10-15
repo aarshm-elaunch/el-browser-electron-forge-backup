@@ -17,7 +17,7 @@ const WebViewComponent = ({ tab, webViewSrc }: { tab: Tab; webViewSrc: string })
 
   useEffect(() => {
     const activeTab = tabsList.find((tab: Tab) => tab.tabId === activeTabId);
-    if (webviewRef.current) {
+    if (webviewRef.current && activeTabId === tab.tabId) {
       const updateNavigationState = (ev: any) => {
         const { url } = ev;
         webviewRef.current
@@ -80,11 +80,10 @@ const WebViewComponent = ({ tab, webViewSrc }: { tab: Tab; webViewSrc: string })
   }, [tab, webviewRef]);
 
   useEffect(() => {
-    const activeTab = tabsList.find((tab: Tab) => tab.tabId === activeTabId);
-    if (tab.tabId === activeTab.tabId) {
-      // setActiveWebViewRef(webviewRef); // Set the active webview ref in the context
+    if (tab.tabId === activeTabId) {
+      setActiveWebViewRef(webviewRef);
     }
-  }, [tab]);
+  }, [activeTabId]);
 
   return (
     <webview

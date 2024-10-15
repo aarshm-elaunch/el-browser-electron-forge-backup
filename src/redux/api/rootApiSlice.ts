@@ -1,5 +1,6 @@
 import { BaseQueryFn, FetchArgs, FetchBaseQueryError, createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { logOut } from "../slices/authSlice";
+import { resetTabsState } from "../slices/browserSlice";
 
 const BASE_URL = "https://browser.elaunchinfotech.in/api";
 
@@ -19,6 +20,8 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
   const result = await baseQuery(args, api, extraOptions);
   if (result.error && result.error.status === 401) {
     api.dispatch(logOut(null));
+    api.dispatch(resetTabsState());
+    api.dispatch(rootApiSlice.util.resetApiState())
   }
   return result;
 };

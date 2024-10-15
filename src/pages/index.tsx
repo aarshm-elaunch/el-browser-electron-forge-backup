@@ -70,7 +70,7 @@ const BrowserContent = () => {
         activeTab &&
         loaded &&
         tabsList.map((tab: Tab) => {
-          if (tab.tabURL === "about:blank") {
+          if (tab.tabURL === "") {
             return (
               <CustomTabPanel value={tab.tabId} activeTab={activeTab} panelHeight={SUMMIT_HEIGHT} key={tab.tabId}>
                 <HomePage />
@@ -97,7 +97,7 @@ const BrowserContent = () => {
           } else {
             return (
               <CustomTabPanel value={tab.tabId} activeTab={activeTab} panelHeight={SUMMIT_HEIGHT} key={tab.tabId}>
-                <WebViewComponent tab={tab} webViewSrc = {tab.tabURL} />
+                <WebViewComponent tab={tab} webViewSrc={tab.tabURL} />
               </CustomTabPanel>
             );
           }

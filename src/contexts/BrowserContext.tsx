@@ -12,7 +12,7 @@ const BrowserContext = createContext<BrowserContextType | null>(null);
 function BrowserProvider({ children }: BrowserProviderProps) {
   const [activeWebViewRef, setActiveWebViewRef] = useState<RefObject<WebviewTag | null> | null>(null);
 
-  // NAVIGATION ACTIONS
+  console.log(activeWebViewRef, "activeWebViewRef")
   const handleGoBack = () => {
     if (activeWebViewRef.current?.canGoBack()) {
       activeWebViewRef.current.goBack();
@@ -26,7 +26,9 @@ function BrowserProvider({ children }: BrowserProviderProps) {
   };
 
   const handleReload = () => {
-    activeWebViewRef.current?.reload();
+    if (activeWebViewRef.current) {
+      activeWebViewRef.current?.reload();
+    }
   };
 
   return (

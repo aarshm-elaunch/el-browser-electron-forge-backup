@@ -18,12 +18,13 @@ export interface Tab {
 export type BrowserState = {
   tabsList: Tab[];
   activeTabId: string;
+  newTabAdded: boolean;
 };
 
 export function addNewTab(): Tab {
   return {
     tabId: uuidv4(),
-    tabURL: "about:blank",
+    tabURL: "",
     tabTitleContent: {
       favIconURL: NEWTAB_ICON_STRING,
       titleString: "start page",

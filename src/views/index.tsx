@@ -8,13 +8,15 @@ import { useEffect } from "react";
 import { User } from "src/types/data";
 import { useDispatch } from "react-redux";
 import { setUserInfo } from "../redux/slices/authSlice";
+import useBrowser from "../hooks/useBrowser";
 
 const Views = () => {
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
+  const { handleReload } = useBrowser()
   const { data, refetch } = useGetMyAccountQuery(null, {
     skip: !isAuthenticated
   });
-  console.log(data, "data")
+
   const dispactch = useDispatch()
   useEffect(() => {
     if (data) {
@@ -29,6 +31,30 @@ const Views = () => {
       dispactch(setUserInfo(userInfoObj))
     }
   }, [data])
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if ((event.ctrlKey || event.metaKey) && event.key === 'r') {
+        event.preventDefault();
+        handleReload()
+      }
+      if (event.key === 'F5') {
+        event.preventDefault();
+        handleReload()
+      }
+      if ((event.ctrlKey || event.metaKey) && event.shiftKey && event.key === 'r') {
+        event.preventDefault();
+        handleReload()
+      }
+      if ((event.ctrlKey || event.metaKey) && event.shiftKey && event.key === 't') {
+        event.preventDefault();
+        handleReload()
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
 
   return <>
     {isAuthenticated ? <UserView /> : <AuthView />}

@@ -6,7 +6,7 @@ import { DOWNLOAD_HISTORY_TAB_ICON, HISTORY_TAB_ICON, NEWTAB_ICON_STRING, SETTIN
 
 const newTab: Tab = {
   tabId: uuidv4(),
-  tabURL: "about:blank",
+  tabURL: "",
   tabTitleContent: {
     favIconURL: NEWTAB_ICON_STRING,
     titleString: "start page",
@@ -19,6 +19,7 @@ const newTab: Tab = {
 const initialState: BrowserState = {
   tabsList: [newTab], // initially no tabs
   activeTabId: newTab.tabId, // no active tab initially
+  newTabAdded: false,
 };
 
 const browserSlice = createSlice({
@@ -28,7 +29,7 @@ const browserSlice = createSlice({
     addTab: (state) => {
       const newTab: Tab = {
         tabId: uuidv4(),
-        tabURL: "about:blank",
+        tabURL: "",
         tabTitleContent: {
           favIconURL: NEWTAB_ICON_STRING,
           titleString: "start page",
@@ -39,6 +40,7 @@ const browserSlice = createSlice({
       };
       state.tabsList.push(newTab);
       state.activeTabId = newTab.tabId; // Make new tab active
+      state.newTabAdded = true;
     },
     closeTab: (state, action: PayloadAction<string>) => {
       const updatedTabsList = state.tabsList.filter((tab) => tab.tabId !== action.payload);
@@ -65,6 +67,7 @@ const browserSlice = createSlice({
         tabTitleContent: TabTitleContent;
       }>
     ) => {
+      console.log("update happening")
       const tab = state.tabsList.find((tab) => tab.tabId === action.payload.tabId);
       if (tab) {
         tab.canGoBack = action.payload.canGoBack;
@@ -137,11 +140,17 @@ const browserSlice = createSlice({
       state.tabsList.push(newTab);
       state.activeTabId = newTab.tabId; // Make new tab active
     },
+    resetNewTabAdded(state) {
+      state.newTabAdded = false;
+    },
+    resetTabsState(state) {
+      state.tabsList = [newTab];
+    },
   },
 });
 
 // Export actions
-export const { addTab, closeTab, setActiveTab, loadUrl, updateTabState, openHistoryTab, openDownloadTab, openSettingTab } = browserSlice.actions;
+export const { addTab, closeTab, setActiveTab, loadUrl, updateTabState, openHistoryTab, openDownloadTab, openSettingTab, resetNewTabAdded, resetTabsState } = browserSlice.actions;
 
 // Export reducer
 export default browserSlice.reducer;
