@@ -82,7 +82,7 @@ const WebViewComponent = ({ tab, webViewSrc }: { tab: Tab; webViewSrc: string })
   useEffect(() => {
     const activeTab = tabsList.find((tab: Tab) => tab.tabId === activeTabId);
     if (tab.tabId === activeTab.tabId) {
-      setActiveWebViewRef(webviewRef); // Set the active webview ref in the context
+      // setActiveWebViewRef(webviewRef); // Set the active webview ref in the context
     }
   }, [tab]);
 
