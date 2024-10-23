@@ -12,6 +12,21 @@ export const createStandardURL = (inputUrl: string) => {
   const defaultSearchEngine = "https://www.google.com/search?q="; // Default search engine
   const tld = ".com"; // Default TLD if none is provided
 
+  // Check if the input is a valid URL
+  const isValidURL = (url: string) => {
+    const urlPattern = /^(https?:\/\/)?([a-zA-Z0-9-_]+\.)+[a-zA-Z]{2,11}(\/.*)?$/; // Adjusted to allow query strings
+    return urlPattern.test(url);
+  };
+
+  // If the input is already a valid URL, return it
+  if (isValidURL(url)) {
+    // Ensure it has the protocol
+    if (!url.startsWith("http://") && !url.startsWith("https://")) {
+      url = `https://${url}`; // Add https if no protocol is present
+    }
+    return url; // Return the valid URL
+  }
+
   // Check if input looks like an IP address or has a valid domain structure
   const isLikelyValidDomain = (url: string) => {
     const domainPattern = /^(?!:\/\/)([a-zA-Z0-9-_]+\.)*[a-zA-Z0-9][a-zA-Z0-9-_]+\.[a-zA-Z]{2,11}?$/;
@@ -22,20 +37,15 @@ export const createStandardURL = (inputUrl: string) => {
 
   // If it’s a keyword or invalid domain, treat it as a search query
   if (!isLikelyValidDomain(url)) {
-    url = defaultSearchEngine + encodeURIComponent(inputUrl); // Perform search query
-    return url
+    return defaultSearchEngine + encodeURIComponent(inputUrl); // Perform search query
   } else {
-    // If the user enters something like "google" or "google."
+    // If the user enters something like "youtube" or "youtube."
     if (!url.includes(".") && !url.startsWith("http")) {
       url += tld; // Append the default TLD if no dot is found
     }
     // If the user entered a domain but without protocol
     if (!url.startsWith("http://") && !url.startsWith("https://")) {
-      // Check if "www" is needed
-      if (!url.startsWith("www.")) {
-        url = "www." + url;
-      }
-      url = `https://${url}`;
+      url = `https://${url}`; // Add https if no protocol is present
     }
   }
 
@@ -60,4 +70,3 @@ export const formatDate = (dateString: string) => {
   }
 }
 
-  

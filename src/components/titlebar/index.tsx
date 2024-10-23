@@ -12,10 +12,12 @@ import { loadUrl, resetNewTabAdded } from "../../redux/slices/browserSlice";
 import { createStandardURL } from "../../utils";
 import UserAvatarMenu from "./UserAvatarMenu";
 import { Tab } from "../../types/browser";
+import useBrowser from "../../hooks/useBrowser";
 
 function Titlebar() {
   const [enteredURL, setEnteredURL] = useState<string>("");
   const theme = useTheme();
+  const { handleReload } = useBrowser();
   const dispatch = useDispatch();
   const { tabsList, activeTabId, newTabAdded } = useSelector((state: RootState) => state.browser);
   const activeTab = tabsList.find((tab: Tab) => tab.tabId === activeTabId);
@@ -33,6 +35,7 @@ function Titlebar() {
       if (ev.key === "Enter") {
         if (enteredURL !== "") {
           dispatch(loadUrl({ tabId: activeTab.tabId, url: createStandardURL(enteredURL) }));
+          handleReload();
           inputRef.current?.blur(); // Remove focus after entering the URL
         }
       }
